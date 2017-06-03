@@ -1,0 +1,9 @@
+dependencies {
+    compile libraries.javax.rs
+    compile libraries.javax.validation
+    compile libraries.jackson.databind
+    compile libraries.hibernate.validator
+    compile libraries.spring.dataCommons
+    compile (project(':aldebaran-data'))
+    compile (project(':aldebaran-utils'))
+}

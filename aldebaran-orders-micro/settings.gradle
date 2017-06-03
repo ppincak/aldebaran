@@ -1,0 +1,10 @@
+rootProject.name = 'aldebaran-order-micros'
+include 'aldebaran-order-api'
+include 'aldebaran-order-server'
+include 'aldebaran-order-core'
+include 'aldebaran-data'
+include 'aldebaran-rest'
+include 'aldebaran-utils'
+project(':aldebaran-data').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-data')
+project(':aldebaran-utils').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-utils')
+project(':aldebaran-rest').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-rest')

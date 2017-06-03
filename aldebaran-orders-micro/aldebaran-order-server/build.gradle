@@ -1,0 +1,39 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile (project(':aldebaran-order-api'))
+    compile (project(':aldebaran-order-core'))
+    compile (project(':aldebaran-data'))
+    compile (project(':aldebaran-rest'))
+
+    compile libraries.aspectj.weaver
+    compile libraries.flyway.core
+
+    compile libraries.hibernate.core
+    compile libraries.hibernate.entityManager
+    compile libraries.hibernate.java8
+    compile libraries.hibernate.jpa
+    compile libraries.hibernate.validator
+
+    compile libraries.javax.rs
+
+    compile libraries.hikari
+
+    compile libraries.mysqlDriver
+
+    compile libraries.spring.boot.jersey
+    compile libraries.spring.dataJpa
+    compile libraries.spring.dataCommons
+    compile libraries.spring.orm
+    compile libraries.spring.tx
+
+    compile libraries.swagger.jersey2
+}
+
+bootRepackage {
+    mainClass = 'com.inloop.server.Startup'
+}
+
+springBoot  {
+    requiresUnpack = ['com.inloop.api:omanager-server']
+}

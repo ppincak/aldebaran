@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    jdbcUrl: jdbc:mysql://localhost:3306/aldebaran?verifyServerCertificate=false&useSSL=true
+    username: aldebaran-admin
+    password: aldebaran-password
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        hbm2ddl:
+          auto: none
+
+flyway:
+  locations: classpath:db/migration/
+  cleanOnValidationError: true
+  validate-on-migrate: true
+  revoked: true

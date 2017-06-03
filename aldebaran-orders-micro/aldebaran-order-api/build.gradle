@@ -1,0 +1,13 @@
+dependencies {
+    compile (project(':aldebaran-rest'))
+    compile (project(':aldebaran-order-core'))
+
+    compile libraries.javax.rs
+    compile libraries.jackson.databind
+    compile libraries.jackson.java8
+
+    compile libraries.spring.beans
+    compile libraries.spring.context
+
+    compile libraries.swagger.annotations
+}
