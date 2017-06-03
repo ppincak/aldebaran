@@ -13,7 +13,7 @@ public class CustomerResponse extends CustomerModel implements Response {
     private String imageUrl;
 
     @JsonProperty
-    private TimestampsModel timestampsModel;
+    private TimestampsModel timestamps;
 
     public String getId() {
         return id;
@@ -31,11 +31,11 @@ public class CustomerResponse extends CustomerModel implements Response {
         this.imageUrl = imageUrl;
     }
 
-    public TimestampsModel getTimestampsModel() {
-        return timestampsModel;
+    public TimestampsModel getTimestamps() {
+        return timestamps;
     }
 
-    public void setTimestampsModel(TimestampsModel timestampsModel) {
-        this.timestampsModel = timestampsModel;
+    public void setTimestamps(TimestampsModel timestamps) {
+        this.timestamps = timestamps;
     }
 }

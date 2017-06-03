@@ -14,9 +14,6 @@ public class Utils {
                 validProperties.add(giveProperty);
             }
         }
-        if(validProperties.isEmpty() && available.contains("id")) {
-            validProperties.add("id");
-        }
         return validProperties.toArray(new String[validProperties.size()]);
     }
 }

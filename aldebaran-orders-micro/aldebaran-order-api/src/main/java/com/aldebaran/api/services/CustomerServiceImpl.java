@@ -103,11 +103,7 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
                                                              PaginationRequest paginationRequest) {
 
         PageRequest pageRequest =
-                new PageRequest(paginationRequest.getPage(),
-                                paginationRequest.getLimit(),
-                                paginationRequest.orderDirection(),
-                                Utils.orderBy(CustomerSearchDescriptors.orderProperties,
-                                              paginationRequest.orderProperties()));
+                assemblePageRequest(paginationRequest, CustomerSearchDescriptors.orderProperties);
 
         Set<SearchCriterion> criteria =
                 searchRequest.toSearchCriteria(CustomerSearchDescriptors.descriptors);
