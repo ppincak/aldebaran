@@ -16,12 +16,17 @@ public class TypeOperators {
                 SearchOperator.LIKE,
                 SearchOperator.ILIKE));
 
-        typeOperators.put(BigDecimal.class, EnumSet.of(SearchOperator.EQUALS,
-                SearchOperator.NOT_EQUALS,
-                SearchOperator.GREATER_THAN,
-                SearchOperator.GREATER_THAN_EQUALS,
-                SearchOperator.LESS_THAN,
-                SearchOperator.LESS_THAN_EQUALS));
+        EnumSet<SearchOperator> numberOperations =
+            EnumSet.of(SearchOperator.EQUALS,
+                       SearchOperator.NOT_EQUALS,
+                       SearchOperator.GREATER_THAN,
+                       SearchOperator.GREATER_THAN_EQUALS,
+                       SearchOperator.LESS_THAN,
+                       SearchOperator.LESS_THAN_EQUALS);
+
+        typeOperators.put(Integer.class, numberOperations);
+        typeOperators.put(Long.class, numberOperations);
+        typeOperators.put(BigDecimal.class, numberOperations);
     }
 
     public static EnumSet<SearchOperator> getOperators(Class<? extends Comparable<?>> clazz) {

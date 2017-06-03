@@ -19,15 +19,10 @@ public class OrikaConfiguration {
 
     @Bean
     public MapperFactory mapperFactory() {
-        return new DefaultMapperFactory.Builder().build();
-    }
-
-    // TODO move
-    @Bean
-    public ConverterFactory converterFactory(MapperFactory mapperFactory) {
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
         ConverterFactory converterFactory = mapperFactory.getConverterFactory();
         converterFactory.registerConverter(new OrikaInstantConverter());
-        return converterFactory;
+        return mapperFactory;
     }
 
     @Bean

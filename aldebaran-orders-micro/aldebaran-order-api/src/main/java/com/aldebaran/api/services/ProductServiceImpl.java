@@ -8,6 +8,9 @@ import com.aldebaran.omanager.core.model.ProductResponse;
 import com.aldebaran.omanager.core.model.update.ProductUpdateRequest;
 import com.aldebaran.omanager.core.repositories.ProductRepository;
 import com.aldebaran.rest.error.codes.ApplicationException;
+import com.aldebaran.rest.search.PaginationRequest;
+import com.aldebaran.rest.search.PaginationResponse;
+import com.aldebaran.rest.search.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +71,11 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     @Override
     public List<Product> getProducts(Set<Long> productIds) {
         return repository.getByProductIds(productIds);
+    }
+
+    @Override
+    public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest, PaginationRequest paginationRequest) {
+        return null;
     }
 
     private void checkProductName(String name) {

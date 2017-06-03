@@ -5,6 +5,8 @@ import com.aldebaran.omanager.core.model.CustomerResponse;
 import com.aldebaran.omanager.core.model.ProductRequest;
 import com.aldebaran.omanager.core.model.ProductResponse;
 import com.aldebaran.omanager.core.model.update.ProductUpdateRequest;
+import com.aldebaran.rest.search.PaginationRequest;
+import com.aldebaran.rest.search.SearchRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +29,16 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @GET
+    @ApiOperation(value = "Get Products",
+                  response = ProductResponse.class)
+    public Response createProduct(@BeanParam SearchRequest searchRequest,
+                                  @BeanParam PaginationRequest paginationRequest) {
+        return Response
+                .ok(productService.getProducts(searchRequest, paginationRequest))
+                .build();
+    }
 
     @POST
     @ApiOperation(value = "Create product",

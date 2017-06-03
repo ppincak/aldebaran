@@ -15,6 +15,7 @@ public final class CustomerSearchDescriptors {
     public static final Set<String> orderProperties = new HashSet<>();
 
     static {
+        addDescriptor("id", Long.class,"id");
         addDescriptor("firstName", String.class,"firstName");
         addDescriptor("lastName", String.class, "lastName");
         addDescriptor("email", String.class, "email");

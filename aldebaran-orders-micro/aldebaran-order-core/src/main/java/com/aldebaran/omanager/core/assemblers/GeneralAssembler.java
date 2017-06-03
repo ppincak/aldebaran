@@ -25,6 +25,4 @@ public class GeneralAssembler extends AbstractOrikaAssembler {
             .byDefault()
             .register();
     }
-
-
 }
