@@ -1,13 +1,19 @@
 package com.aldebaran.omanager.core.assemblers;
 
+import com.aldebaran.data.domain.Price;
 import com.aldebaran.omanager.core.entities.Customer;
 import com.aldebaran.omanager.core.entities.Product;
+import com.aldebaran.omanager.core.model.PriceModel;
 import com.aldebaran.omanager.core.model.ProductRequest;
 import com.aldebaran.omanager.core.model.ProductResponse;
 import com.aldebaran.omanager.core.model.update.ProductUpdateRequest;
+import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 
 @Component
@@ -46,10 +52,25 @@ public class ProductAssembler extends AbstractOrikaAssembler {
 
         registerMap(factory.classMap(Product.class, ProductUpdateRequest.class))
             .mapNulls(false)
+            .customize(new CustomMapper<Product, ProductUpdateRequest>() {
+                @Override
+                public void mapAtoB(Product product, ProductUpdateRequest updateRequest, MappingContext context) {
+                    updateRequest.setProperty("preTax", product.getPrice().getPreTax());
+                    updateRequest.setProperty("afterTax", product.getPrice().getAfterTax());
+                }
+            })
             .register();
 
         registerMap(factory.classMap(ProductRequest.class, ProductUpdateRequest.class))
             .mapNulls(false)
+            .customize(new CustomMapper<ProductRequest, ProductUpdateRequest>() {
+                @Override
+                public void mapBtoA(ProductUpdateRequest updateRequest, ProductRequest productRequest, MappingContext context) {
+                    productRequest
+                            .setPrice(new PriceModel((BigDecimal) updateRequest.getMap().get("preTax"),
+                                                     (BigDecimal) updateRequest.getMap().get("afterTax")));
+                }
+            })
             .register();
     }
 
@@ -57,7 +78,6 @@ public class ProductAssembler extends AbstractOrikaAssembler {
         builder
             .field("name", "map['name']")
             .field("description", "map['description']")
-            .field("price", "map['price']")
             .field("code", "map['code']");
         return builder;
     }
