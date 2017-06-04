@@ -8,7 +8,8 @@ public enum CustomerOrderErrorCodes implements ErrorEvent {
     CUSTOMER_EMAIL_TAKEN(1, "customer.email.taken"),
     EMPTY_CUSTOMER_ORDER(2, "empty.customer.order"),
     PRODUCT_NAME_TOKEN(3, "product.mail.taken"),
-    CUSTOMER_HAS_ORDERS(4, "customer.has.orders");
+    CUSTOMER_HAS_ORDERS(4, "customer.has.orders"),
+    PRODUCT_FILE_LINK_EXISTS(5, "product.file.link.exists");
 
     private final static int SUB_CODE = 4;
 

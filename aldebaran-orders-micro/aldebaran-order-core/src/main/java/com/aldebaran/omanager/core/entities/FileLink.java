@@ -24,8 +24,10 @@ public class FileLink extends TrackableBaseDomain {
             nullable = false)
     private String url;
 
+/*
     @Column(name = "metadata")
     private String metadata;
+*/
 
     public String getName() {
         return name;
@@ -55,11 +57,11 @@ public class FileLink extends TrackableBaseDomain {
         this.url = url;
     }
 
-    public String getMetadata() {
+  /*  public String getMetadata() {
         return metadata;
     }
 
     public void setMetadata(String metadata) {
         this.metadata = metadata;
-    }
+    }*/
 }
