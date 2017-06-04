@@ -94,10 +94,10 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest,
                                                            PaginationRequest paginationRequest) {
         PageRequest pageRequest =
-                assemblePageRequest(paginationRequest, ProductSearchDescriptors.orderProperties);
+                assemblePageRequest(paginationRequest, ProductSearchDescriptors.getOrderProperties());
 
         Set<SearchCriterion> criteria =
-                searchRequest.toSearchCriteria(ProductSearchDescriptors.descriptors);
+                searchRequest.toSearchCriteria(ProductSearchDescriptors.getDescriptors());
 
         Page<Product> page;
         if(criteria.isEmpty()) {

@@ -8,8 +8,8 @@ import java.util.*;
 
 public final class CustomerSearchDescriptors {
 
-    public static final Map<String, SearchDescriptor> descriptors = new HashMap<>();
-    public static final Set<String> orderProperties = new HashSet<>();
+    private static final Map<String, SearchDescriptor> descriptors = new HashMap<>();
+    private static final Set<String> orderProperties = new HashSet<>();
 
     static {
         addDescriptor("id", Long.class,"id");
@@ -20,9 +20,17 @@ public final class CustomerSearchDescriptors {
         orderProperties.addAll(Arrays.asList("id", "firstName", "lastName", "email"));
     }
 
+    public static Map<String, SearchDescriptor> getDescriptors() {
+        return descriptors;
+    }
+
+    public static Set<String> getOrderProperties() {
+        return orderProperties;
+    }
+
     private static void addDescriptor(String propertyName,
-                                     Class<? extends Comparable<?>> resultType,
-                                     String resultProperty) {
+                                      Class<? extends Comparable<?>> resultType,
+                                      String resultProperty) {
         descriptors.put(propertyName,
                         new SearchDescriptor(propertyName,
                                              resultType,

@@ -9,8 +9,8 @@ import java.util.*;
 
 public final class ProductSearchDescriptors {
 
-    public static final Map<String, SearchDescriptor> descriptors = new HashMap<>();
-    public static final Set<String> orderProperties = new HashSet<>();
+    private static final Map<String, SearchDescriptor> descriptors = new HashMap<>();
+    private static final Set<String> orderProperties = new HashSet<>();
 
     static {
         addDescriptor("id", Long.class, "id");
@@ -19,6 +19,14 @@ public final class ProductSearchDescriptors {
         addDescriptor("afterTaxPrice", BigDecimal.class, "price.afterTax");
 
         orderProperties.addAll(Arrays.asList("id", "name"));
+    }
+
+    public static Map<String, SearchDescriptor> getDescriptors() {
+        return descriptors;
+    }
+
+    public static final Set<String> getOrderProperties() {
+        return orderProperties;
     }
 
     private static void addDescriptor(String propertyName,

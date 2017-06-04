@@ -103,10 +103,10 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
                                                              PaginationRequest paginationRequest) {
 
         PageRequest pageRequest =
-                assemblePageRequest(paginationRequest, CustomerSearchDescriptors.orderProperties);
+                assemblePageRequest(paginationRequest, CustomerSearchDescriptors.getOrderProperties());
 
         Set<SearchCriterion> criteria =
-                searchRequest.toSearchCriteria(CustomerSearchDescriptors.descriptors);
+                searchRequest.toSearchCriteria(CustomerSearchDescriptors.getDescriptors());
 
         Page<Customer> page;
         if(criteria.isEmpty()) {
