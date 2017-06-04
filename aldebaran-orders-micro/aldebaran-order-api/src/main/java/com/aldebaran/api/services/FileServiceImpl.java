@@ -3,14 +3,14 @@ package com.aldebaran.api.services;
 import com.aldebaran.omanager.core.ApiProperties;
 import com.aldebaran.omanager.core.assemblers.FileLinkAssembler;
 import com.aldebaran.omanager.core.entities.FileLink;
-import com.aldebaran.omanager.core.entities.FileLinkType;
+import com.aldebaran.omanager.core.entities.FileType;
 import com.aldebaran.omanager.core.model.FileLinkResponse;
 import com.aldebaran.omanager.core.repositories.FileLinkRepository;
 import com.aldebaran.rest.error.GeneralErrorCodes;
 import com.aldebaran.rest.error.codes.ApplicationException;
-import com.aldebaran.rest.upload.DownloadableFile;
-import com.aldebaran.rest.upload.FileStorageFacade;
-import com.aldebaran.rest.upload.UploadedFile;
+import com.aldebaran.rest.files.DownloadableFile;
+import com.aldebaran.rest.files.FileStorageFacade;
+import com.aldebaran.rest.files.UploadedFile;
 import com.aldebaran.utils.descriptors.FileUtils;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -18,15 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.StreamingOutput;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
-// TODO add unique constraint to ProductFileLink
-// TODO add length to file
-// TODO set correct file length
 @Service
 @Transactional
 public class FileServiceImpl implements FileService {
@@ -51,12 +49,15 @@ public class FileServiceImpl implements FileService {
             FormDataContentDisposition contentDisposition =
                     bodyPart.getFormDataContentDisposition();
 
+            String extension = "." +
+                    FileUtils.getExtension(contentDisposition.getFileName());
+
             UploadedFile uploadedFile;
             try {
                 InputStream inputStream = bodyPart.getEntityAs(InputStream.class);
 
                 uploadedFile = fileStorageFacade.upload(inputStream,
-                                                        FileUtils.generateName(".jpg"));
+                                                        FileUtils.generateName(extension));
             } catch (Exception e) {
                 continue;
             }
@@ -64,10 +65,15 @@ public class FileServiceImpl implements FileService {
                 fileName = contentDisposition.getFileName();
             }
 
+            MediaType mediaType = bodyPart.getMediaType();
+
             FileLink fileLink = new FileLink();
-            fileLink.setName(fileName);
-            fileLink.setFileLinkType(FileLinkType.IMAGE);
+            fileLink.setFilename(fileName);
+            fileLink.setFileType(FileType.IMAGE);
+            fileLink.setFileLength(uploadedFile.getFileLength());
             fileLink.setUrl(uploadedFile.getFileUrl());
+            fileLink.setMediaType(mediaType.getType() + "/" +
+                                  mediaType.getSubtype());
             fileLinks.add(fileLink);
         }
 
@@ -79,17 +85,30 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public DownloadableFile downloadFile(Long fileId, OutputStream outputStream) {
-        FileLink fileLink = fileLinkRepository.findOne(fileId);
-        if(fileLink == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
-        }
-        long length = fileStorageFacade.download(fileLink.getUrl(), outputStream);
-        return new DownloadableFile(length, fileLink.getName());
+    public DownloadableFile downloadFile(Long fileId) {
+        FileLink fileLink = getFileLink(fileId);
+
+        StreamingOutput output =
+                outputStream -> fileStorageFacade.download(fileLink.getUrl(), outputStream);
+
+        return new DownloadableFile()
+                    .setFilename(fileLink.getFilename())
+                    .setMediaType(fileLink.getMediaType())
+                    .setLength(fileLink.getFileLength())
+                    .setStreamingOutput(output);
     }
 
     @Override
     public void deleteFile(Long fileId) {
+        FileLink fileLink = getFileLink(fileId);
+        fileStorageFacade.delete(fileLink.getUrl());
+    }
 
+    private FileLink getFileLink(Long fileId) {
+        FileLink fileLink = fileLinkRepository.findOne(fileId);
+        if(fileLink == null) {
+            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+        }
+        return fileLink;
     }
 }

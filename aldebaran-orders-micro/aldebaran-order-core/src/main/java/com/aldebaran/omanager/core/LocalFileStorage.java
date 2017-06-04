@@ -1,13 +1,10 @@
 package com.aldebaran.omanager.core;
 
-import com.aldebaran.rest.upload.FileStorageFacade;
-import com.aldebaran.rest.upload.FileUploadException;
-import com.aldebaran.rest.upload.UploadedFile;
+import com.aldebaran.rest.files.*;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
@@ -16,16 +13,14 @@ public class LocalFileStorage implements FileStorageFacade {
 
     @Override
     public UploadedFile upload(InputStream inputStream, String filePath) {
+        long size;
+
         try {
-            long size = Files.copy(inputStream, Paths.get(filePath));
-            // TODO check if this condition needs to be  here
-            if(size <= 0) {
-                throw new FileUploadException();
-            }
+            size = Files.copy(inputStream, Paths.get(filePath));
         } catch (IOException e) {
             throw new FileUploadException();
         }
-        return new UploadedFile(filePath, "");
+        return new UploadedFile(filePath, "", size);
     }
 
     @Override
@@ -33,7 +28,16 @@ public class LocalFileStorage implements FileStorageFacade {
         try {
             return Files.copy(Paths.get(filePath), outputStream);
         } catch (IOException e) {
-            throw new FileUploadException();
+            throw new FileDownloadException();
+        }
+    }
+
+    @Override
+    public void delete(String filePath) {
+        try {
+            Files.delete(Paths.get(filePath));
+        } catch (IOException e) {
+            throw new FileDeleteException();
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.aldebaran.omanager.core.entities;
 
 
-public enum FileLinkType {
-    IMAGE
+public enum FileType {
+    IMAGE;
+
 }

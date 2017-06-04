@@ -3,7 +3,6 @@ package com.aldebaran.omanager.core.entities;
 import com.aldebaran.data.domain.TrackableBaseDomain;
 
 import javax.persistence.*;
-import javax.ws.rs.Consumes;
 
 
 @Entity
@@ -12,41 +11,61 @@ public class FileLink extends TrackableBaseDomain {
 
     public static final String tableName = "file_link";
 
-    @Column(name = "`name`")
-    private String name;
+    @Column(name = "file_name",
+            nullable = false)
+    private String filename;
+
+    @Column(name = "file_length",
+            nullable = false)
+    private Long fileLength;
 
     @Column(name = "file_link_type",
             nullable = false)
     @Enumerated(EnumType.STRING)
-    private FileLinkType fileLinkType;
+    private FileType fileType;
+
+    @Column(name = "media_type",
+            nullable = false)
+    private String mediaType;
 
     @Column(name = "url",
-            nullable = false)
+            nullable = false,
+            unique = true)
     private String url;
-
-/*
-    @Column(name = "metadata")
-    private String metadata;
-*/
-
-    public String getName() {
-        return name;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public Long getFileLength() {
+        return fileLength;
+    }
+
+    public void setFileLength(Long fileLength) {
+        this.fileLength = fileLength;
     }
 
     public static String getTableName() {
         return tableName;
     }
 
-    public FileLinkType getFileLinkType() {
-        return fileLinkType;
+    public FileType getFileType() {
+        return fileType;
     }
 
-    public void setFileLinkType(FileLinkType fileLinkType) {
-        this.fileLinkType = fileLinkType;
+    public void setFileType(FileType fileType) {
+        this.fileType = fileType;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
     }
 
     public String getUrl() {
@@ -56,12 +75,4 @@ public class FileLink extends TrackableBaseDomain {
     public void setUrl(String url) {
         this.url = url;
     }
-
-  /*  public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
-    }*/
 }

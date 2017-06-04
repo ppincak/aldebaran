@@ -14,7 +14,7 @@ public class ProductResponse extends ProductModel {
     private TimestampsModel timestamps;
 
     @JsonProperty
-    private List<String> images;
+    private List<ImageModel> images;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class ProductResponse extends ProductModel {
         this.timestamps = timestamps;
     }
 
-    public List<String> getImages() {
+    public List<ImageModel> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<ImageModel> images) {
         this.images = images;
     }
 }

@@ -1,8 +1,10 @@
 CREATE TABLE file_link
 (
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	`name` VARCHAR(50) NOT NULL,
+	file_name VARCHAR(50) NOT NULL,
+    file_length BIGINT NOT NULL,
 	file_link_type VARCHAR(10),
+	media_type VARCHAR(20),
 	url CHAR(65) NOT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
@@ -89,6 +91,9 @@ CREATE TABLE product_file_link
      product_id BIGINT NOT NULL,
      file_link_id BIGINT NOT NULL
 );
+
+ALTER TABLE product_file_link
+    ADD CONSTRAINT UNIQUE INDEX uq_product_file_link_product_id_file_link_id (product_id, file_link_id);
 
 ALTER TABLE product_file_link
     ADD CONSTRAINT fk_product_file_link__product_product_id

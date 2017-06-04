@@ -84,11 +84,13 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     }
 
     @Override
-    public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest, PaginationRequest paginationRequest) {
+    public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest,
+                                                           PaginationRequest paginationRequest) {
+
+
         return null;
     }
 
-    // TODO rethink
     @Override
     public void addImage(Long productId, Long imageId) {
         ProductFileLink productFileLink =
@@ -111,7 +113,6 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
         productFileLinkRepository.save(productFileLink);
     }
 
-    // TODO rethink
     @Override
     public void removeImage(Long productId, Long imageId) {
         ProductFileLink productFileLink =
