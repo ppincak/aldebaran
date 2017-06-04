@@ -5,6 +5,7 @@ import com.aldebaran.rest.handlers.ValidationExceptionHandler;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.model.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class JerseyConfiguration extends ResourceConfig {
 
     @Autowired
     public JerseyConfiguration(ValidationExceptionHandler cHandler, GeneralExceptionHandler gHandler) {
+        register(MultiPartFeature.class);
+
         packages(componentScan);
         register(cHandler);
         register(gHandler);

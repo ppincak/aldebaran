@@ -19,7 +19,7 @@ import java.util.List;
 public class CustomerAssembler extends AbstractOrikaAssembler {
 
     @Autowired
-    private ImageAssembler imageAssembler;
+    private FileLinkAssembler fileLinkAssembler;
 
     public Customer toEntity(CustomerRequest request) {
         return mapperFacade.map(request, Customer.class);
@@ -86,7 +86,7 @@ public class CustomerAssembler extends AbstractOrikaAssembler {
                                     MappingContext context) {
 
                     customerResponse.setImageUrl(
-                            imageAssembler.assembleImageUrl(customer.getImage()));
+                            fileLinkAssembler.assembleImageUrl(customer.getFileLink()));
                 }
             })
             .register();

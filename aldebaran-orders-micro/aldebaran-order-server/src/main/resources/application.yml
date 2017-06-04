@@ -1,6 +1,7 @@
 api:
   defaultPage: 0
   defaultPageSize: 10
+  maxFileLength: 10000000
 
 spring:
   datasource:

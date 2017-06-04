@@ -69,8 +69,11 @@ public class GeneralExceptionHandler implements ExceptionMapper<Exception> {
 
         errorResponse.setStatus(exception.getStatus());
 
+        int status = exception.getStatus() != 0 ? exception.getStatus() :
+                                                  Response.Status.BAD_REQUEST.getStatusCode();
+
         return Response
-                .status(exception.getStatus())
+                .status(status)
                 .entity(errorResponse)
                 .build();
     }

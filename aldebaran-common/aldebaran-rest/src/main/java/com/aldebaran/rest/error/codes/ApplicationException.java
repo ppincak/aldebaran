@@ -1,5 +1,6 @@
 package com.aldebaran.rest.error.codes;
 
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,8 +11,7 @@ public class ApplicationException extends RuntimeException {
     private final ErrorBuilder errorBuilder;
     private final Set<ErrorBuilder> detail = new HashSet<>();
 
-    // TODO assign from constant
-    private int status = 400;
+    private int status = 0;
 
     public ApplicationException(ErrorEvent errorBuilder) {
         this.errorBuilder = new ErrorBuilder(errorBuilder);

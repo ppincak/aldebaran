@@ -13,12 +13,11 @@ import com.aldebaran.rest.search.PaginationResponse;
 import com.aldebaran.rest.search.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -76,6 +75,16 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     @Override
     public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest, PaginationRequest paginationRequest) {
         return null;
+    }
+
+    @Override
+    public void addImage(Long productId, Long imageId) {
+
+    }
+
+    @Override
+    public void removeImage(Long productId, Long imageId) {
+
     }
 
     private void checkProductName(String name) {

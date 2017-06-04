@@ -23,12 +23,12 @@ public class PaginationRequest {
 
     public Sort.Direction orderDirection() {
         if(orderDirection == null || orderDirection.isEmpty()) {
-            return Sort.Direction.ASC;
+            return null;
         }
         try {
             return Sort.Direction.valueOf(orderDirection.toUpperCase());
         } catch (Exception e) {
-            return Sort.Direction.ASC;
+            return null;
         }
     }
 

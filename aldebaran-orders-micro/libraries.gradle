@@ -8,6 +8,7 @@ ext {
     jacksonDataformatVersion = '2.8.6'
     jaxwsVersion = '2.0.1'
     jaxValidationVersion= '1.1.0.Final'
+    jerseyVersion = '2.23.2'
     kotlinVersion = '1.1.1'
     mysqlDriverVersion = '6.0.5'
     orikaVersion = '1.5.1'
@@ -46,6 +47,10 @@ ext {
         javax: [
             rs: "javax.ws.rs:javax.ws.rs-api:${jaxwsVersion}",
             validation: "javax.validation:validation-api:${jaxValidationVersion}"
+        ],
+        jersey: [
+            core: "org.glassfish.jersey.core:jersey-server:${jerseyVersion}",
+            media: "org.glassfish.jersey.media:jersey-media-multipart:${jerseyVersion}"
         ],
         kotlin: [
             sdk: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"

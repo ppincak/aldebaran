@@ -13,6 +13,9 @@ public class ApiProperties {
     @Value("${api.defaultPageSize}")
     private Integer defaultPageSize;
 
+    @Value("${api.maxFileLength}")
+    private Integer maxFileLength;
+
     public Integer getDefaultPage() {
         return defaultPage;
     }
@@ -27,5 +30,13 @@ public class ApiProperties {
 
     public void setDefaultPageSize(Integer defaultPageSize) {
         this.defaultPageSize = defaultPageSize;
+    }
+
+    public Integer getMaxFileLength() {
+        return maxFileLength;
+    }
+
+    public void setMaxFileLength(Integer maxFileLength) {
+        this.maxFileLength = maxFileLength;
     }
 }

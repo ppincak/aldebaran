@@ -16,6 +16,7 @@ dependencies {
     compile libraries.hibernate.validator
 
     compile libraries.javax.rs
+    compile libraries.jersey.media
 
     compile libraries.hikari
 
@@ -27,7 +28,9 @@ dependencies {
     compile libraries.spring.orm
     compile libraries.spring.tx
 
-    compile libraries.swagger.jersey2
+    compile (libraries.swagger.jersey2) {
+        exclude group: 'org.glassfish.jersey.media'
+    }
 }
 
 bootRepackage {

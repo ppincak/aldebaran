@@ -26,8 +26,8 @@ public class Customer extends TrackableBaseDomain {
 
     @OneToOne(fetch = FetchType.LAZY,
               cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id")
-    private Image image;
+    @JoinColumn(name = "file_link_id")
+    private FileLink fileLink;
 
     @OneToMany(mappedBy = "customer",
                fetch = FetchType.LAZY)
@@ -65,12 +65,12 @@ public class Customer extends TrackableBaseDomain {
         this.phone = phone;
     }
 
-    public Image getImage() {
-        return image;
+    public FileLink getFileLink() {
+        return fileLink;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setFileLink(FileLink fileLink) {
+        this.fileLink = fileLink;
     }
 
     public List<CustomerOrder> getCustomerOrders() {

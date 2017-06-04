@@ -13,7 +13,7 @@ public class SearchRequest {
 
     private static final String SPLIT_CHAR = ";";
     private static final Pattern SEARCH_PATTERN =
-            Pattern.compile("([a-zA-Z]+)(:eq:|:neq:|:it:|:gt:|:lte:|:gte:|:in:|:li:|:ili:)([a-zA-Z]+)");
+            Pattern.compile("([a-zA-Z]+)(:eq:|:neq:|:it:|:gt:|:lte:|:gte:|:in:|:li:|:ili:)([a-zA-Z0-9]+)");
 
     @QueryParam("search")
     private String search;

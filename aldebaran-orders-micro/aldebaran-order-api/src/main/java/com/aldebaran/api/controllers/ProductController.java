@@ -80,4 +80,28 @@ public class ProductController {
                 .noContent()
                 .build();
     }
+
+    @POST
+    @Path("/{productId}/images/{imageId}")
+    @ApiOperation(value = "Add image to product by id",
+                  response = Void.class)
+    public Response addImage(@PathParam("productId") Long productId,
+                             @PathParam("imageId") Long imageId) {
+        productService.addImage(productId, imageId);
+        return Response
+                .status(Response.Status.CREATED)
+                .build();
+    }
+
+    @DELETE
+    @Path("/{productId}/images/{imageId}")
+    @ApiOperation(value = "Delete product image by id",
+                  response = Void.class)
+    public Response removeImage(@PathParam("productId") Long productId,
+                                @PathParam("imageId") Long imageId) {
+        productService.removeImage(productId, imageId);
+        return Response
+                .noContent()
+                .build();
+    }
 }

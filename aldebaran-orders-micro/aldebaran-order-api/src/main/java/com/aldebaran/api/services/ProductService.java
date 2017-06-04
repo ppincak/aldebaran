@@ -25,4 +25,8 @@ public interface ProductService {
     List<Product> getProducts(Set<Long> productIds);
 
     PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest, PaginationRequest paginationRequest);
+
+    void addImage(Long productId, Long imageId);
+
+    void removeImage(Long productId, Long imageId);
 }

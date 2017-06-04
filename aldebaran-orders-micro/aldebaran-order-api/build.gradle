@@ -5,6 +5,7 @@ dependencies {
     compile libraries.javax.rs
     compile libraries.jackson.databind
     compile libraries.jackson.java8
+    compile libraries.jersey.media
 
     compile libraries.spring.beans
     compile libraries.spring.context
