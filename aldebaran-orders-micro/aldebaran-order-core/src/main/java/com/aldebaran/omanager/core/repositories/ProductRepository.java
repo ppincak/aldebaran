@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaSearchRepository<Product, Long> {
 
     Product getByName(String name);
 

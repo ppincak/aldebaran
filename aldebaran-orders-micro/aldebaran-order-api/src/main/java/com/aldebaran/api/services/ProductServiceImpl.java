@@ -2,6 +2,9 @@ package com.aldebaran.api.services;
 
 import com.aldebaran.omanager.core.CustomerOrderErrorCodes;
 import com.aldebaran.omanager.core.assemblers.ProductAssembler;
+import com.aldebaran.omanager.core.descriptors.CustomerSearchDescriptors;
+import com.aldebaran.omanager.core.descriptors.ProductSearchDescriptors;
+import com.aldebaran.omanager.core.entities.Customer;
 import com.aldebaran.omanager.core.entities.FileLink;
 import com.aldebaran.omanager.core.entities.Product;
 import com.aldebaran.omanager.core.entities.ProductFileLink;
@@ -11,12 +14,16 @@ import com.aldebaran.omanager.core.model.update.ProductUpdateRequest;
 import com.aldebaran.omanager.core.repositories.FileLinkRepository;
 import com.aldebaran.omanager.core.repositories.ProductFileLinkRepository;
 import com.aldebaran.omanager.core.repositories.ProductRepository;
+import com.aldebaran.omanager.core.repositories.SearchCriteriaSpecification;
 import com.aldebaran.rest.error.GeneralErrorCodes;
 import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.PaginationResponse;
+import com.aldebaran.rest.search.SearchCriterion;
 import com.aldebaran.rest.search.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,9 +93,24 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     @Override
     public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest,
                                                            PaginationRequest paginationRequest) {
+        PageRequest pageRequest =
+                assemblePageRequest(paginationRequest, ProductSearchDescriptors.orderProperties);
 
+        Set<SearchCriterion> criteria =
+                searchRequest.toSearchCriteria(ProductSearchDescriptors.descriptors);
 
-        return null;
+        Page<Product> page;
+        if(criteria.isEmpty()) {
+            page = repository.findAll(pageRequest);
+        } else {
+            page = repository.findAll(SearchCriteriaSpecification.buildWithAnd(criteria), pageRequest);
+        }
+
+        return PaginationResponse
+                .data(productAssembler.toResponseList(page.getContent()))
+                .totalElements(page.getNumberOfElements())
+                .totalPages(page.getTotalPages())
+                .build();
     }
 
     @Override

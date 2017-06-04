@@ -11,13 +11,11 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaSearchRepository<Customer, Long> {
 
     Customer getByEmail(String email);
 
     @Query("SELECT COUNT(c) FROM Customer c " +
            "WHERE id=:customerId")
     Long ordersCount(@Param("customerId") Long customerId);
-
-    Page<Customer> findAll(Specification<Customer> specification, Pageable pageable);
 }

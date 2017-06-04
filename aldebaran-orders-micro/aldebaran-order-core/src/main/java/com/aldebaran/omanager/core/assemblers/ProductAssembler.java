@@ -14,6 +14,7 @@ import ma.glasnost.orika.metadata.ClassMapBuilder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @Component
@@ -36,6 +37,10 @@ public class ProductAssembler extends AbstractOrikaAssembler {
                 mapperFacade.map(product, ProductUpdateRequest.class);
         tempUpdateRequest.getMap().putAll(updateRequest.getMap());
         return mapperFacade.map(tempUpdateRequest, ProductRequest.class);
+    }
+
+    public List<ProductResponse> toResponseList(List<Product> products) {
+        return mapperFacade.mapAsList(products, ProductResponse.class);
     }
 
     @Override

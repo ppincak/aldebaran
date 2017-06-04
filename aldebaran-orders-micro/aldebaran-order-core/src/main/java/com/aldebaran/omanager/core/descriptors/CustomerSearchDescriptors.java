@@ -3,10 +3,7 @@ package com.aldebaran.omanager.core.descriptors;
 import com.aldebaran.rest.search.SearchDescriptor;
 import com.aldebaran.rest.search.TypeOperators;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public final class CustomerSearchDescriptors {
@@ -20,10 +17,7 @@ public final class CustomerSearchDescriptors {
         addDescriptor("lastName", String.class, "lastName");
         addDescriptor("email", String.class, "email");
 
-        orderProperties.add("id");
-        orderProperties.add("firstName");
-        orderProperties.add("lastName");
-        orderProperties.add("email");
+        orderProperties.addAll(Arrays.asList("id", "firstName", "lastName", "email"));
     }
 
     private static void addDescriptor(String propertyName,
