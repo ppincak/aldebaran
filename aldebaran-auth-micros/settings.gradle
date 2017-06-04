@@ -1,0 +1,3 @@
+rootProject.name = 'aldebaran-auth-micros'
+include 'aldebaran-auth-server'
+
