@@ -1,4 +1,7 @@
 dependencies {
+    compile (project(":aldebaran-auth-core"))
+
+    compile libraries.javax.rs
     compile libraries.spring.core
     compile libraries.spring.context
 }

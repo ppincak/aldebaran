@@ -1,0 +1,9 @@
+jwt:
+  header: Authorization
+  issuer: grid-auth
+  defaultTokenLife: 1000
+  refreshTokenValidity: 10000
+  encryption:
+    key: dasdasdadashfdjt674gdgdggdfgdfggdasdasdadashfdjt674gdgdggdfgdfgg
+  signature:
+    key: dasdasdadashfdjt674gdgdggdfgdfggdasdasdadashfdjt674gdgdggdfgdfgg

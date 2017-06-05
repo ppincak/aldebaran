@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,11 +22,19 @@ open class WebSecurityConfiguration
         return BCryptPasswordEncoder();
     }
 
-    override fun configure(http: HttpSecurity?) {
-        super.configure(http)
+    override fun configure(http: HttpSecurity) {
+        http
+            .csrf()
+            .disable()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeRequests()
+            .antMatchers("/**")
+            .authenticated()
     }
 
-    override fun configure(web: WebSecurity?) {
-        super.configure(web)
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers("/oauth2/**")
     }
 }

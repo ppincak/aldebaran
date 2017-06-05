@@ -1,4 +1,6 @@
 dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+
     compile libraries.jose4j
     compile libraries.spring.core
     compile libraries.spring.context
