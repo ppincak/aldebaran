@@ -1,3 +1,8 @@
 dependencies {
+    compile libraries.aspectj.runtime
 
+    compile libraries.spring.boot.jersey
+    compile libraries.spring.security.web
+    compile libraries.spring.security.core
+    compile libraries.spring.security.config
 }

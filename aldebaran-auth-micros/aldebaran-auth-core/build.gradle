@@ -1,0 +1,5 @@
+dependencies {
+    compile libraries.jose4j
+    compile libraries.spring.core
+    compile libraries.spring.context
+}

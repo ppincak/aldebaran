@@ -1,3 +1,5 @@
 rootProject.name = 'aldebaran-auth-micros'
 include 'aldebaran-auth-server'
+include 'aldebaran-auth-api'
+include 'aldebaran-auth-core'
 
