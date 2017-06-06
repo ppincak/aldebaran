@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component
 data class JwtProperties(
 
     @Value("\${jwt.issuer}")
-    var issuer: String,
+    val issuer: String,
 
     @Value("\${jwt.signature.key}")
-    var signatureKey: String,
+    val signatureKey: String,
 
     @Value("\${jwt.encryption.key}")
-    var encryptionKey: String,
+    val encryptionKey: String,
 
     @Value("\${jwt.defaultTokenLife}")
-    var defaultTokenLife: String
+    val defaultTokenLife: String
 )

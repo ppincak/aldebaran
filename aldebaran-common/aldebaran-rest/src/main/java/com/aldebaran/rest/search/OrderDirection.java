@@ -1,9 +1,9 @@
 package com.aldebaran.rest.search;
 
-import com.aldebaran.utils.descriptors.Labelable;
+import com.aldebaran.utils.descriptors.LabelEnum;
 
 
-public enum OrderDirection implements Labelable {
+public enum OrderDirection implements LabelEnum {
     ASCENDING("asc"),
     ASC("desc");
 

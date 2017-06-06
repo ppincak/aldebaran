@@ -1,6 +1,7 @@
 ext {
     aspectjVersion = '1.8.9'
     flywayVersion = '4.0.2'
+    guavaVersion = '21.0'
     hibernateVersion = '5.2.8.Final'
     hibernateValidatorVersion = '5.2.4.Final'
     hikariVersion = '2.4.6'
@@ -28,6 +29,7 @@ ext {
         flyway: [
             core: "org.flywaydb:flyway-core:${flywayVersion}"
         ],
+        guava: "com.google.guava:guava:${guavaVersion}",
         hibernate: [
             validator: "org.hibernate:hibernate-validator:${hibernateValidatorVersion}",
             core: "org.hibernate:hibernate-core:${hibernateVersion}",

@@ -3,4 +3,5 @@ include 'aldebaran-data'
 include 'aldebaran-rest'
 include 'aldebaran-chassis'
 include 'aldebaran-utils'
+include 'aldebaran-security'
 

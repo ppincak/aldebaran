@@ -1,6 +1,6 @@
 package com.aldebaran.utils.descriptors;
 
-public interface Labelable {
+public interface LabelEnum {
 
     String getLabel();
 }

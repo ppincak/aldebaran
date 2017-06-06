@@ -1,7 +1,10 @@
 dependencies {
-    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+    compile (project(':aldebaran-utils'))
 
+    compile libraries.guava
+    compile libraries.javax.rs
     compile libraries.jose4j
+    compile libraries.jackson.annotations
     compile libraries.spring.core
     compile libraries.spring.context
 }
