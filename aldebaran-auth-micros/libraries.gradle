@@ -7,6 +7,7 @@ ext {
     hikariVersion = '2.4.6'
     jacksonVersion = '2.8.6'
     jacksonDataformatVersion = '2.8.6'
+    jacksonKotlinVersion = '2.8.8'
     jaxwsVersion = '2.0.1'
     jaxValidationVersion= '1.1.0.Final'
     jerseyVersion = '2.23.2'
@@ -46,6 +47,7 @@ ext {
             dataformat: [
                 yaml: "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonDataformatVersion}"
             ],
+            kotlin: "com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonKotlinVersion}"
         ],
         javax: [
             rs: "javax.ws.rs:javax.ws.rs-api:${jaxwsVersion}",

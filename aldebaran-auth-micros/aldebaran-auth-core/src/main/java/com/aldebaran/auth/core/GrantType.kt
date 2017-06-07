@@ -1,4 +1,4 @@
-package com.aldebaran.auth
+package com.aldebaran.auth.core
 
 import com.aldebaran.utils.descriptors.ValueEnum
 

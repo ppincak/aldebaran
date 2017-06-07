@@ -5,6 +5,8 @@ include 'aldebaran-auth-core'
 include 'aldebaran-data'
 include 'aldebaran-rest'
 include 'aldebaran-utils'
+include 'aldebaran-security'
 project(':aldebaran-data').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-data')
+project(':aldebaran-security').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-security')
 project(':aldebaran-utils').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-utils')
 project(':aldebaran-rest').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-rest')

@@ -11,4 +11,13 @@ public class EnumUtils {
         }
         return null;
     }
+
+    public static <T extends Enum<T> & ValueEnum> T getByValue(Class<T> enumClass, Object value) {
+        for(T labelable: enumClass.getEnumConstants()) {
+            if(labelable.getValue().equals(value)) {
+                return labelable;
+            }
+        }
+        return null;
+    }
 }

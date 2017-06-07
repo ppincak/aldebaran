@@ -1,6 +1,8 @@
 dependencies {
     compile (project(":aldebaran-auth-core"))
 
+    compile libraries.jackson.databind
+    compile libraries.jackson.kotlin
     compile libraries.javax.rs
     compile libraries.spring.core
     compile libraries.spring.context

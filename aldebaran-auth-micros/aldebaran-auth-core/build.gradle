@@ -1,7 +1,11 @@
 dependencies {
+    compile (project(':aldebaran-data'))
+    compile (project(':aldebaran-security'))
     compile (project(':aldebaran-utils'))
 
     compile libraries.guava
+    compile libraries.hibernate.jpa
+    compile libraries.hibernate.core
     compile libraries.javax.rs
     compile libraries.jose4j
     compile libraries.jackson.annotations
