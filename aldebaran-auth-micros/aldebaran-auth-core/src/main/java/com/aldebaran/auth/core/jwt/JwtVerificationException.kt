@@ -1,4 +1,4 @@
-package com.aldebaran.auth.core
+package com.aldebaran.auth.core.jwt
 
 
 class JwtVerificationException : RuntimeException {

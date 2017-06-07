@@ -1,4 +1,4 @@
-package com.aldebaran.auth.core
+package com.aldebaran.auth.core.jwt
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component

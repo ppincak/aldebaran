@@ -1,5 +1,6 @@
 package com.aldebaran.auth.core.entity;
 
+import com.aldebaran.data.domain.BaseDomain;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = User.tableName)
-public class User {
+public class User extends BaseDomain {
 
     static final String tableName = "auth_user";
 

@@ -1,4 +1,4 @@
-package com.aldebaran.auth.core
+package com.aldebaran.auth.core.jwt
 
 import com.aldebaran.security.AuthenticatedUser
 import com.aldebaran.security.JwtAuthenticatedUser

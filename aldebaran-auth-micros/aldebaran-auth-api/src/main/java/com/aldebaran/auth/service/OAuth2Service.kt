@@ -1,4 +1,4 @@
-package com.aldebaran.auth.controller
+package com.aldebaran.auth.service
 
 import com.aldebaran.auth.core.model.TokenRequest
 import com.aldebaran.auth.core.model.TokenResponse
@@ -9,5 +9,5 @@ interface OAuth2Service {
 
     fun token(tokenRequest: TokenRequest) : TokenResponse
 
-    fun tokenInfo(tokenRequest: TokenRequest) : AuthenticatedUser
+    fun tokenInfo(token: String) : AuthenticatedUser
 }
