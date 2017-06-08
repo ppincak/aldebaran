@@ -11,8 +11,7 @@ import javax.ws.rs.core.Response
 
 @Component
 @Path("/oauth2")
-@Consumes(MediaType.APPLICATION_XML,
-          MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 open class Oauth2Controller
     @Autowired constructor(val oauthService: OAuth2Service) {
@@ -27,9 +26,9 @@ open class Oauth2Controller
 
     @GET
     @Path("/tokenInfo")
-    fun tokenInfo() : Response {
+    fun tokenInfo(@HeaderParam("Authorization") jwt: String) : Response {
         return Response
-                .ok()
+                .ok(oauthService.tokenInfo(jwt))
                 .build()
     }
 }

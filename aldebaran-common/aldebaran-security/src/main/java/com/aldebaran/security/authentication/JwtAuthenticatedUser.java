@@ -1,5 +1,6 @@
-package com.aldebaran.security;
+package com.aldebaran.security.authentication;
 
+import com.aldebaran.security.jwt.TokenInfo;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
@@ -8,23 +9,24 @@ import java.util.Collection;
 public class JwtAuthenticatedUser implements AuthenticatedUser {
 
     private Long userId;
-    private String tempId;
     private String username;
     private String email;
     private String jwt;
+    private String jti;
     private String clientId;
     private Long expiresAt;
     private Collection<? extends GrantedAuthority> authorities;
     private Collection<String> scopes;
 
-    @Override
-    public Long getUserId() {
-        return userId;
+    public JwtAuthenticatedUser() {
+    }
+
+    public JwtAuthenticatedUser(TokenInfo tokenInfo) {
     }
 
     @Override
-    public String getTempId() {
-        return tempId;
+    public Long getUserId() {
+        return userId;
     }
 
     @Override
@@ -39,6 +41,10 @@ public class JwtAuthenticatedUser implements AuthenticatedUser {
 
     public String getJwt() {
         return jwt;
+    }
+
+    public String getJti() {
+        return jti;
     }
 
     @Override
@@ -90,10 +96,6 @@ public class JwtAuthenticatedUser implements AuthenticatedUser {
         this.userId = userId;
     }
 
-    public void setTempId(String tempId) {
-        this.tempId = tempId;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -104,6 +106,10 @@ public class JwtAuthenticatedUser implements AuthenticatedUser {
 
     public void setJwt(String jwt) {
         this.jwt = jwt;
+    }
+
+    public void setJti(String jti) {
+        this.jti = jti;
     }
 
     public void setClientId(String clientId) {

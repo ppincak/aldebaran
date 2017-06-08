@@ -2,6 +2,7 @@ package com.aldebaran.auth.core.authentication
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationProvider
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -24,7 +25,7 @@ open class UsernamePasswordAuthenticationProvider
                          userDetails.password)
 
         if (!passwordMatches) {
-            throw RuntimeException()
+            throw BadCredentialsException("Bad credentials")
         }
 
         usernamePasswordAuth.principal = userDetails

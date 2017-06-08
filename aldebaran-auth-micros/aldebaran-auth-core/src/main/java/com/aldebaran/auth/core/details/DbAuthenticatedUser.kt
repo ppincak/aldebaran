@@ -12,7 +12,7 @@ data class DbAuthenticatedUser(val user: User) : UserDetails {
     }
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return ArrayList<GrantedAuthority>(0)
     }
 
     override fun isEnabled(): Boolean {
@@ -32,10 +32,10 @@ data class DbAuthenticatedUser(val user: User) : UserDetails {
     }
 
     override fun isAccountNonExpired(): Boolean {
-        return user.expired
+        return !user.expired
     }
 
     override fun isAccountNonLocked(): Boolean {
-        return user.locked
+        return !user.locked
     }
 }

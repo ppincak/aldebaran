@@ -20,7 +20,7 @@ open class WebSecurityConfiguration
             : WebSecurityConfigurerAdapter() {
 
     @Autowired
-    fun configureAuthenticationmanager(managerBuilder: AuthenticationManagerBuilder,
+    fun configureAuthenticationManager(managerBuilder: AuthenticationManagerBuilder,
                                        usernamePasswordProvider: UsernamePasswordAuthenticationProvider) {
         managerBuilder
                 .authenticationProvider(usernamePasswordProvider)

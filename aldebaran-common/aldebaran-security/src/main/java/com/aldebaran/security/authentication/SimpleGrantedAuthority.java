@@ -1,4 +1,4 @@
-package com.aldebaran.security;
+package com.aldebaran.security.authentication;
 
 import org.springframework.security.core.GrantedAuthority;
 

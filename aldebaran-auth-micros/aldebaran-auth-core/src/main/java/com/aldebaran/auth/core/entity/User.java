@@ -1,15 +1,14 @@
 package com.aldebaran.auth.core.entity;
 
-import com.aldebaran.data.domain.BaseDomain;
+import com.aldebaran.data.domain.TrackableBaseDomain;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
 @Table(name = User.tableName)
-public class User extends BaseDomain {
+public class User extends TrackableBaseDomain {
 
     static final String tableName = "auth_user";
 
@@ -26,10 +25,6 @@ public class User extends BaseDomain {
     @Column(name = "password",
             nullable = false)
     private String password;
-    
-    @Column(name = "temp_token_id",
-            nullable = false)
-    private String tempTokenId;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     @Column(name = "enabled",
@@ -73,14 +68,6 @@ public class User extends BaseDomain {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getTempTokenId() {
-        return tempTokenId;
-    }
-
-    public void setTempTokenId(String tempTokenId) {
-        this.tempTokenId = tempTokenId;
     }
 
     public Boolean getEnabled() {

@@ -13,11 +13,17 @@ spring:
         hbm2ddl:
           auto: none
 
+flyway:
+  locations: classpath:db/migration/
+  cleanOnValidationError: true
+  validate-on-migrate: true
+  revoked: true
+
 jwt:
   header: Authorization
-  issuer: grid-auth
-  defaultTokenLife: 1000
-  refreshTokenValidity: 10000
+  issuer: aldebaran-auth
+  defaultTokenLife: 10000
+  encrypt: false
   encryption:
     key: dasdasdadashfdjt674gdgdggdfgdfggdasdasdadashfdjt674gdgdggdfgdfgg
   signature:

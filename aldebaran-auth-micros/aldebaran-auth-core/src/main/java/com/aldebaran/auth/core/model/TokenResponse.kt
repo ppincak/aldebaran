@@ -1,5 +1,6 @@
 package com.aldebaran.auth.core.model
 
+import com.aldebaran.auth.core.enums.TokenType
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 
@@ -15,11 +16,11 @@ data class TokenResponse (
     val refreshToken: String?,
 
     @JsonProperty
-    val tokenType: String,
+    val tokenType: TokenType,
 
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    val scope: Set<String>?,
+    val scope: Collection<String>?,
 
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_NULL)

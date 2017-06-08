@@ -4,13 +4,13 @@ import org.springframework.stereotype.Component
 
 
 @Component
-open class SecurityStorageProxy : SecurityStorage {
+open class SecurityStorageProxy(val securityStorage: SecurityStorage) : SecurityStorage {
 
     override fun revoke(jti: String) {
-
+        securityStorage.revoke(jti)
     }
 
     override fun isRevoked(jti: String) : Boolean {
-        return false
+        return securityStorage.isRevoked(jti)
     }
 }

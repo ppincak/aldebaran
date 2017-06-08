@@ -1,6 +1,6 @@
 package com.aldebaran.auth.core.model
 
-import com.aldebaran.auth.core.GrantType
+import com.aldebaran.auth.core.enums.GrantType
 import com.aldebaran.utils.descriptors.EnumUtils
 import com.fasterxml.jackson.annotation.JsonProperty
 

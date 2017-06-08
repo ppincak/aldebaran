@@ -3,7 +3,6 @@ package com.aldebaran.rest.error.codes;
 import java.util.Collections;
 
 
-// TODO rename
 public interface ErrorEvent {
 
     int getErrorCode();

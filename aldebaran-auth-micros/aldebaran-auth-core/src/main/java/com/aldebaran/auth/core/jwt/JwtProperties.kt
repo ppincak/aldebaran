@@ -1,5 +1,6 @@
 package com.aldebaran.auth.core.jwt
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
@@ -16,6 +17,9 @@ data class JwtProperties(
     @Value("\${jwt.encryption.key}")
     val encryptionKey: String,
 
+    @Value("\${jwt.encrypt}")
+    val encrypt: Boolean,
+
     @Value("\${jwt.defaultTokenLife}")
-    val defaultTokenLife: String
+    val defaultTokenLife: Long
 )

@@ -1,5 +1,6 @@
 dependencies {
     compile (project(":aldebaran-auth-core"))
+    compile (project(":aldebaran-rest"))
 
     compile libraries.jackson.databind
     compile libraries.jackson.kotlin

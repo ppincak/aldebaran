@@ -4,6 +4,7 @@ dependencies {
 
     compile libraries.aspectj.runtime
 
+    compile libraries.flyway.core
     compile libraries.hibernate.core
     compile libraries.hibernate.entityManager
     compile libraries.hibernate.jpa

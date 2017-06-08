@@ -1,8 +1,8 @@
 package com.aldebaran.auth.core.jwt
 
-import com.aldebaran.security.AuthenticatedUser
-import com.aldebaran.security.JwtAuthenticatedUser
-import com.aldebaran.security.TokenUtils
+import com.aldebaran.security.authentication.AuthenticatedUser
+import com.aldebaran.security.authentication.JwtAuthenticatedUser
+import com.aldebaran.security.jwt.TokenUtils
 import org.jose4j.jwe.ContentEncryptionAlgorithmIdentifiers
 import org.jose4j.jwe.JsonWebEncryption
 import org.jose4j.jwe.KeyManagementAlgorithmIdentifiers
@@ -20,7 +20,6 @@ import java.io.UnsupportedEncodingException
 
 // JWT fields
 private const val USER_ID = "uid"
-private const val TEMP_ID = "tpid"
 private const val CLIENT_ID = "auid"
 private const val USERNAME = "usrn"
 private const val EMAIL = "eml"
@@ -46,13 +45,12 @@ open class JwtTokenizer {
         }
     }
 
-    fun generateToken(authenticatedUser: AuthenticatedUser, jti: String, expireIn: Long, encrypt: Boolean) : String {
+    fun generateToken(authenticatedUser: AuthenticatedUser, jti: String, expireIn: Long) : String {
         val claims = JwtClaims()
         claims.issuer = jwtProperties?.issuer
         claims.jwtId = jti
 
         claims.setClaim(USER_ID, authenticatedUser.userId)
-        claims.setClaim(TEMP_ID, authenticatedUser.tempId)
         claims.setClaim(CLIENT_ID, authenticatedUser.clientId)
         claims.setClaim(USERNAME, authenticatedUser.username)
         claims.setClaim(EMAIL, authenticatedUser.email)
@@ -72,7 +70,7 @@ open class JwtTokenizer {
         try {
             jwt = jws.compactSerialization
 
-            if (encrypt) {
+            if (jwtProperties.encrypt) {
                 val jwe = JsonWebEncryption()
                 jwe.payload = jwt
                 jwe.key = encryptionKey
@@ -87,15 +85,20 @@ open class JwtTokenizer {
     }
 
     fun getClaims(jwt: String) : JwtClaims {
-        val jwe = JsonWebEncryption()
-
         val decryptedToken: String
-        try {
-            jwe.compactSerialization = jwt
-            jwe.key = encryptionKey
-            decryptedToken = jwe.plaintextString
-        } catch (e: JoseException) {
-            throw JwtVerificationException("Failed to decrypt token")
+
+        if(jwtProperties.encrypt) {
+            val jwe = JsonWebEncryption()
+
+            try {
+                jwe.compactSerialization = jwt
+                jwe.key = encryptionKey
+                decryptedToken = jwe.plaintextString
+            } catch (e: JoseException) {
+                throw JwtVerificationException("Failed to decrypt token")
+            }
+        } else {
+            decryptedToken = jwt
         }
 
         val payload: String
@@ -113,17 +116,18 @@ open class JwtTokenizer {
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun getAuthenticatedUser(token: String): AuthenticatedUser {
+    fun getAuthenticatedUser(token: String): JwtAuthenticatedUser {
         val claims = getClaims(token)
 
         val authenticatedUser = JwtAuthenticatedUser()
-        authenticatedUser.setUserId(claims.getClaimValue(USER_ID) as Long)
-        authenticatedUser.setTempId(claims.getClaimValue(TEMP_ID) as String)
-        authenticatedUser.setClientId(claims.getClaimValue(CLIENT_ID) as String)
-        authenticatedUser.setUsername(claims.getClaimValue(USERNAME) as String)
-        authenticatedUser.setEmail(claims.getClaimValue(EMAIL) as String)
-        authenticatedUser.setScopes(claims.getClaimValue(SCOPES) as Collection<String>)
-        authenticatedUser.setAuthorities(TokenUtils.createAuthorities(claims.getClaimValue(ROLES)))
+        authenticatedUser.jti = claims.jwtId
+        authenticatedUser.userId = claims.getClaimValue(USER_ID) as Long
+        authenticatedUser.clientId = claims.getClaimValue(CLIENT_ID) as String
+        authenticatedUser.username = claims.getClaimValue(USERNAME) as String
+        authenticatedUser.email = claims.getClaimValue(EMAIL) as String
+        authenticatedUser.scopes = claims.getClaimValue(SCOPES) as Collection<String>
+        authenticatedUser.authorities = TokenUtils.createAuthorities(claims.getClaimValue(ROLES))
+        authenticatedUser.expiresAt = claims.expirationTime.value
         return authenticatedUser
     }
 }

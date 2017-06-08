@@ -1,0 +1,9 @@
+dependencies {
+    compile libraries.aspectj.weaver
+    compile libraries.hystrix.core
+    compile libraries.spring.beans
+    compile libraries.spring.context
+    compile libraries.spring.core
+    compile libraries.spring.web
+
+}
