@@ -1,3 +1,16 @@
+server:
+  port: ${SERVICE_PORT}
+
+discovery:
+  name: ${CONSUL_SERVICE_NAME}
+  healthCheckPath: /monitor/health
+  healthCheckInterval: ${CONSUL_HEALTH_CHECK_INTERVAL}
+  consul:
+    enabled: ${CONSUL_ENABLED}
+    host: ${CONSUL_IP}
+    port: ${CONSUL_PORT}
+    config:
+
 api:
   defaultPage: 0
   defaultPageSize: 10

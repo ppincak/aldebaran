@@ -26,9 +26,9 @@ open class Oauth2Controller
 
     @GET
     @Path("/tokenInfo")
-    fun tokenInfo(@HeaderParam("Authorization") jwt: String) : Response {
+    fun tokenInfo(@HeaderParam("Authorization") authorizationHeader: String) : Response {
         return Response
-                .ok(oauthService.tokenInfo(jwt))
+                .ok(oauthService.tokenInfo(authorizationHeader))
                 .build()
     }
 }

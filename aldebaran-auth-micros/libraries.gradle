@@ -2,6 +2,7 @@ ext {
     aspectjVersion = '1.8.9'
     flywayVersion = '4.0.2'
     guavaVersion = '21.0'
+    guavaVersion = '21.0'
     hibernateVersion = '5.2.8.Final'
     hibernateValidatorVersion = '5.2.4.Final'
     hikariVersion = '2.4.6'
@@ -65,7 +66,7 @@ ext {
         spring: [
                 beans: "org.springframework:spring-beans:${springVersion}",
             boot: [
-                    jersey: "org.springframework.boot:spring-boot-starter-jersey:${springBootVersion}"
+                jersey: "org.springframework.boot:spring-boot-starter-jersey:${springBootVersion}"
             ],
             context: "org.springframework:spring-context:${springVersion}",
             core: "org.springframework:spring-core:${springVersion}",

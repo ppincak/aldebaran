@@ -1,6 +1,8 @@
 dependencies {
     compile libraries.aspectj.weaver
-    compile libraries.hystrix.core
+    compile libraries.netflix.hystrix.core
+    compile libraries.prometheus.client
+    compile libraries.prometheus.client
     compile libraries.spring.beans
     compile libraries.spring.context
     compile libraries.spring.core

@@ -26,6 +26,15 @@ public class TokenUtils {
         return hc.toString();
     }
 
+    public static String extractJwt(String authorization, String tokenType) {
+        int index = authorization.lastIndexOf(tokenType);
+        if(index == -1) {
+            return null;
+        }
+        return authorization
+                .substring(index + tokenType.length() + 1, authorization.length());
+    }
+
     @SuppressWarnings("unchecked")
     public static Collection<GrantedAuthority> createAuthorities(Object roles) {
         if(roles instanceof ArrayList == false) {

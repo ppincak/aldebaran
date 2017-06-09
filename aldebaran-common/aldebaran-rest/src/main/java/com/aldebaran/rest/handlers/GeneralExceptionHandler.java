@@ -5,21 +5,21 @@ import com.aldebaran.rest.error.codes.ErrorBuilder;
 import com.aldebaran.rest.error.codes.ErrorDetailBuilder;
 import com.aldebaran.rest.error.codes.ErrorResponse;
 import com.aldebaran.rest.error.GeneralErrorCodes;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
+@Provider
 public class GeneralExceptionHandler implements ExceptionMapper<Exception> {
 
+    @Autowired
     private ErrorResponseCreator responseCreator;
-
-    public GeneralExceptionHandler(ErrorResponseCreator responseCreator) {
-        this.responseCreator = responseCreator;
-    }
 
     @Override
     public Response toResponse(Exception exception) {

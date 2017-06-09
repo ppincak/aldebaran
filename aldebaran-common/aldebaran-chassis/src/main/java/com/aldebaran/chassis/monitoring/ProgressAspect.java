@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProgressAspect extends AbstractMonitoringAspect<Gauge>{
 
-    @Pointcut("(@annotation(com.grid.microservices.monitoring.Progress))")
+    @Pointcut("(@annotation(com.aldebaran.chassis.monitoring.Progress))")
     void annotatedWithGauche() {}
 
     @Around("annotatedWithGauche()")

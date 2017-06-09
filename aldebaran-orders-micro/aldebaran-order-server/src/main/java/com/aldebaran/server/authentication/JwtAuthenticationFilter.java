@@ -1,16 +1,22 @@
-package com.aldebaran.server.filter;
+package com.aldebaran.server.authentication;
 
+import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.codes.ApplicationException;
+import com.aldebaran.security.jwt.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 
@@ -25,7 +31,16 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        return null;
+
+        String authorization = request.getHeader("Authorization");
+        if(authorization == null) {
+            throw new UnauthorizedException();
+        }
+
+        Authentication authentication = getAuthenticationManager()
+                .authenticate(new JwtAuthentication(authorization));
+
+        return authentication;
     }
 
     @Override
@@ -42,5 +57,17 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Override
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         super.setAuthenticationManager(authenticationManager);
+    }
+
+    @Autowired
+    @Override
+    public void setAuthenticationSuccessHandler(AuthenticationSuccessHandler successHandler) {
+        super.setAuthenticationSuccessHandler(successHandler);
+    }
+
+    @Autowired
+    @Override
+    public void setAuthenticationFailureHandler(AuthenticationFailureHandler failureHandler) {
+        super.setAuthenticationFailureHandler(failureHandler);
     }
 }

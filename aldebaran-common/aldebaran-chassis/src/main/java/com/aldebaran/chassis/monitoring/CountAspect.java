@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CountAspect extends AbstractMonitoringAspect<Counter> {
 
-    @Pointcut("@annotation(com.grid.microservices.monitoring.Count)")
+    @Pointcut("@annotation(com.aldebaran.chassis.monitoring.Count)")
     void annotatedWithCount() {}
 
     @Before("(annotatedWithCount())")

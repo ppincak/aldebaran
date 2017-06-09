@@ -1,6 +1,7 @@
 package com.aldebaran.security.authentication;
 
 import com.aldebaran.security.jwt.TokenInfo;
+import com.aldebaran.security.jwt.TokenUtils;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
@@ -21,7 +22,14 @@ public class JwtAuthenticatedUser implements AuthenticatedUser {
     public JwtAuthenticatedUser() {
     }
 
-    public JwtAuthenticatedUser(TokenInfo tokenInfo) {
+    public JwtAuthenticatedUser(String jwt, TokenInfo tokenInfo) {
+        this.jwt = jwt;
+        userId = tokenInfo.getUserId();
+        username = tokenInfo.getUsername();
+        email = tokenInfo.getEmail();
+        clientId = tokenInfo.getClientId();
+        expiresAt = tokenInfo.getExpiresAt();
+        authorities = TokenUtils.createAuthorities(tokenInfo.getRoles());
     }
 
     @Override

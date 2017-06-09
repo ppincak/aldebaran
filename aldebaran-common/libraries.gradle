@@ -13,6 +13,7 @@ ext {
     kotlinVersion = '1.1.1'
     mysqlDriverVersion = '6.0.5'
     orikaVersion = '1.5.1'
+    prometheusVersion = '0.0.21'
     springSecurityVersion = '4.2.1.RELEASE'
     springBootVersion = '1.5.1.RELEASE'
     springDataJpaVersion = '1.11.0.RELEASE'
@@ -58,6 +59,11 @@ ext {
             ]
         ],
         orika: "ma.glasnost.orika:orika-core:${orikaVersion}",
+        prometheus: [
+            client: "io.prometheus:simpleclient:${prometheusVersion}",
+            common: "io.prometheus:simpleclient_common:${prometheusVersion}",
+            hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
+        ],
         spring: [
             beans: "org.springframework:spring-beans:${springVersion}",
             boot: [

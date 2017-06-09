@@ -1,6 +1,7 @@
 dependencies {
     compile (project(":aldebaran-auth-api"))
     compile (project(":aldebaran-auth-core"))
+    compile (project(":aldebaran-rest"))
 
     compile libraries.aspectj.runtime
 

@@ -4,24 +4,24 @@ import com.aldebaran.rest.error.ValidationErrorsMap;
 import com.aldebaran.rest.error.codes.ErrorEvent;
 import com.aldebaran.rest.error.codes.ErrorResponse;
 import com.aldebaran.rest.error.ValidationErrorCodes;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.metadata.ConstraintDescriptor;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 
+@Provider
 public class ValidationExceptionHandler implements ExceptionMapper<ConstraintViolationException> {
 
+    @Autowired
     private ErrorResponseCreator responseCreator;
-
-    public ValidationExceptionHandler(ErrorResponseCreator responseCreator) {
-        this.responseCreator = responseCreator;
-    }
 
     @Override
     public Response toResponse(ConstraintViolationException exception) {

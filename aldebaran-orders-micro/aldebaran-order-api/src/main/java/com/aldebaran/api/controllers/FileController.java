@@ -15,6 +15,7 @@ import java.util.List;
 
 @Component
 @Path("/files")
+@Produces({MediaType.APPLICATION_JSON})
 public class FileController {
 
     @Autowired
@@ -23,7 +24,6 @@ public class FileController {
     @POST
     @Path("/{fileName}")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
-    @Produces({MediaType.APPLICATION_JSON})
     public Response uploadFile(@PathParam("fileName") String fileName,
                                @FormDataParam("file") final List<FormDataBodyPart> formDataBodyParts) {
 
@@ -48,7 +48,6 @@ public class FileController {
 
     @DELETE
     @Path("/{fileId}")
-    @Produces({MediaType.APPLICATION_JSON})
     public Response deleteFile(@PathParam("fileId") Long fileId) {
         fileService.deleteFile(fileId);
         return Response

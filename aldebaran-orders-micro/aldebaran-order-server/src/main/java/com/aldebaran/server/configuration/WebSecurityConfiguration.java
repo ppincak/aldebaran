@@ -1,8 +1,8 @@
 package com.aldebaran.server.configuration;
 
 
-import com.aldebaran.server.filter.JwtAuthenticationFilter;
-import com.aldebaran.server.filter.JwtAuthenticationProvider;
+import com.aldebaran.server.authentication.JwtAuthenticationFilter;
+import com.aldebaran.server.authentication.JwtAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

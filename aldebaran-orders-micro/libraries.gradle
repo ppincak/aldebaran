@@ -1,9 +1,11 @@
 ext {
     aspectjVersion = '1.8.9'
     flywayVersion = '4.0.2'
+    guavaVersion = '21.0'
     hibernateVersion = '5.2.8.Final'
     hibernateValidatorVersion = '5.2.4.Final'
     hikariVersion = '2.4.6'
+    hystrixVersion = '1.5.11'
     jacksonVersion = '2.8.6'
     jacksonDataformatVersion = '2.8.6'
     jaxwsVersion = '2.0.1'
@@ -12,6 +14,7 @@ ext {
     kotlinVersion = '1.1.1'
     mysqlDriverVersion = '6.0.5'
     orikaVersion = '1.5.1'
+    prometheusVersion = '0.0.21'
     springSecurityVersion = '4.2.1.RELEASE'
     springBootVersion = '1.5.1.RELEASE'
     springDataJpaVersion = '1.11.0.RELEASE'
@@ -27,6 +30,7 @@ ext {
         flyway: [
             core: "org.flywaydb:flyway-core:${flywayVersion}"
         ],
+        guava: "com.google.guava:guava:${guavaVersion}",
         hibernate: [
             validator: "org.hibernate:hibernate-validator:${hibernateValidatorVersion}",
             core: "org.hibernate:hibernate-core:${hibernateVersion}",
@@ -56,7 +60,17 @@ ext {
             sdk: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"
         ],
         mysqlDriver: "mysql:mysql-connector-java:${mysqlDriverVersion}",
+        netflix: [
+            hystrix: [
+                core: "com.netflix.hystrix:hystrix-core:${hystrixVersion}"
+            ]
+        ],
         orika: "ma.glasnost.orika:orika-core:${orikaVersion}",
+        prometheus: [
+                client: "io.prometheus:simpleclient:${prometheusVersion}",
+                common: "io.prometheus:simpleclient_common:${prometheusVersion}",
+                hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
+        ],
         spring: [
             beans: "org.springframework:spring-beans:${springVersion}",
             boot: [

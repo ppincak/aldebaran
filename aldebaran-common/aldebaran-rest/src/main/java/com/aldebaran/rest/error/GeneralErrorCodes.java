@@ -2,12 +2,15 @@ package com.aldebaran.rest.error;
 
 import com.aldebaran.rest.error.codes.ErrorEvent;
 
+import javax.ws.rs.ext.Provider;
+
 
 public enum GeneralErrorCodes implements ErrorEvent {
 
     INTERNAL_SERVER_ERROR(1, "internal.server.error"),
     RESOURCE_NOT_FOUND(2, "resource.not found"),
-    UNSUPPORTED_SEARCH_OPERATOR(3, "unsupported.search.operator");
+    UNAUTHORIZED(4, "unauthorized.access"),
+    UNSUPPORTED_SEARCH_OPERATOR(4, "unsupported.search.operator");
 
     private final static int SUB_CODE = 3;
 

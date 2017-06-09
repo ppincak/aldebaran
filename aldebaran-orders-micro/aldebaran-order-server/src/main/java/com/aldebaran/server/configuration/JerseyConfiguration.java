@@ -21,13 +21,10 @@ public class JerseyConfiguration extends ResourceConfig {
     /** Package for jersey components */
     public static final String componentScan = "com.aldebaran";
 
-    @Autowired
-    public JerseyConfiguration(ValidationExceptionHandler cHandler, GeneralExceptionHandler gHandler) {
+    public JerseyConfiguration() {
         register(MultiPartFeature.class);
 
         packages(componentScan);
-        register(cHandler);
-        register(gHandler);
 
         initializeSwagger();
     }

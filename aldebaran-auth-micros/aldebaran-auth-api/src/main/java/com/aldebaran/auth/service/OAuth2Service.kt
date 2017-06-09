@@ -9,5 +9,5 @@ interface OAuth2Service {
 
     fun token(tokenRequest: TokenRequest) : TokenResponse
 
-    fun tokenInfo(token: String) : TokenInfo
+    fun tokenInfo(authorizationHeader: String) : TokenInfo
 }

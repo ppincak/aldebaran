@@ -17,12 +17,14 @@ open class UsernamePasswordAuthenticationProvider
 
     override fun authenticate(authentication: Authentication?): Authentication {
         val usernamePasswordAuth = authentication as UsernamePasswordAuthentication
-        val userDetails = userDetailsService
-                .loadUserByUsername(usernamePasswordAuth.name)
+        val userDetails =
+                userDetailsService
+                        .loadUserByUsername(usernamePasswordAuth.name)
 
-        val passwordMatches = passwordEncoder
-                .matches(authentication.getCredentials() as String,
-                         userDetails.password)
+        val passwordMatches =
+                passwordEncoder
+                        .matches(authentication.getCredentials() as String,
+                                 userDetails.password)
 
         if (!passwordMatches) {
             throw BadCredentialsException("Bad credentials")

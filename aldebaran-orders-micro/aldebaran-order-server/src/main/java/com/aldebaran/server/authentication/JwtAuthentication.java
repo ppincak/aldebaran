@@ -1,4 +1,4 @@
-package com.aldebaran.server.filter;
+package com.aldebaran.server.authentication;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,13 +18,6 @@ public class JwtAuthentication implements Authentication {
 
     public JwtAuthentication(String jwt) {
         this.jwt = jwt;
-    }
-
-    public JwtAuthentication(String jwt, Collection<? extends GrantedAuthority> authorities, UserDetails details) {
-        this.jwt = jwt;
-        this.authorities = authorities;
-        this.details = details;
-        this.principal = details;
     }
 
     public String getJwt() {
@@ -64,5 +57,9 @@ public class JwtAuthentication implements Authentication {
     @Override
     public String getName() {
         return null;
+    }
+
+    public void setDetails(UserDetails details) {
+        this.details = details;
     }
 }

@@ -10,13 +10,13 @@ public class RestCall<T> {
     private HttpMethod method;
     private HttpEntity<?> requestEntity;
     private Class<T> responseType;
-    private Object[] uriVariables;
+    private Object[] uriVariables = new Object[0];
 
     public String getUrl() {
         return url;
     }
 
-    public RestCall setUrl(String url) {
+    public RestCall<T> setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -25,7 +25,7 @@ public class RestCall<T> {
         return method;
     }
 
-    public RestCall setMethod(HttpMethod method) {
+    public RestCall<T> setMethod(HttpMethod method) {
         this.method = method;
         return this;
     }
@@ -34,7 +34,7 @@ public class RestCall<T> {
         return requestEntity;
     }
 
-    public RestCall setRequestEntity(HttpEntity<?> requestEntity) {
+    public RestCall<T> setRequestEntity(HttpEntity<?> requestEntity) {
         this.requestEntity = requestEntity;
         return this;
     }
@@ -43,7 +43,7 @@ public class RestCall<T> {
         return responseType;
     }
 
-    public RestCall setResponseType(Class<T> responseType) {
+    public RestCall<T> setResponseType(Class<T> responseType) {
         this.responseType = responseType;
         return this;
     }
@@ -52,7 +52,7 @@ public class RestCall<T> {
         return uriVariables;
     }
 
-    public RestCall setUriVariables(Object[] uriVariables) {
+    public RestCall<T> setUriVariables(Object[] uriVariables) {
         this.uriVariables = uriVariables;
         return this;
     }

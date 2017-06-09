@@ -4,7 +4,7 @@ import com.aldebaran.utils.descriptors.ValueEnum
 
 
 enum class TokenType(val label: String, val enumValue: String) : ValueEnum<String> {
-    BEARER("bearer", "bearer");
+    BEARER("bearer", "Bearer");
 
     override fun getValue(): String {
         return enumValue

@@ -5,3 +5,4 @@ build
 /vms/vagrant/.vagrant
 /vms/packer/packer_cache
 /vms/packer/build
+classes

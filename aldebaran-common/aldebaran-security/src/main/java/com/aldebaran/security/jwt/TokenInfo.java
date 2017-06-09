@@ -26,6 +26,9 @@ public class TokenInfo {
     @JsonProperty
     private List<String> roles;
 
+    public TokenInfo() {
+    }
+
     public TokenInfo(AuthenticatedUser authenticatedUser) {
         userId = authenticatedUser.getUserId();
         username = authenticatedUser.getUsername();

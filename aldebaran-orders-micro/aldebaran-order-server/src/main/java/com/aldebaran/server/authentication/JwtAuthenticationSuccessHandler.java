@@ -1,4 +1,4 @@
-package com.aldebaran.server.filter;
+package com.aldebaran.server.authentication;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
