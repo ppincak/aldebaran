@@ -20,7 +20,12 @@ dependencies {
     compile libraries.javax.rs
     compile libraries.jersey.media
     compile libraries.mysqlDriver
-    compile libraries.spring.boot.jersey
+    compile libraries.prometheus.client
+    compile libraries.prometheus.common
+    compile libraries.prometheus.hotspot
+    compile (libraries.spring.boot.jersey){
+        exclude group: 'ch.qos.logback'
+    }
     compile libraries.spring.dataJpa
     compile libraries.spring.dataCommons
     compile libraries.spring.orm
@@ -37,5 +42,6 @@ bootRepackage {
 }
 
 springBoot  {
-    requiresUnpack = ['com.aldebaran.api:omanager-server']
+    requiresUnpack = ['com.aldebaran:aldebaran-order-api',
+                      'com.aldebaran:aldebaran-rest']
 }

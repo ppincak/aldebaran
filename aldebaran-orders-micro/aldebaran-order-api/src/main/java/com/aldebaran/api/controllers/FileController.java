@@ -1,6 +1,7 @@
 package com.aldebaran.api.controllers;
 
 import com.aldebaran.api.services.FileService;
+import com.aldebaran.chassis.monitoring.Count;
 import com.aldebaran.rest.files.DownloadableFile;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -24,6 +25,7 @@ public class FileController {
     @POST
     @Path("/{fileName}")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
+    @Count(name = "fileUploadCount")
     public Response uploadFile(@PathParam("fileName") String fileName,
                                @FormDataParam("file") final List<FormDataBodyPart> formDataBodyParts) {
 
@@ -35,6 +37,7 @@ public class FileController {
 
     @GET
     @Path("/{fileId}")
+    @Count(name = "fileDownloadCount")
     public Response downloadFile(@PathParam("fileId") Long fileId) throws Exception {
         DownloadableFile downloadableFile =
                 fileService.downloadFile(fileId);

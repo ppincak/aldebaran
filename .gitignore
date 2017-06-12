@@ -6,3 +6,5 @@ build
 /vms/packer/packer_cache
 /vms/packer/build
 classes
+.vagrant
+/aldebaran-auth-micros/out

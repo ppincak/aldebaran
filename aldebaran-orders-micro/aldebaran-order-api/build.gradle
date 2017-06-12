@@ -1,16 +1,13 @@
 dependencies {
+    compile (project(':aldebaran-chassis'))
     compile (project(':aldebaran-rest'))
     compile (project(':aldebaran-order-core'))
 
     compile libraries.javax.rs
-    // TODO add to libraries
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
     compile libraries.jackson.databind
     compile libraries.jackson.java8
     compile libraries.jersey.media
-
     compile libraries.spring.beans
     compile libraries.spring.context
-
     compile libraries.swagger.annotations
 }

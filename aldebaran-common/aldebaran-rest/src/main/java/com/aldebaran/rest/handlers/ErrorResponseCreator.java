@@ -1,5 +1,6 @@
 package com.aldebaran.rest.handlers;
 
+import com.aldebaran.rest.device.DeviceContext;
 import com.aldebaran.rest.error.codes.ErrorEvent;
 import com.aldebaran.rest.error.codes.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class ErrorResponseCreator {
         try {
             return messageSource.getMessage(error.getErrorMessageKey(),
                                             replacements,
-                                            new Locale("en"));
+                                            DeviceContext.getContext().getLocale());
         } catch (Exception e) {
             return "";
         }

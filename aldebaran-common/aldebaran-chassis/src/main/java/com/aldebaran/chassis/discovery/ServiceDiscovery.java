@@ -3,5 +3,5 @@ package com.aldebaran.chassis.discovery;
 
 public interface ServiceDiscovery {
 
-    ServiceDescription discover(String serviceId);
+    ServiceDescription discover(String serviceName);
 }

@@ -12,7 +12,7 @@ public class ServiceDiscoveryStub implements ServiceDiscovery {
     }
 
     @Override
-    public ServiceDescription discover(String serviceId) {
-        return services.get(serviceId);
+    public ServiceDescription discover(String serviceName) {
+        return services.get(serviceName);
     }
 }

@@ -1,6 +1,9 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile (project(":aldebaran-auth-api"))
     compile (project(":aldebaran-auth-core"))
+    compile (project(":aldebaran-data"))
     compile (project(":aldebaran-rest"))
 
     compile libraries.aspectj.runtime
@@ -15,4 +18,13 @@ dependencies {
     compile libraries.spring.security.web
     compile libraries.spring.security.core
     compile libraries.spring.security.config
+}
+
+bootRepackage {
+    mainClass = 'com.aldebaran.server.StartupKt'
+}
+
+springBoot  {
+    requiresUnpack = ['com.aldebaran:aldebaran-auth-api',
+                      'com.aldebaran:aldebaran-rest']
 }

@@ -1,15 +1,14 @@
 package com.aldebaran.api.controllers;
 
+import com.aldebaran.omanager.core.model.*;
 import com.aldebaran.omanager.core.model.update.CustomerOrderUpdateRequest;
-import com.aldebaran.omanager.core.model.CustomerRequest;
-import com.aldebaran.omanager.core.model.CustomerOrderRequest;
-import com.aldebaran.omanager.core.model.CustomerResponse;
 import com.aldebaran.omanager.core.model.update.CustomerUpdateRequest;
 import com.aldebaran.api.services.CustomerService;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.SearchRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +30,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GET
+    @ApiOperation(value = "Get customers by complex search criteria")
     public Response getCustomers(@BeanParam SearchRequest searchRequest,
                                  @BeanParam PaginationRequest paginationRequest) {
         return Response
@@ -60,7 +60,7 @@ public class CustomerController {
 
     @PUT
     @Path("/{customerId}")
-    @ApiOperation(value = "Update customer",
+    @ApiOperation(value = "Update customer by",
                   response = CustomerResponse.class)
     public Response updateCustomer(@PathParam("customerId") Long customerId,
                                    CustomerUpdateRequest request) {
@@ -71,6 +71,8 @@ public class CustomerController {
 
     @DELETE
     @Path("/{customerId}")
+    @ApiOperation(value = "Delete customer by id",
+                  response = Void.class)
     public Response deleteCustomer(@PathParam("customerId") Long customerId) {
         customerService.deleteCustomer(customerId);
         return Response
@@ -80,6 +82,8 @@ public class CustomerController {
 
     @GET
     @Path("/{customerId}/orders")
+    @ApiOperation(value = "Get customer orders",
+                  response = CustomerOrdersResponse.class)
     public Response getCustomerOrders(@PathParam("customerId") Long customerId) {
         return Response
                 .ok(customerService.getCustomerOrders(customerId))
@@ -88,6 +92,8 @@ public class CustomerController {
 
     @POST
     @Path("/{customerId}/orders")
+    @ApiOperation(value = "Create customer order",
+                  response = CustomerOrderResponse.class)
     public Response createCustomerOrder(@PathParam("customerId") Long customerId,
                                         @Valid CustomerOrderRequest customerOrderRequest) {
         return Response
@@ -98,6 +104,8 @@ public class CustomerController {
 
     @PUT
     @Path("/{customerId}/orders/{orderId}")
+    @ApiOperation(value = "Update customer order by customer and order id",
+                  response = CustomerOrderResponse.class)
     public Response updateCustomerOrder(@PathParam("orderId") Long customerOrderId,
                                         @Valid CustomerOrderUpdateRequest customerOrderRequest) {
         return Response
@@ -108,6 +116,8 @@ public class CustomerController {
 
     @DELETE
     @Path("/{customerId}/orders/{orderId}")
+    @ApiOperation(value = "Delete customer order by customer and order id",
+                  response = Void.class)
     public Response deleteOrder(@PathParam("orderId") Long customerOrderId) {
         customerService.deleteCustomerOder(customerOrderId);
         return Response

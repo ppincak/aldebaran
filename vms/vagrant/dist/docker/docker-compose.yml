@@ -1,0 +1,20 @@
+version: '2'
+services:
+  auth:
+    build: ./aldebaran-auth
+    environment:
+      - SERVICE_PORT=8080
+      - DATABASE_HOST=172.17.0.1
+      - EXPOSED_ADDRESS=172.17.0.1
+      - EXPOSED_PORT=8078
+    ports:
+      - "8078:8080"
+  order:
+    build: ./aldebaran-order
+    environment:
+      - SERVICE_PORT=8080
+      - DATABASE_HOST=172.17.0.1
+      - EXPOSED_ADDRESS=172.17.0.1
+      - EXPOSED_PORT=8079
+    ports:
+      - "8079:8080"

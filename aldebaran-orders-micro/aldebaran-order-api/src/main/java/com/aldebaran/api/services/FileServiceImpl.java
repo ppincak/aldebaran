@@ -11,7 +11,7 @@ import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.rest.files.DownloadableFile;
 import com.aldebaran.rest.files.FileStorageFacade;
 import com.aldebaran.rest.files.UploadedFile;
-import com.aldebaran.utils.descriptors.FileUtils;
+import com.aldebaran.utils.FileUtils;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.springframework.beans.factory.annotation.Autowired;

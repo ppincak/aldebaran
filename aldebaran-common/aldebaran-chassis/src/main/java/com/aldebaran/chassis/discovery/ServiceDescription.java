@@ -5,5 +5,7 @@ public interface ServiceDescription {
 
     Integer port();
 
-    String url();
+    String host();
+
+    String assembleUrl();
 }

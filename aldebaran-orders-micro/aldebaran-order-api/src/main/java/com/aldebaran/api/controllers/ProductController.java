@@ -31,10 +31,10 @@ public class ProductController {
     private ProductService productService;
 
     @GET
-    @ApiOperation(value = "Get Products",
+    @ApiOperation(value = "Get products by complex search criteria",
                   response = ProductResponse.class)
-    public Response createProduct(@BeanParam SearchRequest searchRequest,
-                                  @BeanParam PaginationRequest paginationRequest) {
+    public Response getProducts(@BeanParam SearchRequest searchRequest,
+                                @BeanParam PaginationRequest paginationRequest) {
         return Response
                 .ok(productService.getProducts(searchRequest, paginationRequest))
                 .build();

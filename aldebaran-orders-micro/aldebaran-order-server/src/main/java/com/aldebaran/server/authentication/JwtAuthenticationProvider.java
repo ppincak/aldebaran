@@ -1,11 +1,14 @@
 package com.aldebaran.server.authentication;
 
+import com.aldebaran.chassis.discovery.ServiceDescription;
+import com.aldebaran.chassis.discovery.ServiceDiscovery;
 import com.aldebaran.chassis.hystrix.RestCall;
 import com.aldebaran.chassis.hystrix.RestCallCommand;
 import com.aldebaran.rest.error.GeneralErrorCodes;
 import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.security.authentication.JwtAuthenticatedUser;
 import com.aldebaran.security.jwt.TokenInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,11 +17,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.core.Response;
-
 
 @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired
+    private ServiceDiscovery serviceDiscovery;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -27,6 +31,9 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", jwtAuthentication.getJwt());
         HttpEntity<Object> httpEntity = new HttpEntity<>(httpHeaders);
+
+        ServiceDescription serviceDescription =
+                serviceDiscovery.discover("aldebaran-auth");
 
         RestCall<TokenInfo> restCall =
                 new RestCall<TokenInfo>()

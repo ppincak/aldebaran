@@ -14,7 +14,6 @@ open class UsernamePasswordAuthenticationProvider
     @Autowired constructor(val userDetailsService: UserDetailsService,
                            val passwordEncoder: PasswordEncoder) : AuthenticationProvider {
 
-
     override fun authenticate(authentication: Authentication?): Authentication {
         val usernamePasswordAuth = authentication as UsernamePasswordAuthentication
         val userDetails =

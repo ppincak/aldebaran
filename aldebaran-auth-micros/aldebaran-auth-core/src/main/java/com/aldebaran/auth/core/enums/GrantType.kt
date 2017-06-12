@@ -1,6 +1,6 @@
 package com.aldebaran.auth.core.enums
 
-import com.aldebaran.utils.descriptors.ValueEnum
+import com.aldebaran.utils.ValueEnum
 
 
 enum class GrantType(val grantType: String) : ValueEnum<String> {
