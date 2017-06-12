@@ -1,8 +1,6 @@
 package com.aldebaran.server.config;
 
-import com.aldebaran.chassis.discovery.ServiceDescription;
-import com.aldebaran.chassis.discovery.ServiceDiscovery;
-import com.aldebaran.chassis.discovery.ServiceDiscoveryStub;
+import com.aldebaran.chassis.discovery.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -12,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -42,8 +41,18 @@ public class SpringConfiguration {
     }
 
     @Bean
-    public ServiceDiscovery serviceDiscovery() {
+    public ServiceDiscovery serviceDiscovery(DiscoveryProperties discoveryProperties,
+                                             Environment env) {
+        if(discoveryProperties.getConsulEnabled()) {
+            return null;
+        }
+        String authHost = env.getProperty("discovery.aldebaran-auth.host");
+        Integer authPort = env.getProperty("discovery.aldebaran-auth.port", Integer.class);
+
         Map<String, ServiceDescription> services = new HashMap<>();
+        services.put("aldebaran-auth",
+                 new ServiceDescriptionModel("http://", authHost, authPort));
+
         return new ServiceDiscoveryStub(services);
     }
 

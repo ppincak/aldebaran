@@ -3,7 +3,7 @@ package com.aldebaran.rest.error;
 import com.aldebaran.rest.error.codes.ErrorEvent;
 
 
-public enum ValidationErrorCodes implements ErrorEvent {
+public enum ValidationErrorEvents implements ErrorEvent {
 
     VALIDATION_ERROR(1, "validation.error"),
     NOT_NULL_ERROR(2, "not.null.error"),
@@ -16,7 +16,7 @@ public enum ValidationErrorCodes implements ErrorEvent {
     private final int errorSubCode;
     private final String errorMessageKey;
 
-    ValidationErrorCodes(int errorCode, String errorMessageKey) {
+    ValidationErrorEvents(int errorCode, String errorMessageKey) {
         this.errorCode = errorCode;
         this.errorSubCode = SUB_CODE;
         this.errorMessageKey = errorMessageKey;

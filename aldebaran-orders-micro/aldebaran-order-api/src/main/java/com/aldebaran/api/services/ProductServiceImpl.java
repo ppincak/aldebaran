@@ -15,7 +15,7 @@ import com.aldebaran.omanager.core.repositories.FileLinkRepository;
 import com.aldebaran.omanager.core.repositories.ProductFileLinkRepository;
 import com.aldebaran.omanager.core.repositories.ProductRepository;
 import com.aldebaran.omanager.core.repositories.SearchCriteriaSpecification;
-import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.PaginationResponse;
@@ -123,11 +123,11 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
         }
         Product product = repository.findOne(productId);
         if(product == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
         }
         FileLink fileLink = fileLinkRepository.findOne(imageId);
         if(fileLink == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
         }
         productFileLink = new ProductFileLink();
         productFileLink.setProduct(product);
@@ -141,7 +141,7 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
                 productFileLinkRepository.getByProductAndFileLink(productId, imageId);
 
         if(productFileLink == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
         }
         productFileLinkRepository.delete(productFileLink);
     }

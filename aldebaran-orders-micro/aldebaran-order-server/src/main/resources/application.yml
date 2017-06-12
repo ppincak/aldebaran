@@ -9,7 +9,10 @@ discovery:
     enabled: ${CONSUL_ENABLED}
     host: ${CONSUL_IP}
     port: ${CONSUL_PORT}
-    config:
+  # temporary solution for presentational purposes
+  aldebaran-auth:
+    host: ${ALDEBARAN_AUTH_HOST}
+    port: ${ALDEBARAN_AUTH_PORT}
 
 api:
   defaultPage: 0

@@ -3,7 +3,7 @@ package com.aldebaran.rest.handlers;
 import com.aldebaran.rest.error.ValidationErrorsMap;
 import com.aldebaran.rest.error.codes.ErrorEvent;
 import com.aldebaran.rest.error.codes.ErrorResponse;
-import com.aldebaran.rest.error.ValidationErrorCodes;
+import com.aldebaran.rest.error.ValidationErrorEvents;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolation;
@@ -42,7 +42,7 @@ public class ValidationExceptionHandler implements ExceptionMapper<ConstraintVio
 
         ErrorResponse errorResponse =
                 responseCreator.getErrorResponse(Response.Status.BAD_REQUEST.getStatusCode(),
-                                                 ValidationErrorCodes.VALIDATION_ERROR);
+                                                 ValidationErrorEvents.VALIDATION_ERROR);
 
         errorResponse.setErrorDetails(errorDetails);
         errorResponse.setStatus(Response.Status.BAD_REQUEST.getStatusCode());

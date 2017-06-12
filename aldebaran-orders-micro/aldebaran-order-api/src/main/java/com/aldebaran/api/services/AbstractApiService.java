@@ -3,7 +3,7 @@ package com.aldebaran.api.services;
 import com.aldebaran.omanager.core.ApiProperties;
 import com.aldebaran.omanager.core.Utils;
 import com.aldebaran.omanager.core.descriptors.CustomerSearchDescriptors;
-import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.rest.search.PaginationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public abstract class AbstractApiService<TRepository extends JpaRepository<TEnti
     protected TEntity getById(Long id) {
         TEntity entity = repository.findOne(id);
         if(entity == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
         }
         return entity;
     }

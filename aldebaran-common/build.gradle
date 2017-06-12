@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply from: './libraries.gradle'
+apply from: '../libraries.gradle'
 
 allprojects {
     sourceCompatibility = 1.8

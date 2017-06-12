@@ -1,6 +1,6 @@
 package com.aldebaran.rest.search;
 
-import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.codes.ApplicationException;
 
 import javax.ws.rs.QueryParam;
@@ -48,7 +48,7 @@ public class SearchRequest {
                 continue;
             }
             if(searchDescriptor.getSupportedOperators().contains(searchOperator) == false) {
-                throw new ApplicationException(GeneralErrorCodes.UNSUPPORTED_SEARCH_OPERATOR);
+                throw new ApplicationException(GeneralErrorEvents.UNSUPPORTED_SEARCH_OPERATOR);
             }
             String value = matcher.group(3);
 

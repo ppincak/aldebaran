@@ -10,7 +10,7 @@ import com.aldebaran.auth.core.jwt.JwtVerificationException
 import com.aldebaran.auth.core.model.TokenRequest
 import com.aldebaran.auth.core.model.TokenResponse
 import com.aldebaran.auth.core.storage.SecurityStorageProxy
-import com.aldebaran.rest.error.GeneralErrorCodes
+import com.aldebaran.rest.error.GeneralErrorEvents
 import com.aldebaran.rest.error.codes.ApplicationException
 import com.aldebaran.rest.error.codes.ErrorEvent
 import com.aldebaran.security.authentication.JwtAuthenticatedUser
@@ -41,16 +41,16 @@ open class Oauth2ServiceImpl
     override fun tokenInfo(authorizationHeader: String): TokenInfo {
         val jwt = TokenUtils.extractJwt(authorizationHeader, TokenType.BEARER.enumValue)
         if(jwt == null) {
-            throw ApplicationException(GeneralErrorCodes.UNAUTHORIZED)
+            throw ApplicationException(GeneralErrorEvents.UNAUTHORIZED)
         }
         try {
             val authenticatedUser = jwtTokenizer.getAuthenticatedUser(jwt)
             if(storageProxy.isRevoked(authenticatedUser.jti)) {
-                throw ApplicationException(GeneralErrorCodes.UNAUTHORIZED)
+                throw ApplicationException(GeneralErrorEvents.UNAUTHORIZED)
             }
             return TokenInfo(authenticatedUser)
         } catch(e: JwtVerificationException) {
-            throw ApplicationException(GeneralErrorCodes.UNAUTHORIZED)
+            throw ApplicationException(GeneralErrorEvents.UNAUTHORIZED)
         }
     }
 

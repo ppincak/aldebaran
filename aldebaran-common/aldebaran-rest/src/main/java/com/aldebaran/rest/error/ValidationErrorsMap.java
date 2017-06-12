@@ -16,9 +16,9 @@ public class ValidationErrorsMap {
 
     static {
         validationMap = new HashMap<>();
-        validationMap.put(NotNull.class, ValidationErrorCodes.NOT_NULL_ERROR);
-        validationMap.put(NotEmpty.class, ValidationErrorCodes.NOT_EMPTY_ERROR);
-        validationMap.put(Email.class, ValidationErrorCodes.INVALID_EMAIL_ADDRESS);
+        validationMap.put(NotNull.class, ValidationErrorEvents.NOT_NULL_ERROR);
+        validationMap.put(NotEmpty.class, ValidationErrorEvents.NOT_EMPTY_ERROR);
+        validationMap.put(Email.class, ValidationErrorEvents.INVALID_EMAIL_ADDRESS);
     }
 
     public static ErrorEvent resolveErrorEvent(Class<? extends Annotation> annotation) {

@@ -1,6 +1,6 @@
-package com.aldebaran.server.authentication;
+package com.aldebaran.security.authentication.filter;
 
-import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.codes.ErrorResponse;
 import com.aldebaran.rest.handlers.ErrorResponseCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +32,7 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
         int statusCode = Response.Status.UNAUTHORIZED.getStatusCode();
 
         ErrorResponse errorResponse =
-                responseCreator.getErrorResponse(statusCode, GeneralErrorCodes.UNAUTHORIZED);
+                responseCreator.getErrorResponse(statusCode, GeneralErrorEvents.UNAUTHORIZED);
 
         response.addHeader("Content-Type", "application/json");
         response.setStatus(statusCode);

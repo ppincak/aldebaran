@@ -17,7 +17,7 @@ import com.aldebaran.omanager.core.repositories.CustomerOrderProductRepository;
 import com.aldebaran.omanager.core.repositories.CustomerOrderRepository;
 import com.aldebaran.omanager.core.repositories.CustomerRepository;
 import com.aldebaran.omanager.core.repositories.SearchCriteriaSpecification;
-import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.PaginationResponse;
@@ -194,7 +194,7 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
                                                      CustomerOrderUpdateRequest customerOrderRequest) {
 
         if(customerOrderRequest.getUpdateMode() == null) {
-            throw new ApplicationException(GeneralErrorCodes.INTERNAL_SERVER_ERROR);
+            throw new ApplicationException(GeneralErrorEvents.INTERNAL_SERVER_ERROR);
         }
 
         CustomerOrder customerOrder  = getCustomerOrder(customerOrderId);
@@ -293,7 +293,7 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
     private CustomerOrder getCustomerOrder(Long customerOrderId) {
         CustomerOrder customerOrder  = orderRepository.findOne(customerOrderId);
         if(customerOrder == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
         }
         return customerOrder;
     }

@@ -6,7 +6,7 @@ import com.aldebaran.omanager.core.entities.FileLink;
 import com.aldebaran.omanager.core.entities.FileType;
 import com.aldebaran.omanager.core.model.FileLinkResponse;
 import com.aldebaran.omanager.core.repositories.FileLinkRepository;
-import com.aldebaran.rest.error.GeneralErrorCodes;
+import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.codes.ApplicationException;
 import com.aldebaran.rest.files.DownloadableFile;
 import com.aldebaran.rest.files.FileStorageFacade;
@@ -107,7 +107,7 @@ public class FileServiceImpl implements FileService {
     private FileLink getFileLink(Long fileId) {
         FileLink fileLink = fileLinkRepository.findOne(fileId);
         if(fileLink == null) {
-            throw new ApplicationException(GeneralErrorCodes.RESOURCE_NOT_FOUND);
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
         }
         return fileLink;
     }

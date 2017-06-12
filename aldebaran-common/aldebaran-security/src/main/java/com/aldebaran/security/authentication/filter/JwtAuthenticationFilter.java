@@ -1,5 +1,7 @@
-package com.aldebaran.server.authentication;
+package com.aldebaran.security.authentication.filter;
 
+import com.aldebaran.security.authentication.JwtAuthentication;
+import com.aldebaran.security.authentication.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;

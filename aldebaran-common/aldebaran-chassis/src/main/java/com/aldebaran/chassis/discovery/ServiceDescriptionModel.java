@@ -7,10 +7,12 @@ public class ServiceDescriptionModel implements ServiceDescription {
         return null;
     }
 
+    private String protocol;
     private String host;
     private Integer port;
 
-    public ServiceDescriptionModel(String host, Integer port) {
+    public ServiceDescriptionModel(String protocol, String host, Integer port) {
+        this.protocol = protocol;
         this.host = host;
         this.port = port;
     }
@@ -25,8 +27,9 @@ public class ServiceDescriptionModel implements ServiceDescription {
         return host;
     }
 
+    //NOTE(peter.pincak) validate and rethink
     @Override
     public String assembleUrl() {
-        return null;
+        return protocol + host + ":" + port;
     }
 }

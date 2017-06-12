@@ -2,25 +2,30 @@ ext {
     aspectjVersion = '1.8.9'
     flywayVersion = '4.0.2'
     guavaVersion = '21.0'
+    guavaVersion = '21.0'
     hibernateVersion = '5.2.8.Final'
     hibernateValidatorVersion = '5.2.4.Final'
     hikariVersion = '2.4.6'
-    hystrixVersion = '1.5.11'
+	hystrixVersion = '1.5.11'
     jacksonVersion = '2.8.6'
     jacksonDataformatVersion = '2.8.6'
+    jacksonKotlinVersion = '2.8.8'
     jaxwsVersion = '2.0.1'
     jaxValidationVersion= '1.1.0.Final'
     jerseyVersion = '2.23.2'
+    jose4jVersion = '0.5.5'
     kotlinVersion = '1.1.1'
+    log4jVersion = '2.7'
     mysqlDriverVersion = '6.0.5'
     orikaVersion = '1.5.1'
-    prometheusVersion = '0.0.21'
+	prometheusVersion = '0.0.21'
     springSecurityVersion = '4.2.1.RELEASE'
     springBootVersion = '1.5.1.RELEASE'
     springDataJpaVersion = '1.11.0.RELEASE'
     springDataCommons = '1.13.0.RELEASE'
     springVersion = '4.3.6.RELEASE'
     swaggerVersion = '1.5.12'
+    tomcatEmbedCoreVersion = '8.5.11'
 
     def libs = [
         aspectj: [
@@ -47,6 +52,7 @@ ext {
             dataformat: [
                 yaml: "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonDataformatVersion}"
             ],
+            kotlin: "com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonKotlinVersion}"
         ],
         javax: [
             rs: "javax.ws.rs:javax.ws.rs-api:${jaxwsVersion}",
@@ -56,8 +62,16 @@ ext {
             core: "org.glassfish.jersey.core:jersey-server:${jerseyVersion}",
             media: "org.glassfish.jersey.media:jersey-media-multipart:${jerseyVersion}"
         ],
+        jose4j: "org.bitbucket.b_c:jose4j:${jose4jVersion}",
         kotlin: [
             sdk: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"
+        ],
+        log4j: [
+            api: "org.apache.logging.log4j:log4j-api:${log4jVersion}",
+            core: "org.apache.logging.log4j:log4j-core:${log4jVersion}",
+            jcl: "org.apache.logging.log4j:log4j-jcl:${log4jVersion}",
+            jul: "org.apache.logging.log4j:log4j-jul:${log4jVersion}",
+            slf4j: "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
         ],
         mysqlDriver: "mysql:mysql-connector-java:${mysqlDriverVersion}",
         netflix: [
@@ -67,14 +81,14 @@ ext {
         ],
         orika: "ma.glasnost.orika:orika-core:${orikaVersion}",
         prometheus: [
-                client: "io.prometheus:simpleclient:${prometheusVersion}",
-                common: "io.prometheus:simpleclient_common:${prometheusVersion}",
-                hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
+            client: "io.prometheus:simpleclient:${prometheusVersion}",
+            common: "io.prometheus:simpleclient_common:${prometheusVersion}",
+            hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
         ],
         spring: [
-            beans: "org.springframework:spring-beans:${springVersion}",
+                beans: "org.springframework:spring-beans:${springVersion}",
             boot: [
-                    jersey: "org.springframework.boot:spring-boot-starter-jersey:${springBootVersion}"
+                jersey: "org.springframework.boot:spring-boot-starter-jersey:${springBootVersion}"
             ],
             context: "org.springframework:spring-context:${springVersion}",
             core: "org.springframework:spring-core:${springVersion}",
@@ -93,6 +107,9 @@ ext {
             annotations: "io.swagger:swagger-annotations:${swaggerVersion}",
             jersey2: "io.swagger:swagger-jersey2-jaxrs:${swaggerVersion}"
         ],
+        tomcat: [
+            embedCore: "org.apache.tomcat.embed:tomcat-embed-core:${tomcatEmbedCoreVersion}"
+        ]
     ]
     libraries = libs
 }

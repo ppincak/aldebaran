@@ -8,10 +8,6 @@ CREATE TABLE auth_user
 	locked BOOLEAN NOT NULL,
 	`password` CHAR(60) NOT NULL,
 	username VARCHAR(40) NOT NULL,
-	first_name VARCHAR(50),
-	last_name VARCHAR(60),
-	gender VARCHAR(10),
-	birth_date TIMESTAMP,
 	created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
