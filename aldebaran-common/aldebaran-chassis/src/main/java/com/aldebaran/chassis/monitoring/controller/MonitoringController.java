@@ -38,7 +38,7 @@ public class MonitoringController {
     public Response getMetrics() throws IOException {
         StringWriter stringWriter = new StringWriter();
         TextFormat.write004(stringWriter,
-                CollectorRegistry.defaultRegistry.metricFamilySamples());
+                            CollectorRegistry.defaultRegistry.metricFamilySamples());
         return Response
                 .ok(stringWriter.toString())
                 .build();

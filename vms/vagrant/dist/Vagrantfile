@@ -28,17 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.provision "shell", run: "once" do |s|
 		s.path = "provisioning/before-docker-setup.sh"
 	end
-	
-	config.vm.provision "docker", run: "once" do |d|
-		d.run "mysql",
-			args: "-p 3306:3306 -v /var/mysql/data:/var/lib/mysql " +
-			      "-e MYSQL_ROOT_PASSWORD='#{DB_PASSWORD}' " +
-			      "-e MYSQL_USER='#{DB_USER}' " +
-			      "-e MYSQL_PASSWORD='#{DB_PASSWORD}' " +
-			      "-e MYSQL_DATABASE='#{DB_NAME}' " +
-			      "--name mysql-server"
-	end
-	
+		
 	config.vm.provision "shell", run: "always" do |s|
 		s.path = "provisioning/run-aldebaran.sh"		  
 	end

@@ -7,8 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscoveryProperties {
 
-    @Value("${discovery.serviceName}")
+    @Value("${discovery.service.name}")
     private String serviceName;
+
+    @Value("${discovery.service.host}")
+    private String serviceHost;
+
+    @Value("${discovery.service.port}")
+    private Integer servicePort;
 
     @Value("${discovery.healthCheckPath}")
     private String healthCheckPath;
@@ -25,12 +31,32 @@ public class DiscoveryProperties {
     @Value("${discovery.consul.host}")
     private String consulHost;
 
+    public String assembleServiceUrl() {
+        return serviceHost + ":" + servicePort;
+    }
+
     public String getServiceName() {
         return serviceName;
     }
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public String getServiceHost() {
+        return serviceHost;
+    }
+
+    public void setServiceHost(String serviceHost) {
+        this.serviceHost = serviceHost;
+    }
+
+    public Integer getServicePort() {
+        return servicePort;
+    }
+
+    public void setServicePort(Integer servicePort) {
+        this.servicePort = servicePort;
     }
 
     public String getHealthCheckPath() {

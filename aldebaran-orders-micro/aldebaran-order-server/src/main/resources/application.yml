@@ -2,12 +2,15 @@ server:
   port: ${SERVICE_PORT}
 
 discovery:
-  serviceName: ${DISCOVERY_SERVICE_NAME}
+  service:
+    name: ${DISCOVERY_SERVICE_NAME}
+    host: ${DISCOVERY_SERVICE_HOST}
+    port: ${DISCOVERY_SERVICE_PORT}
   healthCheckPath: /monitor/health
   healthCheckInterval: ${DISCOVERY_HEALTH_CHECK_INTERVAL}
   consul:
     enabled: ${CONSUL_ENABLED}
-    host: ${CONSUL_IP}
+    host: ${CONSUL_HOST}
     port: ${CONSUL_PORT}
   # temporary solution for presentational purposes
   aldebaran-auth:
@@ -21,7 +24,7 @@ api:
 
 spring:
   datasource:
-    jdbcUrl: jdbc:mysql://${DATABASE_HOST}:3306/aldebaran?verifyServerCertificate=false&useSSL=true
+    jdbcUrl: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/aldebaran?verifyServerCertificate=false&useSSL=true
     username: aldebaran-admin
     password: aldebaran-password
     driverClassName: com.mysql.cj.jdbc.Driver

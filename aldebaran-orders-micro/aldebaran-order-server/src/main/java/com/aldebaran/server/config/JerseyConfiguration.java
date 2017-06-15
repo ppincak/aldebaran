@@ -1,5 +1,6 @@
 package com.aldebaran.server.config;
 
+import com.aldebaran.chassis.discovery.DiscoveryProperties;
 import com.aldebaran.chassis.monitoring.controller.MonitoringController;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
@@ -18,22 +19,22 @@ import javax.ws.rs.ApplicationPath;
 public class JerseyConfiguration extends ResourceConfig {
 
     @Autowired
-    public JerseyConfiguration() {
+    public JerseyConfiguration(DiscoveryProperties discoveryProperties) {
         register(MultiPartFeature.class);
         register(MonitoringController.class);
         packages("com.aldebaran.api",
                  "com.aldebaran.rest");
 
-        initializeSwagger();
+        initializeSwagger(discoveryProperties);
     }
 
-    private void initializeSwagger() {
+    private void initializeSwagger(DiscoveryProperties discoveryProperties) {
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.2");
         beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("localhost:8080");
+        beanConfig.setHost(discoveryProperties.assembleServiceUrl());
         beanConfig.setBasePath("/");
-        beanConfig.setResourcePackage("com.aldebaran.api");
+        beanConfig.setResourcePackage("com.aldebaran");
         beanConfig.setScan(true);
 
         final Resource.Builder docsBuilder = Resource.builder();

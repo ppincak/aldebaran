@@ -1,18 +1,22 @@
 package com.aldebaran.rest.handlers;
 
 import com.aldebaran.rest.device.DeviceContext;
-import com.aldebaran.rest.error.codes.ErrorEvent;
-import com.aldebaran.rest.error.codes.ErrorResponse;
+import com.aldebaran.rest.error.event.ErrorEvent;
+import com.aldebaran.rest.error.event.ErrorResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
+
 
 @Component
 public class ErrorResponseCreator {
+
+    private static final Logger logger = LoggerFactory.getLogger(ErrorResponseCreator.class);
 
     @Autowired
     private MessageSource messageSource;
@@ -46,6 +50,7 @@ public class ErrorResponseCreator {
                                             replacements,
                                             DeviceContext.getContext().getLocale());
         } catch (Exception e) {
+            logger.error("Message for key: \"{}\" not found", error.getErrorMessageKey());
             return "";
         }
     }

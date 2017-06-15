@@ -14,9 +14,6 @@ public class Price {
     @Column(name = "after_tax")
     private BigDecimal afterTax;
 
- /*   @Column(name = "currency")
-    private String currency;
-*/
     public Price() {
         preTax = BigDecimal.ZERO;
         afterTax = BigDecimal.ZERO;
@@ -47,12 +44,4 @@ public class Price {
     public void setAfterTax(BigDecimal afterTax) {
         this.afterTax = afterTax;
     }
-
-    /*public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }*/
 }

@@ -1,7 +1,7 @@
 package com.aldebaran.rest.search;
 
 import com.aldebaran.rest.error.GeneralErrorEvents;
-import com.aldebaran.rest.error.codes.ApplicationException;
+import com.aldebaran.rest.error.event.ApplicationException;
 
 import javax.ws.rs.QueryParam;
 import java.util.*;

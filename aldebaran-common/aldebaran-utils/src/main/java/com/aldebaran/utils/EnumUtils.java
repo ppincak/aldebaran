@@ -1,12 +1,16 @@
 package com.aldebaran.utils;
 
 
-public class EnumUtils {
+import com.aldebaran.utils.descriptor.LabelEnum;
+import com.aldebaran.utils.descriptor.ValueEnum;
+
+//NOTE(peter.pincak) rethink this
+public final class EnumUtils {
 
     public static <T extends Enum<T> & LabelEnum> T getByLabel(Class<T> enumClass, String label) {
-        for(T labelable: enumClass.getEnumConstants()) {
-            if(labelable.getLabel().equals(label)) {
-                return labelable;
+        for(T labelableEnum: enumClass.getEnumConstants()) {
+            if(labelableEnum.getLabel().equals(label)) {
+                return labelableEnum;
             }
         }
         return null;

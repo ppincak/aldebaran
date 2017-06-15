@@ -1,9 +1,9 @@
 package com.aldebaran.rest.handlers;
 
-import com.aldebaran.rest.error.codes.ApplicationException;
-import com.aldebaran.rest.error.codes.ErrorBuilder;
-import com.aldebaran.rest.error.codes.ErrorDetailBuilder;
-import com.aldebaran.rest.error.codes.ErrorResponse;
+import com.aldebaran.rest.error.event.ApplicationException;
+import com.aldebaran.rest.error.event.ErrorBuilder;
+import com.aldebaran.rest.error.event.ErrorDetailBuilder;
+import com.aldebaran.rest.error.event.ErrorResponse;
 import com.aldebaran.rest.error.GeneralErrorEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

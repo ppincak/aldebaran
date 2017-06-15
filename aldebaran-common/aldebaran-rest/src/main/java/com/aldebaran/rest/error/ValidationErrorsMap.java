@@ -1,6 +1,6 @@
 package com.aldebaran.rest.error;
 
-import com.aldebaran.rest.error.codes.ErrorEvent;
+import com.aldebaran.rest.error.event.ErrorEvent;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 

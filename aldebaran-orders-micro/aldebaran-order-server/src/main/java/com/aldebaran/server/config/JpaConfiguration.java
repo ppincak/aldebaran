@@ -1,7 +1,6 @@
 package com.aldebaran.server.config;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -46,12 +45,5 @@ public class JpaConfiguration {
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
-    }
-
-    @Bean(name = "hibernateSessionFactory")
-    public SessionFactory registerEventListeners(LocalContainerEntityManagerFactoryBean factoryBean) {
-        return factoryBean
-                .getNativeEntityManagerFactory()
-                .unwrap(SessionFactory.class);
     }
 }

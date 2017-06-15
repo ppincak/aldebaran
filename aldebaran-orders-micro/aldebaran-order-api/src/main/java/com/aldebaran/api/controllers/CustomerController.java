@@ -80,6 +80,17 @@ public class CustomerController {
                 .build();
     }
 
+    @POST
+    @Path("/{customerId}/photo/{photoId}")
+    @ApiOperation(value = "Assign photo to customer",
+                  response = Void.class)
+    public Response addCustomerPhoto(@PathParam("customerId") Long customerId,
+                                     @PathParam("photoId") Long photoId) {
+        return Response
+                .ok(customerService.addCustomerPhoto(customerId, photoId))
+                .build();
+    }
+
     @GET
     @Path("/{customerId}/orders")
     @ApiOperation(value = "Get customer orders",

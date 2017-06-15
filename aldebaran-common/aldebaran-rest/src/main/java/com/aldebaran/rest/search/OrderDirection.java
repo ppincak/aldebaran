@@ -1,6 +1,6 @@
 package com.aldebaran.rest.search;
 
-import com.aldebaran.utils.LabelEnum;
+import com.aldebaran.utils.descriptor.LabelEnum;
 
 
 public enum OrderDirection implements LabelEnum {

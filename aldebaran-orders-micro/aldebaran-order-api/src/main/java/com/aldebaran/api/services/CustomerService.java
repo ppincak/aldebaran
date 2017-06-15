@@ -21,6 +21,8 @@ public interface CustomerService {
 
     void deleteCustomer(Long customerId);
 
+    CustomerResponse addCustomerPhoto(Long customerId, Long photoId);
+
     CustomerOrdersResponse getCustomerOrders(Long customerId);
 
     CustomerOrderResponse createCustomerOrder(Long customerId,

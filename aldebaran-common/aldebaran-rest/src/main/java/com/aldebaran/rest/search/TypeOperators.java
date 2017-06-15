@@ -11,10 +11,11 @@ public class TypeOperators {
     private static final Map<Class<? extends Comparable<?>>, EnumSet<SearchOperator>> typeOperators = new HashMap<>();
 
     static {
-        typeOperators.put(String.class, EnumSet.of(SearchOperator.EQUALS,
-                SearchOperator.NOT_EQUALS,
-                SearchOperator.LIKE,
-                SearchOperator.ILIKE));
+        typeOperators.put(String.class,
+                          EnumSet.of(SearchOperator.EQUALS,
+                                     SearchOperator.NOT_EQUALS,
+                                     SearchOperator.LIKE,
+                                     SearchOperator.ILIKE));
 
         EnumSet<SearchOperator> numberOperations =
             EnumSet.of(SearchOperator.EQUALS,

@@ -1,7 +1,7 @@
 package com.aldebaran.security.authentication.filter;
 
 import com.aldebaran.rest.error.GeneralErrorEvents;
-import com.aldebaran.rest.error.codes.ErrorResponse;
+import com.aldebaran.rest.error.event.ErrorResponse;
 import com.aldebaran.rest.handlers.ErrorResponseCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

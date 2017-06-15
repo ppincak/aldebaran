@@ -1,10 +1,8 @@
 package com.aldebaran.api.services;
 
-import com.aldebaran.omanager.core.CustomerOrderErrorCodes;
+import com.aldebaran.omanager.core.CustomerOrderErrorEvents;
 import com.aldebaran.omanager.core.assemblers.ProductAssembler;
-import com.aldebaran.omanager.core.descriptors.CustomerSearchDescriptors;
 import com.aldebaran.omanager.core.descriptors.ProductSearchDescriptors;
-import com.aldebaran.omanager.core.entities.Customer;
 import com.aldebaran.omanager.core.entities.FileLink;
 import com.aldebaran.omanager.core.entities.Product;
 import com.aldebaran.omanager.core.entities.ProductFileLink;
@@ -16,7 +14,7 @@ import com.aldebaran.omanager.core.repositories.ProductFileLinkRepository;
 import com.aldebaran.omanager.core.repositories.ProductRepository;
 import com.aldebaran.omanager.core.repositories.SearchCriteriaSpecification;
 import com.aldebaran.rest.error.GeneralErrorEvents;
-import com.aldebaran.rest.error.codes.ApplicationException;
+import com.aldebaran.rest.error.event.ApplicationException;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.PaginationResponse;
 import com.aldebaran.rest.search.SearchCriterion;
@@ -42,6 +40,9 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     private ProductAssembler productAssembler;
 
     @Autowired
+    private ProductSearchDescriptors productSearchDescriptors;
+
+    @Autowired
     private FileLinkRepository fileLinkRepository;
 
     @Autowired
@@ -50,6 +51,7 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     @Autowired
     private Validator validator;
 
+    @Autowired
     public ProductServiceImpl(ProductRepository productRepository) {
         super(productRepository);
     }
@@ -94,10 +96,10 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     public PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest,
                                                            PaginationRequest paginationRequest) {
         PageRequest pageRequest =
-                assemblePageRequest(paginationRequest, ProductSearchDescriptors.getOrderProperties());
+                assemblePageRequest(paginationRequest, productSearchDescriptors.getOrderDescriptors());
 
         Set<SearchCriterion> criteria =
-                searchRequest.toSearchCriteria(ProductSearchDescriptors.getDescriptors());
+                searchRequest.toSearchCriteria(productSearchDescriptors.getSearchDescriptors());
 
         Page<Product> page;
         if(criteria.isEmpty()) {
@@ -119,7 +121,7 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
                 productFileLinkRepository.getByProductAndFileLink(productId, imageId);
 
         if(productFileLink != null) {
-            throw new ApplicationException(CustomerOrderErrorCodes.PRODUCT_FILE_LINK_EXISTS);
+            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_FILE_LINK_EXISTS);
         }
         Product product = repository.findOne(productId);
         if(product == null) {
@@ -149,7 +151,7 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     private void checkProductName(String name) {
         Product product = repository.getByName(name);
         if(product != null) {
-            throw new ApplicationException(CustomerOrderErrorCodes.PRODUCT_NAME_TOKEN);
+            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_NAME_TOKEN);
         }
     }
 }

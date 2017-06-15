@@ -1,15 +1,11 @@
 package com.aldebaran.api.services;
 
 import com.aldebaran.data.domain.Price;
-import com.aldebaran.omanager.core.CustomerOrderErrorCodes;
+import com.aldebaran.omanager.core.CustomerOrderErrorEvents;
 import com.aldebaran.omanager.core.OrderStatus;
-import com.aldebaran.omanager.core.Utils;
 import com.aldebaran.omanager.core.assemblers.CustomerAssembler;
 import com.aldebaran.omanager.core.descriptors.CustomerSearchDescriptors;
-import com.aldebaran.omanager.core.entities.Customer;
-import com.aldebaran.omanager.core.entities.CustomerOrder;
-import com.aldebaran.omanager.core.entities.CustomerOrderProduct;
-import com.aldebaran.omanager.core.entities.Product;
+import com.aldebaran.omanager.core.entities.*;
 import com.aldebaran.omanager.core.model.*;
 import com.aldebaran.omanager.core.model.update.CustomerOrderUpdateRequest;
 import com.aldebaran.omanager.core.model.update.CustomerUpdateRequest;
@@ -18,7 +14,7 @@ import com.aldebaran.omanager.core.repositories.CustomerOrderRepository;
 import com.aldebaran.omanager.core.repositories.CustomerRepository;
 import com.aldebaran.omanager.core.repositories.SearchCriteriaSpecification;
 import com.aldebaran.rest.error.GeneralErrorEvents;
-import com.aldebaran.rest.error.codes.ApplicationException;
+import com.aldebaran.rest.error.event.ApplicationException;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.PaginationResponse;
 import com.aldebaran.rest.search.SearchCriterion;
@@ -26,7 +22,6 @@ import com.aldebaran.rest.search.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +40,9 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
     private CustomerAssembler customerAssembler;
 
     @Autowired
+    private CustomerSearchDescriptors searchDescriptors;
+
+    @Autowired
     private CustomerOrderRepository orderRepository;
 
     @Autowired
@@ -52,6 +50,9 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private FileService fileService;
 
     @Autowired
     private Validator validator;
@@ -93,9 +94,21 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
     public void deleteCustomer(Long customerId) {
         Long ordersCount = repository.ordersCount(customerId);
         if(ordersCount > 0) {
-            throw new ApplicationException(CustomerOrderErrorCodes.CUSTOMER_HAS_ORDERS);
+            throw new ApplicationException(CustomerOrderErrorEvents.CUSTOMER_HAS_ORDERS);
         }
         repository.delete(getById(customerId));
+    }
+
+    @Override
+    public CustomerResponse addCustomerPhoto(Long customerId, Long photoId) {
+        Customer customer = getById(customerId);
+        FileLink fileLink = customer.getFileLink();
+        if(fileLink == null || fileLink.getId().equals(photoId) == false) {
+            fileLink = fileService.getFileLink(photoId);
+            customer.setFileLink(fileLink);
+            repository.save(customer);
+        }
+        return customerAssembler.toResponse(customer);
     }
 
     @Override
@@ -103,10 +116,10 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
                                                              PaginationRequest paginationRequest) {
 
         PageRequest pageRequest =
-                assemblePageRequest(paginationRequest, CustomerSearchDescriptors.getOrderProperties());
+                assemblePageRequest(paginationRequest, searchDescriptors.getOrderDescriptors());
 
         Set<SearchCriterion> criteria =
-                searchRequest.toSearchCriteria(CustomerSearchDescriptors.getDescriptors());
+                searchRequest.toSearchCriteria(searchDescriptors.getSearchDescriptors());
 
         Page<Customer> page;
         if(criteria.isEmpty()) {
@@ -151,7 +164,7 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
                 productService.getProducts(productQuantities.keySet());
 
         if(products.isEmpty()) {
-            throw new ApplicationException(CustomerOrderErrorCodes.EMPTY_CUSTOMER_ORDER);
+            throw new ApplicationException(CustomerOrderErrorEvents.EMPTY_CUSTOMER_ORDER);
         }
 
         if(customerOrder == null) {
@@ -286,7 +299,7 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
             return;
         }
         if(customer != null ) {
-            throw new ApplicationException(CustomerOrderErrorCodes.CUSTOMER_EMAIL_TAKEN);
+            throw new ApplicationException(CustomerOrderErrorEvents.CUSTOMER_EMAIL_TAKEN);
         }
     }
 

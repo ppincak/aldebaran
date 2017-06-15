@@ -1,4 +1,4 @@
-rootProject.name = 'aldebaran-order-micros'
+rootProject.name = 'aldebaran-order-micro'
 include 'aldebaran-order-api'
 include 'aldebaran-order-server'
 include 'aldebaran-order-core'

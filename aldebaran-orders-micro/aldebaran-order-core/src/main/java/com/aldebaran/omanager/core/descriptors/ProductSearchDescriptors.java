@@ -1,41 +1,18 @@
 package com.aldebaran.omanager.core.descriptors;
 
-import com.aldebaran.rest.search.SearchDescriptor;
-import com.aldebaran.rest.search.TypeOperators;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.*;
 
 
-public final class ProductSearchDescriptors {
+@Component
+public final class ProductSearchDescriptors extends AbstractSearchDescriptors {
 
-    private static final Map<String, SearchDescriptor> descriptors = new HashMap<>();
-    private static final Set<String> orderProperties = new HashSet<>();
-
-    static {
+    public void init() {
         addDescriptor("id", Long.class, "id");
         addDescriptor("name", String.class, "name");
+        addDescriptor("code", String.class, "code");
         addDescriptor("preTaxPrice", BigDecimal.class, "price.preTax");
         addDescriptor("afterTaxPrice", BigDecimal.class, "price.afterTax");
-
-        orderProperties.addAll(Arrays.asList("id", "name"));
-    }
-
-    public static Map<String, SearchDescriptor> getDescriptors() {
-        return descriptors;
-    }
-
-    public static final Set<String> getOrderProperties() {
-        return orderProperties;
-    }
-
-    private static void addDescriptor(String propertyName,
-                                      Class<? extends Comparable<?>> resultType,
-                                      String resultProperty) {
-        descriptors.put(propertyName,
-                new SearchDescriptor(propertyName,
-                        resultType,
-                        resultProperty,
-                        TypeOperators.getOperators(resultType)));
     }
 }

@@ -1,5 +1,6 @@
 ext {
     aspectjVersion = '1.8.9'
+    consulClientVersion = '0.14.0'
     flywayVersion = '4.0.2'
     guavaVersion = '21.0'
     guavaVersion = '21.0'
@@ -12,6 +13,7 @@ ext {
     jacksonKotlinVersion = '2.8.8'
     jaxwsVersion = '2.0.1'
     jaxValidationVersion= '1.1.0.Final'
+    jedisVersion = '2.9.0'
     jerseyVersion = '2.23.2'
     jose4jVersion = '0.5.5'
     kotlinVersion = '1.1.1'
@@ -31,6 +33,9 @@ ext {
         aspectj: [
             runtime: "org.aspectj:aspectjrt:${aspectjVersion}",
             weaver:  "org.aspectj:aspectjweaver:${aspectjVersion}"
+        ],
+        consul: [
+            client: "com.orbitz.consul:consul-client:${consulClientVersion}"
         ],
         flyway: [
             core: "org.flywaydb:flyway-core:${flywayVersion}"
@@ -85,8 +90,11 @@ ext {
             common: "io.prometheus:simpleclient_common:${prometheusVersion}",
             hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
         ],
+        redis: [
+            jedis: "redis.clients:jedis:${jedisVersion}"
+        ],
         spring: [
-                beans: "org.springframework:spring-beans:${springVersion}",
+            beans: "org.springframework:spring-beans:${springVersion}",
             boot: [
                 jersey: "org.springframework.boot:spring-boot-starter-jersey:${springBootVersion}"
             ],

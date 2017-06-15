@@ -1,20 +1,66 @@
 version: '2'
 services:
+  mysql: 
+    container_name: mysql-server
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+     - "3306:3306"
+    volumes: 
+     - /var/mysql/data:/var/lib/mysql
+     - /vagrant/docker/mysql/:/docker-entrypoint-initdb.d
+    networks:
+      aldebaran:
+        ipv4_address: 10.5.0.5
   auth:
     build: ./aldebaran-auth
     environment:
       - SERVICE_PORT=8080
-      - DATABASE_HOST=172.17.0.1
-      - EXPOSED_ADDRESS=172.17.0.1
-      - EXPOSED_PORT=8078
+      - DATABASE_HOST=10.5.0.5
+      - DATABASE_PORT=3306     
+      - CONSUL_ENABLED=false
+      - CONSUL_HOST=none
+      - CONSUL_PORT=0
+      - DISCOVERY_HEALTH_CHECK_INTERVAL=10s
+      - DISCOVERY_SERVICE_NAME=aldebaran-auth
+      - DISCOVERY_SERVICE_HOST=10.5.0.2
+      - DISCOVERY_SERVICE_PORT=8078
     ports:
       - "8078:8080"
+    depends_on:
+      - "mysql"
+    networks:
+      aldebaran:
+        ipv4_address: 10.5.0.2      
   order:
     build: ./aldebaran-order
     environment:
       - SERVICE_PORT=8080
-      - DATABASE_HOST=172.17.0.1
-      - EXPOSED_ADDRESS=172.17.0.1
-      - EXPOSED_PORT=8079
+      - DATABASE_HOST=10.5.0.5
+      - DATABASE_PORT=3306      
+      - CONSUL_ENABLED=false
+      - CONSUL_HOST=none
+      - CONSUL_PORT=0
+      - DISCOVERY_HEALTH_CHECK_INTERVAL=10s
+      - DISCOVERY_SERVICE_NAME=aldebaran-order
+      - DISCOVERY_SERVICE_HOST=10.5.0.3
+      - DISCOVERY_SERVICE_PORT=8079
+      - ALDEBARAN_AUTH_HOST=10.5.0.2
+      - ALDEBARAN_AUTH_PORT=8078
     ports:
       - "8079:8080"
+    depends_on:
+      - "mysql"  
+    networks:
+      aldebaran:
+        ipv4_address: 10.5.0.3    
+networks:
+  aldebaran:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1

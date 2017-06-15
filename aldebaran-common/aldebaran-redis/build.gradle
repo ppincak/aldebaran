@@ -1,0 +1,6 @@
+dependencies {
+    compile libraries.redis.jedis
+    compile libraries.spring.context
+    compile libraries.spring.core
+    compile libraries.spring.beans
+}

@@ -1,5 +1,8 @@
 dependencies {
+    compile (project(":aldebaran-utils"))
+
     compile libraries.aspectj.weaver
+    compile libraries.consul.client
     compile libraries.javax.rs
     compile libraries.netflix.hystrix.core
     compile libraries.prometheus.client

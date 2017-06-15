@@ -7,7 +7,7 @@ import com.aldebaran.omanager.core.entities.FileType;
 import com.aldebaran.omanager.core.model.FileLinkResponse;
 import com.aldebaran.omanager.core.repositories.FileLinkRepository;
 import com.aldebaran.rest.error.GeneralErrorEvents;
-import com.aldebaran.rest.error.codes.ApplicationException;
+import com.aldebaran.rest.error.event.ApplicationException;
 import com.aldebaran.rest.files.DownloadableFile;
 import com.aldebaran.rest.files.FileStorageFacade;
 import com.aldebaran.rest.files.UploadedFile;
@@ -40,6 +40,15 @@ public class FileServiceImpl implements FileService {
 
     @Autowired
     private FileStorageFacade fileStorageFacade;
+
+    @Override
+    public FileLink getFileLink(Long fileId) {
+        FileLink fileLink = fileLinkRepository.findOne(fileId);
+        if(fileLink == null) {
+            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
+        }
+        return fileLink;
+    }
 
     @Override
     public List<FileLinkResponse> uploadFile(String fileName, List<FormDataBodyPart> formDataBodyParts) {
@@ -102,13 +111,5 @@ public class FileServiceImpl implements FileService {
     public void deleteFile(Long fileId) {
         FileLink fileLink = getFileLink(fileId);
         fileStorageFacade.delete(fileLink.getUrl());
-    }
-
-    private FileLink getFileLink(Long fileId) {
-        FileLink fileLink = fileLinkRepository.findOne(fileId);
-        if(fileLink == null) {
-            throw new ApplicationException(GeneralErrorEvents.RESOURCE_NOT_FOUND);
-        }
-        return fileLink;
     }
 }

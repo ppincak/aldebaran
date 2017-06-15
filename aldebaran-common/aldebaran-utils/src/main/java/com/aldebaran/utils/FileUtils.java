@@ -3,9 +3,9 @@ package com.aldebaran.utils;
 import java.util.UUID;
 
 
-public class FileUtils {
+public final class FileUtils {
 
-    // TODO rethink
+    //NOTE(peter.pincak) rethink
     public static String getExtension(String fileName) {
         if(fileName == null || fileName.isEmpty()) {
             return "";
@@ -17,7 +17,7 @@ public class FileUtils {
         return splitFilename[splitFilename.length-1];
     }
 
-    // TODO add checks
+    //NOTE(peter.pincak) rethink
     public static String generateName(String extension) {
         return UUID.randomUUID().toString() + extension;
     }

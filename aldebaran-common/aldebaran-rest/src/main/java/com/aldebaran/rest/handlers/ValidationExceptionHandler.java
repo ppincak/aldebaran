@@ -1,8 +1,8 @@
 package com.aldebaran.rest.handlers;
 
 import com.aldebaran.rest.error.ValidationErrorsMap;
-import com.aldebaran.rest.error.codes.ErrorEvent;
-import com.aldebaran.rest.error.codes.ErrorResponse;
+import com.aldebaran.rest.error.event.ErrorEvent;
+import com.aldebaran.rest.error.event.ErrorResponse;
 import com.aldebaran.rest.error.ValidationErrorEvents;
 import org.springframework.beans.factory.annotation.Autowired;
 
