@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	config.vm.network "private_network", ip: LOCAL_IP	
 	config.vm.network "forwarded_port", guest: 3306, host: 3306
+	config.vm.network "forwarded_port", guest: 6379, host: 6379
 	
 	config.vm.provider "virtualbox" do |vb|
 		vb.gui = false
@@ -26,13 +27,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		s.path = "provisioning/before-docker-setup.sh"
 	end
 	
-	config.vm.provision "docker", run: "once" do |d|
-		d.run "mysql",
-			args: "-p 3306:3306 -v /var/mysql/data:/var/lib/mysql " +
-			      "-e MYSQL_ROOT_PASSWORD='#{DB_PASSWORD}' " +
-			      "-e MYSQL_USER='#{DB_USER}' " +
-			      "-e MYSQL_PASSWORD='#{DB_PASSWORD}' " +
-			      "-e MYSQL_DATABASE='#{DB_NAME}' " +
-			      "--name mysql-server"
-	end
+    config.vm.provision "docker", run: "once" do |d|
+        d.run "mysql",
+            args: "-p 3306:3306 -v /var/mysql/data:/var/lib/mysql " +
+                  "-e MYSQL_ROOT_PASSWORD='#{DB_PASSWORD}' " +
+                  "-e MYSQL_USER='#{DB_USER}' " +
+                  "-e MYSQL_PASSWORD='#{DB_PASSWORD}' " +
+                  "-e MYSQL_DATABASE='#{DB_NAME}' " +
+                  "--name mysql-server"
+        d.run "redis",
+            args: "-p 6379:6379 " +
+                  "--name redis-server"
+    end
 end

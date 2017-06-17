@@ -1,6 +1,7 @@
 package com.aldebaran.auth.api.service
 
 import com.aldebaran.auth.api.AuthErrorEvents
+import com.aldebaran.auth.core.authentication.UsernamePasswordAuthentication
 import com.aldebaran.auth.core.enums.GrantType
 import com.aldebaran.auth.core.jwt.JwtTokenizer
 import com.aldebaran.auth.core.details.DbAuthenticatedUser
@@ -59,7 +60,7 @@ open class OAuth2ServiceImpl
 
         try {
             authentication = authManager.authenticate(
-                    com.aldebaran.auth.core.authentication.UsernamePasswordAuthentication(
+                    UsernamePasswordAuthentication(
                             tokenRequest.username,
                             tokenRequest.password
                     )

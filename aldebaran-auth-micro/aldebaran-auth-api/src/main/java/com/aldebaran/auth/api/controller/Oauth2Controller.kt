@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 open class Oauth2Controller
-    @Autowired constructor(val oauthService: OAuth2Service) {
+        @Autowired constructor(val oauthService: OAuth2Service) {
 
     @POST
     @Path("/token")
