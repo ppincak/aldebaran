@@ -11,8 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.UUID;
 
 
@@ -38,13 +40,15 @@ public class ConsulConfigurationConfiguration {
     public Registration registration(Consul consul) {
         AgentClient agentClient = consul.agentClient();
 
-        URL url;
+        URL url = null;
         try {
+            InetAddress address = InetAddress.getLocalHost();
+
             url = new URL("http",
-                          discoveryProperties.getServiceHost(),
-                          discoveryProperties.getServicePort(),
+                          address.getHostAddress(),
+                          8080,
                           discoveryProperties.getHealthCheckPath());
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException | UnknownHostException e) {
             throw new ConsulException("Consul initialization failed");
         }
 
@@ -59,7 +63,7 @@ public class ConsulConfigurationConfiguration {
                         .builder()
                         .id(UUID.randomUUID().toString())
                         .name(discoveryProperties.getServiceName())
-                        .address(discoveryProperties.getServiceHost())
+                        .address(url.toString())
                         .port(discoveryProperties.getServicePort())
                         .addChecks(httpCheck)
                         .build();

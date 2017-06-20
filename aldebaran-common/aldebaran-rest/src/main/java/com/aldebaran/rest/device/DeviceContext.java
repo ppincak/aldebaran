@@ -18,7 +18,11 @@ public final class DeviceContext {
     }
 
     public static DeviceContext getContext() {
-        return context.get();
+        DeviceContext deviceContext = context.get();
+        if(deviceContext == null) {
+            return new DeviceContext(DEFAULT_LANG, "");
+        }
+        return null;
     }
 
     private final String lang;

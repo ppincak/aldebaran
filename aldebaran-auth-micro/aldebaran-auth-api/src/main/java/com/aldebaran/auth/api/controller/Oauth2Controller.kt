@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response
 @Path("/oauth2")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-open class Oauth2Controller
+open class OAuth2Controller
         @Autowired constructor(val oauthService: OAuth2Service) {
 
     @POST

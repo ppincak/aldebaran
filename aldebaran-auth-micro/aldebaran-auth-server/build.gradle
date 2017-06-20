@@ -23,7 +23,7 @@ dependencies {
 }
 
 bootRepackage {
-    mainClass = 'com.aldebaran.server.StartupKt'
+    mainClass = 'com.aldebaran.auth.server.StartupKt'
 }
 
 springBoot  {

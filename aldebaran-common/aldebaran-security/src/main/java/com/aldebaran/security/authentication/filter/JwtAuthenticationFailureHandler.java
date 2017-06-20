@@ -4,6 +4,8 @@ import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.event.ErrorResponse;
 import com.aldebaran.rest.handlers.ErrorResponseCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -19,6 +21,8 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
     @Autowired
     private ErrorResponseCreator responseCreator;
 
@@ -29,6 +33,8 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
+        logger.info("AUTH REQUEST" + request.getMethod() + request.getRequestURI());
+
         int statusCode = Response.Status.UNAUTHORIZED.getStatusCode();
 
         ErrorResponse errorResponse =

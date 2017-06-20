@@ -1,6 +1,7 @@
 package com.aldebaran.server.config;
 
 import com.aldebaran.security.authentication.filter.JwtAuthenticationFilter;
+import com.aldebaran.server.authentication.JwtAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +46,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/monitor/health");
+        web.ignoring().antMatchers("**");
     }
 }

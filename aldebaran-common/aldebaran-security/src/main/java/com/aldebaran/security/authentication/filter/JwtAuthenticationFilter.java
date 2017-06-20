@@ -2,6 +2,8 @@ package com.aldebaran.security.authentication.filter;
 
 import com.aldebaran.security.authentication.JwtAuthentication;
 import com.aldebaran.security.authentication.UnauthorizedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,8 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
     public JwtAuthenticationFilter() {
         super("/**");
     }
@@ -29,16 +33,13 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-
         String authorization = request.getHeader("Authorization");
         if(authorization == null) {
             throw new UnauthorizedException();
         }
 
-        Authentication authentication = getAuthenticationManager()
-                .authenticate(new JwtAuthentication(authorization));
-
-        return authentication;
+        return getAuthenticationManager()
+                    .authenticate(new JwtAuthentication(authorization));
     }
 
     @Override
