@@ -4,8 +4,8 @@ server:
 discovery:
   service:
     name: ${DISCOVERY_SERVICE_NAME}
-    host: ${DISCOVERY_SERVICE_HOST}
     port: ${DISCOVERY_SERVICE_PORT}
+  dependencies: aldebaran-auth
   healthCheckPath: /monitor/health
   healthCheckInterval: ${DISCOVERY_HEALTH_CHECK_INTERVAL}
   consul:

@@ -4,6 +4,7 @@ dependencies {
     compile (project(":aldebaran-auth-api"))
     compile (project(":aldebaran-auth-core"))
     compile (project(":aldebaran-data"))
+    compile (project(":aldebaran-chassis"))
     compile (project(":aldebaran-rest"))
     compile (project(":aldebaran-security"))
 
@@ -28,5 +29,6 @@ bootRepackage {
 
 springBoot  {
     requiresUnpack = ['com.aldebaran:aldebaran-auth-api',
+                      'com.aldebaran:aldebaran-chassis',
                       'com.aldebaran:aldebaran-rest']
 }

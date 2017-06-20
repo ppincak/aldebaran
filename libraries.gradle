@@ -21,6 +21,7 @@ ext {
     mysqlDriverVersion = '6.0.5'
     orikaVersion = '1.5.1'
 	prometheusVersion = '0.0.21'
+    ribbonVersion= '2.2.2'
     springSecurityVersion = '4.2.1.RELEASE'
     springBootVersion = '1.5.1.RELEASE'
     springDataJpaVersion = '1.11.0.RELEASE'
@@ -82,6 +83,10 @@ ext {
         netflix: [
             hystrix: [
                 core: "com.netflix.hystrix:hystrix-core:${hystrixVersion}"
+            ],
+            ribbon: [
+                core: "com.netflix.ribbon:ribbon-core:${ribbonVersion}",
+                loadBalancer: "com.netflix.ribbon:ribbon-loadbalancer:${ribbonVersion}"
             ]
         ],
         orika: "ma.glasnost.orika:orika-core:${orikaVersion}",

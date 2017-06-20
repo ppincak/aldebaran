@@ -4,11 +4,13 @@ import com.orbitz.consul.Consul;
 import com.orbitz.consul.model.agent.Registration;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class ConsulDeregisterBean implements DisposableBean {
+@Conditional(ConsulEnabledCondition.class)
+public class ConsulDeregistrationBean implements DisposableBean {
 
     @Autowired
     private Consul consul;
@@ -18,6 +20,8 @@ public class ConsulDeregisterBean implements DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-        consul.agentClient().deregister(consulRegistration.getId());
+        consul
+            .agentClient()
+            .deregister(consulRegistration.getId());
     }
 }

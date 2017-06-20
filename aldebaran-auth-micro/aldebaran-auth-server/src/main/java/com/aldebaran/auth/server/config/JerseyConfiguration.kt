@@ -11,6 +11,7 @@ open class JerseyConfiguration : ResourceConfig {
 
     constructor() : super() {
         packages("com.aldebaran.rest",
+                 "com.aldebaran.chassis",
                  "com.aldebaran.auth.api")
     }
 }

@@ -41,5 +41,6 @@ bootRepackage {
 
 springBoot  {
     requiresUnpack = ['com.aldebaran:aldebaran-order-api',
+                      'com.aldebaran:aldebaran-chassis',
                       'com.aldebaran:aldebaran-rest']
 }

@@ -4,22 +4,31 @@ import com.aldebaran.utils.FormattingUtils;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.AgentClient;
 import com.orbitz.consul.Consul;
+import com.orbitz.consul.HealthClient;
+import com.orbitz.consul.cache.ServiceHealthCache;
+import com.orbitz.consul.cache.ServiceHealthKey;
 import com.orbitz.consul.model.agent.ImmutableRegistration;
 import com.orbitz.consul.model.agent.Registration;
+import com.orbitz.consul.model.health.Service;
+import com.orbitz.consul.model.health.ServiceHealth;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
 @Configuration
-@Conditional(ConsulCondition.class)
+@Conditional(ConsulEnabledCondition.class)
 public class ConsulConfigurationConfiguration {
 
     @Autowired
@@ -36,8 +45,7 @@ public class ConsulConfigurationConfiguration {
     }
 
     @Bean
-    @Autowired
-    public Registration registration(Consul consul) {
+    public Registration consulSelfRegistration(Consul consul) {
         AgentClient agentClient = consul.agentClient();
 
         URL url = null;
@@ -46,7 +54,7 @@ public class ConsulConfigurationConfiguration {
 
             url = new URL("http",
                           address.getHostAddress(),
-                          8080,
+                          discoveryProperties.getServicePort(),
                           discoveryProperties.getHealthCheckPath());
         } catch (MalformedURLException | UnknownHostException e) {
             throw new ConsulException("Consul initialization failed");

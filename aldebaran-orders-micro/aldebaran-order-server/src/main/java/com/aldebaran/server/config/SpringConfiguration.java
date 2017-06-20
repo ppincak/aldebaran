@@ -42,7 +42,7 @@ public class SpringConfiguration {
         return new ObjectMapper();
     }
 
-    @Bean
+    /*@Bean
     public ServiceDiscovery serviceDiscovery(DiscoveryProperties discoveryProperties,
                                              Environment env) {
         if(discoveryProperties.getConsulEnabled()) {
@@ -56,7 +56,7 @@ public class SpringConfiguration {
                  new ServiceDescriptionModel("http://", authHost, authPort));
 
         return new ServiceDiscoveryStub(services);
-    }
+    }*/
 
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {

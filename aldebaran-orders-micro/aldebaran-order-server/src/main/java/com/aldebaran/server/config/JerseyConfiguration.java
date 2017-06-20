@@ -23,6 +23,7 @@ public class JerseyConfiguration extends ResourceConfig {
         register(MultiPartFeature.class);
         register(MonitoringController.class);
         packages("com.aldebaran.api",
+                 "com.aldebaran.chassis",
                  "com.aldebaran.rest");
 
         initializeSwagger(discoveryProperties);
@@ -32,7 +33,7 @@ public class JerseyConfiguration extends ResourceConfig {
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.2");
         beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost(discoveryProperties.assembleServiceUrl());
+        beanConfig.setHost("localhost");
         beanConfig.setBasePath("/");
         beanConfig.setResourcePackage("com.aldebaran");
         beanConfig.setScan(true);

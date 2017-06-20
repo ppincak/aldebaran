@@ -5,6 +5,8 @@ dependencies {
     compile libraries.consul.client
     compile libraries.javax.rs
     compile libraries.netflix.hystrix.core
+    compile libraries.netflix.ribbon.core
+    compile libraries.netflix.ribbon.loadBalancer
     compile libraries.prometheus.client
     compile libraries.prometheus.common
     compile libraries.spring.beans

@@ -54,6 +54,7 @@ open class WebSecurityConfiguration() : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(web: WebSecurity) {
-        web.ignoring().antMatchers("/oauth2/**")
+        web.ignoring().antMatchers("/oauth2/**",
+                                   "/monitor/health")
     }
 }

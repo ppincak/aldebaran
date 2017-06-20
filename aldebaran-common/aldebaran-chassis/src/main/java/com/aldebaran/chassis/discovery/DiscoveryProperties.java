@@ -3,6 +3,8 @@ package com.aldebaran.chassis.discovery;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 public class DiscoveryProperties {
@@ -10,11 +12,11 @@ public class DiscoveryProperties {
     @Value("${discovery.service.name}")
     private String serviceName;
 
-    @Value("${discovery.service.host}")
-    private String serviceHost;
-
     @Value("${discovery.service.port}")
     private Integer servicePort;
+
+    @Value("${discovery.dependencies}")
+    private String[] discoveryDependencies;
 
     @Value("${discovery.healthCheckPath}")
     private String healthCheckPath;
@@ -31,10 +33,6 @@ public class DiscoveryProperties {
     @Value("${discovery.consul.host}")
     private String consulHost;
 
-    public String assembleServiceUrl() {
-        return serviceHost + ":" + servicePort;
-    }
-
     public String getServiceName() {
         return serviceName;
     }
@@ -43,20 +41,20 @@ public class DiscoveryProperties {
         this.serviceName = serviceName;
     }
 
-    public String getServiceHost() {
-        return serviceHost;
-    }
-
-    public void setServiceHost(String serviceHost) {
-        this.serviceHost = serviceHost;
-    }
-
     public Integer getServicePort() {
         return servicePort;
     }
 
     public void setServicePort(Integer servicePort) {
         this.servicePort = servicePort;
+    }
+
+    public String[] getDiscoveryDependencies() {
+        return discoveryDependencies;
+    }
+
+    public void setDiscoveryDependencies(String[] discoveryDependencies) {
+        this.discoveryDependencies = discoveryDependencies;
     }
 
     public String getHealthCheckPath() {
