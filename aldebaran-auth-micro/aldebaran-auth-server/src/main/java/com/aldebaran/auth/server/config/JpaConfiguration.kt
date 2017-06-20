@@ -16,7 +16,6 @@ import javax.sql.DataSource
 
 const val entitiesToScan = "com.aldebaran"
 
-
 @Configuration
 open class JpaConfiguration {
 

@@ -34,9 +34,8 @@ open class WebSecurityConfiguration() : WebSecurityConfigurerAdapter() {
                 .authenticationProvider(jwtAuthenticationProvider)
     }
 
-    // Disable auto registration of provided filters
     @Bean
-    open fun registration(filter: JwtAuthenticationFilter): FilterRegistrationBean {
+    open fun jwtFilterRegistrationBean(filter: JwtAuthenticationFilter): FilterRegistrationBean {
         val registration = FilterRegistrationBean(filter)
         registration.isEnabled = false
         return registration
