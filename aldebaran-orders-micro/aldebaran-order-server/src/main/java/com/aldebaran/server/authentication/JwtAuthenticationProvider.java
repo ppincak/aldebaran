@@ -1,6 +1,5 @@
 package com.aldebaran.server.authentication;
 
-import com.aldebaran.chassis.discovery.RibbonServiceDiscovery;
 import com.aldebaran.chassis.discovery.ServiceDescription;
 import com.aldebaran.chassis.discovery.ServiceDiscovery;
 import com.aldebaran.security.authentication.JwtAuthentication;
@@ -9,7 +8,6 @@ import com.aldebaran.chassis.hystrix.RestCall;
 import com.aldebaran.chassis.hystrix.RestCallCommand;
 import com.aldebaran.security.authentication.JwtAuthenticatedUser;
 import com.aldebaran.security.jwt.TokenInfo;
-import com.netflix.loadbalancer.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationProvider.class);
 
     @Autowired
-    private ServiceDiscovery loadBalancing;
+    private ServiceDiscovery serviceDiscovery;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -38,10 +36,11 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         httpHeaders.add("Authorization", jwtAuthentication.getJwt());
         HttpEntity<Object> httpEntity = new HttpEntity<>(httpHeaders);
 
-        ServiceDescription serviceDescription = loadBalancing.discover("aldebaran-auth");
+        ServiceDescription serviceDescription =
+                serviceDiscovery.discover("aldebaran-auth");
 
         if(serviceDescription == null) {
-            logger.error("Service aldebaran-auth not found");
+            logger.error("No instance of service aldebaran-auth found");
 
             throw new UnauthorizedException();
         }

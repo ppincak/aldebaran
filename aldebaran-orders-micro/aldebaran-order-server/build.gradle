@@ -19,11 +19,16 @@ dependencies {
     compile libraries.netflix.hystrix.core
     compile libraries.javax.rs
     compile libraries.jersey.media
+    compile libraries.logback.classic
+    compile libraries.logback.core
     compile libraries.mysqlDriver
     compile libraries.prometheus.client
     compile libraries.prometheus.common
     compile libraries.prometheus.hotspot
-    compile libraries.spring.boot.jersey
+    compile (libraries.spring.boot.jersey) {
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+    }
     compile libraries.spring.dataJpa
     compile libraries.spring.dataCommons
     compile libraries.spring.orm

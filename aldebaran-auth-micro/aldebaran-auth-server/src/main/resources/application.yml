@@ -11,9 +11,9 @@ discovery:
     port: ${CONSUL_PORT}
 
 redis:
-  enabled: true
-  host: localhost
-  port: 6379
+  enabled: ${REDIS_ENABLED}
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
   poolSize: 16
 
 server:

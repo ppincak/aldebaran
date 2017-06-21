@@ -37,8 +37,10 @@ public class MonitoringController {
                MediaType.APPLICATION_JSON})
     public Response getMetrics() throws IOException {
         StringWriter stringWriter = new StringWriter();
-        TextFormat.write004(stringWriter,
-                            CollectorRegistry.defaultRegistry.metricFamilySamples());
+        TextFormat
+            .write004(stringWriter,
+                      CollectorRegistry.defaultRegistry.metricFamilySamples());
+
         return Response
                 .ok(stringWriter.toString())
                 .build();

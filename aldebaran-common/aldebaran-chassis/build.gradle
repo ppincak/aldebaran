@@ -4,6 +4,8 @@ dependencies {
     compile libraries.aspectj.weaver
     compile libraries.consul.client
     compile libraries.javax.rs
+    compile libraries.logback.classic
+    compile libraries.logback.core
     compile libraries.netflix.hystrix.core
     compile libraries.netflix.ribbon.core
     compile libraries.netflix.ribbon.loadBalancer

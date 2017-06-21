@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @Conditional(ConsulEnabledCondition.class)
-public class RibbonServiceDiscovery implements ServiceDiscovery {
+public class LoadBalancingServiceDiscovery implements ServiceDiscovery {
 
     @Autowired
     private Consul consul;
@@ -31,7 +31,7 @@ public class RibbonServiceDiscovery implements ServiceDiscovery {
 
     private final Map<String, DynamicLoadBalancer> loadBalancers;
 
-    public RibbonServiceDiscovery() {
+    public LoadBalancingServiceDiscovery() {
         loadBalancers = new ConcurrentHashMap<>();
     }
 

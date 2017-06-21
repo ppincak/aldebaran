@@ -15,9 +15,13 @@ dependencies {
     compile libraries.hibernate.entityManager
     compile libraries.hibernate.jpa
     compile libraries.hikari
+    compile libraries.logback.core
     compile libraries.mysqlDriver
     compile libraries.redis.jedis
-    compile libraries.spring.boot.jersey
+    compile (libraries.spring.boot.jersey) {
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+    }
     compile libraries.spring.security.web
     compile libraries.spring.security.core
     compile libraries.spring.security.config

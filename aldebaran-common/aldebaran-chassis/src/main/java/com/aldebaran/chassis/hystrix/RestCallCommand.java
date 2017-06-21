@@ -3,6 +3,8 @@ package com.aldebaran.chassis.hystrix;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandProperties;
 import com.netflix.hystrix.HystrixObservableCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import rx.Observable;
@@ -16,12 +18,12 @@ public class RestCallCommand<T> extends HystrixObservableCommand<T> {
     private final RestCall<T> restCall;
 
     public RestCallCommand(RestCall<T> restCall) {
-        this(restCall, 800);
+        this(restCall, 2000,"RestCallGroup" );
     }
 
-    public RestCallCommand(RestCall<T> restCall, int timeout) {
+    public RestCallCommand(RestCall<T> restCall, int timeout, String group) {
         super(Setter
-                .withGroupKey(HystrixCommandGroupKey.Factory.asKey("RestCallGroup"))
+                .withGroupKey(HystrixCommandGroupKey.Factory.asKey(group))
                 .andCommandPropertiesDefaults(
                         HystrixCommandProperties.Setter()
                             .withExecutionTimeoutInMilliseconds(timeout)));

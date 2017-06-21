@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appender name="consul-appender" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="com.aldebaran.chassis.discovery.ConsulFilter">
+        </filter>
+        <encoder>
+            <pattern>%date{ISO8601,UTC} \(UTC\) :: %-5p [%C:%thread] :: %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.aldebaran" level="ALL" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.orbitz.consul" level="ERROR" additivity="false">
+        <appender-ref ref="consul-appender"/>
+    </logger>
+</configuration>

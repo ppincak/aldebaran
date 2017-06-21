@@ -33,6 +33,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
+
         String authorization = request.getHeader("Authorization");
         if(authorization == null) {
             throw new UnauthorizedException();
