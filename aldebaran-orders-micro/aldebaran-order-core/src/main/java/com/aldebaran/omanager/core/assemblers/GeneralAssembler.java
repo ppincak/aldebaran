@@ -4,9 +4,7 @@ import com.aldebaran.data.domain.Price;
 import com.aldebaran.data.domain.Timestamps;
 import com.aldebaran.omanager.core.model.PriceModel;
 import com.aldebaran.omanager.core.model.TimestampsModel;
-import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.MappingContext;
 import org.springframework.stereotype.Component;
 
 

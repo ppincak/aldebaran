@@ -1,7 +1,5 @@
 package com.aldebaran.omanager.core.assemblers;
 
-import com.aldebaran.data.domain.Price;
-import com.aldebaran.omanager.core.entities.Customer;
 import com.aldebaran.omanager.core.entities.Product;
 import com.aldebaran.omanager.core.model.PriceModel;
 import com.aldebaran.omanager.core.model.ProductRequest;

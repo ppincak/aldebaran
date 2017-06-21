@@ -3,7 +3,9 @@ package com.aldebaran.auth.core.entity;
 import com.aldebaran.data.domain.TrackableBaseDomain;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity

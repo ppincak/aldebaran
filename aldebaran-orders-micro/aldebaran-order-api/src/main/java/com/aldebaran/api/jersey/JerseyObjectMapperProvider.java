@@ -8,7 +8,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-import javax.xml.ws.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

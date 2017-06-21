@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Map;
-import java.util.Set;
 
 
 public abstract class AbstractApiService<TRepository extends JpaRepository<TEntity, Long>, TEntity> {

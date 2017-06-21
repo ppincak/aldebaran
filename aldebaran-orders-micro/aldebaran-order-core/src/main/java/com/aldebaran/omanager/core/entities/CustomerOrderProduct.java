@@ -4,7 +4,6 @@ import com.aldebaran.data.domain.Price;
 import com.aldebaran.data.domain.TrackableBaseDomain;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 
 @Entity

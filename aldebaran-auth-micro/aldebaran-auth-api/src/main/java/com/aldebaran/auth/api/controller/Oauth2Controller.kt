@@ -1,7 +1,7 @@
 package com.aldebaran.auth.api.controller
 
-import com.aldebaran.auth.core.model.TokenRequest
 import com.aldebaran.auth.api.service.OAuth2Service
+import com.aldebaran.auth.core.model.TokenRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import javax.ws.rs.*

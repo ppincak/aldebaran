@@ -1,14 +1,13 @@
 package com.aldebaran.api.controllers;
 
+import com.aldebaran.api.services.CustomerService;
 import com.aldebaran.omanager.core.model.*;
 import com.aldebaran.omanager.core.model.update.CustomerOrderUpdateRequest;
 import com.aldebaran.omanager.core.model.update.CustomerUpdateRequest;
-import com.aldebaran.api.services.CustomerService;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.SearchRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

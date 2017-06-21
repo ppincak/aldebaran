@@ -1,6 +1,5 @@
 package com.aldebaran.omanager.core.repositories;
 
-import com.aldebaran.omanager.core.entities.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

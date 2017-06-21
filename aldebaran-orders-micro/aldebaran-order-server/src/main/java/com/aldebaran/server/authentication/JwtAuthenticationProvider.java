@@ -2,11 +2,11 @@ package com.aldebaran.server.authentication;
 
 import com.aldebaran.chassis.discovery.ServiceDescription;
 import com.aldebaran.chassis.discovery.ServiceDiscovery;
-import com.aldebaran.security.authentication.JwtAuthentication;
-import com.aldebaran.security.authentication.UnauthorizedException;
 import com.aldebaran.chassis.hystrix.RestCall;
 import com.aldebaran.chassis.hystrix.RestCallCommand;
 import com.aldebaran.security.authentication.JwtAuthenticatedUser;
+import com.aldebaran.security.authentication.JwtAuthentication;
+import com.aldebaran.security.authentication.UnauthorizedException;
 import com.aldebaran.security.jwt.TokenInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,11 +2,11 @@ package com.aldebaran.auth.api.service
 
 import com.aldebaran.auth.api.AuthErrorEvents
 import com.aldebaran.auth.core.authentication.UsernamePasswordAuthentication
-import com.aldebaran.auth.core.enums.GrantType
-import com.aldebaran.auth.core.jwt.JwtTokenizer
 import com.aldebaran.auth.core.details.DbAuthenticatedUser
+import com.aldebaran.auth.core.enums.GrantType
 import com.aldebaran.auth.core.enums.TokenType
 import com.aldebaran.auth.core.jwt.JwtProperties
+import com.aldebaran.auth.core.jwt.JwtTokenizer
 import com.aldebaran.auth.core.jwt.JwtVerificationException
 import com.aldebaran.auth.core.model.TokenRequest
 import com.aldebaran.auth.core.model.TokenResponse
