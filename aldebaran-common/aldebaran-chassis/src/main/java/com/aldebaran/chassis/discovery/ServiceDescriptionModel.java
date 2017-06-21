@@ -1,5 +1,7 @@
 package com.aldebaran.chassis.discovery;
 
+import com.netflix.loadbalancer.Server;
+
 
 public class ServiceDescriptionModel implements ServiceDescription {
 
@@ -10,6 +12,10 @@ public class ServiceDescriptionModel implements ServiceDescription {
     private String protocol;
     private String host;
     private Integer port;
+
+    public ServiceDescriptionModel(String addressWithPort) {
+        this.protocol = protocol;
+    }
 
     public ServiceDescriptionModel(String protocol, String host, Integer port) {
         this.protocol = protocol;
@@ -31,5 +37,9 @@ public class ServiceDescriptionModel implements ServiceDescription {
     @Override
     public String assembleUrl() {
         return protocol + host + ":" + port;
+    }
+
+    public Server toServer() {
+        return new Server(assembleUrl());
     }
 }

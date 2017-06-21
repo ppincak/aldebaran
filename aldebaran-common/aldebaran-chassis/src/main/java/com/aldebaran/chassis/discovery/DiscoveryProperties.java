@@ -15,7 +15,7 @@ public class DiscoveryProperties {
     @Value("${discovery.service.port}")
     private Integer servicePort;
 
-    @Value("${discovery.dependencies}")
+    @Value("${discovery.services}")
     private String[] discoveryDependencies;
 
     @Value("${discovery.healthCheckPath}")
@@ -49,7 +49,7 @@ public class DiscoveryProperties {
         this.servicePort = servicePort;
     }
 
-    public String[] getDiscoveryDependencies() {
+    public String[] getDiscoveryServices() {
         return discoveryDependencies;
     }
 

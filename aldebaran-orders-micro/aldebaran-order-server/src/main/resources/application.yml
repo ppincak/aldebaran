@@ -5,7 +5,7 @@ discovery:
   service:
     name: ${DISCOVERY_SERVICE_NAME}
     port: ${DISCOVERY_SERVICE_PORT}
-  dependencies: aldebaran-auth
+  services: aldebaran-auth
   healthCheckPath: /monitor/health
   healthCheckInterval: ${DISCOVERY_HEALTH_CHECK_INTERVAL}
   consul:

@@ -7,10 +7,12 @@ import java.util.List;
 
 public class ConsulServiceChangeEvent extends ApplicationEvent {
 
+    private final String serviceName;
     private final List<String> services;
 
-    public ConsulServiceChangeEvent(Object source, List<String> services) {
+    public ConsulServiceChangeEvent(Object source, String serviceName, List<String> services) {
         super(source);
+        this.serviceName = serviceName;
         this.services = services;
     }
 

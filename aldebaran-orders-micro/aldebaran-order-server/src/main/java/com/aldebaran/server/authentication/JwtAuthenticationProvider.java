@@ -1,6 +1,8 @@
 package com.aldebaran.server.authentication;
 
 import com.aldebaran.chassis.discovery.RibbonServiceDiscovery;
+import com.aldebaran.chassis.discovery.ServiceDescription;
+import com.aldebaran.chassis.discovery.ServiceDiscovery;
 import com.aldebaran.security.authentication.JwtAuthentication;
 import com.aldebaran.security.authentication.UnauthorizedException;
 import com.aldebaran.chassis.hystrix.RestCall;
@@ -26,7 +28,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationProvider.class);
 
     @Autowired
-    private RibbonServiceDiscovery loadBalancing;
+    private ServiceDiscovery loadBalancing;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -36,9 +38,9 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         httpHeaders.add("Authorization", jwtAuthentication.getJwt());
         HttpEntity<Object> httpEntity = new HttpEntity<>(httpHeaders);
 
-        Server server = loadBalancing.chooseServer();
+        ServiceDescription serviceDescription = loadBalancing.discover("aldebaran-auth");
 
-        if(server == null) {
+        if(serviceDescription == null) {
             logger.error("Service aldebaran-auth not found");
 
             throw new UnauthorizedException();
@@ -46,7 +48,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
         RestCall<TokenInfo> restCall =
                 new RestCall<TokenInfo>()
-                    .setUrl(server.getHostPort() + "/oauth2/tokenInfo")
+                    .setUrl(serviceDescription.assembleUrl() + "/oauth2/tokenInfo")
                     .setMethod(HttpMethod.GET)
                     .setResponseType(TokenInfo.class)
                     .setRequestEntity(httpEntity);
