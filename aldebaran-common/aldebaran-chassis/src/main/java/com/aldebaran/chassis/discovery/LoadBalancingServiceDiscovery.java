@@ -76,6 +76,9 @@ public class LoadBalancingServiceDiscovery implements ServiceDiscovery {
             return null;
         }
         Server server = loadBalancer.getZoneAwareLoadBalancer().chooseServer();
+        if(server == null) {
+            return null;
+        }
 
         return new ServiceDescriptionModel("http://",
                                            server.getHost(),

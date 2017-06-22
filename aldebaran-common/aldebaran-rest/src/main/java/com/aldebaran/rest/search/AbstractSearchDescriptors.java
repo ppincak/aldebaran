@@ -1,4 +1,4 @@
-package com.aldebaran.omanager.core.descriptors;
+package com.aldebaran.rest.search;
 
 import com.aldebaran.rest.search.OrderDescriptor;
 import com.aldebaran.rest.search.SearchDescriptor;
@@ -34,14 +34,25 @@ public abstract class AbstractSearchDescriptors {
     }
 
     protected void addDescriptor(String propertyName,
+                                 Class<? extends Comparable<?>> resultType) {
+
+        searchDescriptors
+                .put(propertyName,
+                     new SearchDescriptor(propertyName,
+                                          resultType,
+                                          propertyName,
+                                          TypeOperators.getOperators(resultType)));
+    }
+
+    protected void addDescriptor(String propertyName,
                                  Class<? extends Comparable<?>> resultType,
                                  String resultProperty) {
-
-        searchDescriptors.put(propertyName,
-                              new SearchDescriptor(propertyName,
-                                                   resultType,
-                                                   resultProperty,
-                                                   TypeOperators.getOperators(resultType)));
+        searchDescriptors
+                .put(propertyName,
+                     new SearchDescriptor(propertyName,
+                                          resultType,
+                                          resultProperty,
+                                          TypeOperators.getOperators(resultType)));
     }
 
     public Map<String, SearchDescriptor> getSearchDescriptors() {

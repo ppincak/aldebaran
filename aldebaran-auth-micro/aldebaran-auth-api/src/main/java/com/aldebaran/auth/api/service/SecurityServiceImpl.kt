@@ -1,6 +1,7 @@
 package com.aldebaran.auth.api.service
 
 import com.aldebaran.auth.core.model.TokenRevokeRequest
+import com.aldebaran.auth.core.model.UserRegistrationRequest
 import com.aldebaran.auth.core.storage.SecurityStorageProxy
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -14,9 +15,5 @@ open class SecurityServiceImpl
         for(jti: String in tokenRevokeRequest.jtis) {
             storageProxy.revoke(jti)
         }
-    }
-
-    fun register() {
-
     }
 }

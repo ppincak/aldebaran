@@ -34,6 +34,10 @@ public class LocalFileStorage implements FileStorageFacade {
         }
     }
 
+    public String downloadLink() {
+        return null;
+    }
+
     @Override
     public void delete(String filePath) {
         try {

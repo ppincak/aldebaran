@@ -8,9 +8,13 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository : CrudRepository<User, Long> {
 
-    fun getById(id: Long): User
+    fun getById(id: Long): User?
 
     fun getByUsername(username: String): User?
 
-    fun getByEmail(email: String): User
+    fun getByEmail(email: String): User?
+
+    fun countByUsername(username: String) : Long
+
+    fun countByEmail(email: String) : Long
 }

@@ -1,5 +1,6 @@
 package com.aldebaran.omanager.core.descriptors;
 
+import com.aldebaran.rest.search.AbstractSearchDescriptors;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -9,9 +10,9 @@ import java.math.BigDecimal;
 public final class ProductSearchDescriptors extends AbstractSearchDescriptors {
 
     public void init() {
-        addDescriptor("id", Long.class, "id");
-        addDescriptor("name", String.class, "name");
-        addDescriptor("code", String.class, "code");
+        addDescriptor("id", Long.class);
+        addDescriptor("name", String.class);
+        addDescriptor("code", String.class);
         addDescriptor("preTaxPrice", BigDecimal.class, "price.preTax");
         addDescriptor("afterTaxPrice", BigDecimal.class, "price.afterTax");
     }

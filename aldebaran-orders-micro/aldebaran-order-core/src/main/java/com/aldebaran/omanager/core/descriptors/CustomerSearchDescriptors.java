@@ -1,5 +1,6 @@
 package com.aldebaran.omanager.core.descriptors;
 
+import com.aldebaran.rest.search.AbstractSearchDescriptors;
 import org.springframework.stereotype.Component;
 
 
@@ -7,10 +8,10 @@ import org.springframework.stereotype.Component;
 public final class CustomerSearchDescriptors extends AbstractSearchDescriptors {
 
     protected void init() {
-        addDescriptor("id", Long.class,"id");
-        addDescriptor("firstName", String.class,"firstName");
-        addDescriptor("lastName", String.class, "lastName");
-        addDescriptor("email", String.class, "email");
+        addDescriptor("id", Long.class);
+        addDescriptor("firstName", String.class);
+        addDescriptor("lastName", String.class);
+        addDescriptor("email", String.class);
 
         addOrderDescriptor("id");
         addOrderDescriptor("firstName");
