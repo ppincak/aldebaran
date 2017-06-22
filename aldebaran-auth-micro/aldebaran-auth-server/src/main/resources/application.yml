@@ -1,3 +1,6 @@
+server:
+  port: ${SERVICE_PORT}
+
 discovery:
   service:
     name: ${DISCOVERY_SERVICE_NAME}
@@ -15,9 +18,6 @@ redis:
   host: ${REDIS_HOST}
   port: ${REDIS_PORT}
   poolSize: 16
-
-server:
-  port: ${SERVICE_PORT}
 
 spring:
   datasource:
@@ -43,9 +43,9 @@ flyway:
 jwt:
   header: Authorization
   issuer: aldebaran-auth
-  defaultTokenLife: 10000
+  defaultTokenLife: 2h
   encrypt: false
   encryption:
-    key: dasdasdadashfdjt674gdgdggdfgdfggdasdasdadashfdjt674gdgdggdfgdfgg
+    key: CE94EF31C158DBCFFD8BE8787807552435499E0A6113771B6BE4D64530CCB833
   signature:
-    key: dasdasdadashfdjt674gdgdggdfgdfggdasdasdadashfdjt674gdgdggdfgdfgg
+    key: 85CB9CA576DFE7604DF37DA9B00FEA6560DD16CBD6BA3F7A88607D050C9C31DE

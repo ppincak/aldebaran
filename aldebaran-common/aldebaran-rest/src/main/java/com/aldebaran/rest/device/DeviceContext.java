@@ -6,7 +6,6 @@ import java.util.Locale;
 public final class DeviceContext {
 
     public static final String DEFAULT_LANG = "en";
-
     public static final Locale DEFAULT_LOCALE =
             new Locale("en");
 
@@ -22,7 +21,7 @@ public final class DeviceContext {
         if(deviceContext == null) {
             return new DeviceContext(DEFAULT_LANG, "");
         }
-        return null;
+        return deviceContext;
     }
 
     private final String lang;

@@ -15,4 +15,8 @@ open class SecurityServiceImpl
             storageProxy.revoke(jti)
         }
     }
+
+    fun register() {
+
+    }
 }

@@ -20,5 +20,5 @@ data class JwtProperties(
     val encrypt: Boolean,
 
     @Value("\${jwt.defaultTokenLife}")
-    val defaultTokenLife: Long
+    val defaultTokenLife: String
 )

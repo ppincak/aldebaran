@@ -1,21 +1,20 @@
 VAGRANTFILE_API_VERSION = "2"
 LOCAL_IP = "192.168.33.10"
 
+DB_ROOT_PASSWORD="root"
 
-DB_NAME="aldebaran"
-DB_USER="aldebaran-admin"
-DB_PASSWORD="aldebaran-password"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.box = "packer-ubuntu"
 	config.vm.box_url = "../../packer/build/ubuntu-16.10-amd64.box"
 
-    config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.synced_folder ".", "/vagrant", disabled: false
 
 	config.vm.network "private_network", ip: LOCAL_IP	
 	config.vm.network "forwarded_port", guest: 3306, host: 3306
 	config.vm.network "forwarded_port", guest: 6379, host: 6379
-	
+	config.vm.network "forwarded_port", guest: 8500, host: 8500
+
 	config.vm.provider "virtualbox" do |vb|
 		vb.gui = false
 		vb.name = "aldebaran-vm"
@@ -29,14 +28,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	
     config.vm.provision "docker", run: "once" do |d|
         d.run "mysql",
-            args: "-p 3306:3306 -v /var/mysql/data:/var/lib/mysql " +
-                  "-e MYSQL_ROOT_PASSWORD='#{DB_PASSWORD}' " +
-                  "-e MYSQL_USER='#{DB_USER}' " +
-                  "-e MYSQL_PASSWORD='#{DB_PASSWORD}' " +
-                  "-e MYSQL_DATABASE='#{DB_NAME}' " +
+            args: "-p 3306:3306 " +
+				  "-v /var/mysql/data:/var/lib/mysql " +
+				  "-v /vagrant/mysql/:/docker-entrypoint-initdb.d " +
+                  "-e MYSQL_ROOT_PASSWORD='#{DB_ROOT_PASSWORD}' " +                
                   "--name mysql-server"
         d.run "redis",
             args: "-p 6379:6379 " +
                   "--name redis-server"
+        d.run "consul",
+            args: "-p 8500:8500 " +
+                  "--name consul-server"
     end
 end

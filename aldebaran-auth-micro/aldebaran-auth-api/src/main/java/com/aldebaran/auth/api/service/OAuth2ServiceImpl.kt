@@ -17,6 +17,7 @@ import com.aldebaran.rest.error.event.ErrorEvent
 import com.aldebaran.security.authentication.JwtAuthenticatedUser
 import com.aldebaran.security.jwt.TokenInfo
 import com.aldebaran.security.jwt.TokenUtils
+import com.aldebaran.utils.FormattingUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.*
 import org.springframework.security.core.Authentication
@@ -102,7 +103,8 @@ open class OAuth2ServiceImpl
         val authenticatedUser = getJwtAuthenticatedUser(userDetails, clientId)
         val jti = TokenUtils.generateJti(authenticatedUser);
         val jwt = jwtTokenizer
-                    .generateToken(authenticatedUser, jti, jwtProperties.defaultTokenLife)
+                    .generateToken(authenticatedUser, jti,
+                                   FormattingUtils.parseExpression(jwtProperties.defaultTokenLife))
         authenticatedUser.jwt = jwt
         authenticatedUser.jti = jti
         return authenticatedUser
