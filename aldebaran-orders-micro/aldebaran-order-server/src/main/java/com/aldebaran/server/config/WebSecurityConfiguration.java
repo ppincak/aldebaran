@@ -50,6 +50,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/monitor/health");
+        web.ignoring().antMatchers("/monitor/**");
     }
 }

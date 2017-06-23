@@ -1,4 +1,4 @@
-package com.aldebaran.omanager.core;
+package com.aldebaran.omanager.core.entities;
 
 
 public enum OrderStatus {

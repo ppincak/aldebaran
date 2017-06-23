@@ -2,7 +2,9 @@ package com.aldebaran.api.controllers;
 
 import com.aldebaran.api.services.FileService;
 import com.aldebaran.chassis.monitoring.Count;
+import com.aldebaran.omanager.core.model.FileLinkResponse;
 import com.aldebaran.rest.files.DownloadableFile;
+import io.swagger.annotations.ApiOperation;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class FileController {
     @POST
     @Path("/{fileName}")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
+    @ApiOperation(value = "Upload file",
+                  response = FileLinkResponse.class,
+                  responseContainer = "List")
     @Count(name = "fileUploadCount")
     public Response uploadFile(@PathParam("fileName") String fileName,
                                @FormDataParam("file") final List<FormDataBodyPart> formDataBodyParts) {
@@ -37,6 +42,7 @@ public class FileController {
 
     @GET
     @Path("/{fileId}")
+    @ApiOperation(value = "Download file")
     @Count(name = "fileDownloadCount")
     public Response downloadFile(@PathParam("fileId") Long fileId) throws Exception {
         DownloadableFile downloadableFile =
@@ -51,6 +57,7 @@ public class FileController {
 
     @DELETE
     @Path("/{fileId}")
+    @ApiOperation(value = "Delete file")
     public Response deleteFile(@PathParam("fileId") Long fileId) {
         fileService.deleteFile(fileId);
         return Response

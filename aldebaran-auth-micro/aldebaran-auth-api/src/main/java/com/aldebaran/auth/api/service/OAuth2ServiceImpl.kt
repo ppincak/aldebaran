@@ -26,10 +26,10 @@ import org.springframework.stereotype.Service
 
 @Service
 open class OAuth2ServiceImpl
-    @Autowired constructor(val authManager: AuthenticationManager,
-                           val storageProxy: SecurityStorageProxy,
-                           val jwtProperties: JwtProperties,
-                           val jwtTokenizer: JwtTokenizer) : OAuth2Service {
+        @Autowired constructor(val authManager: AuthenticationManager,
+                               val storageProxy: SecurityStorageProxy,
+                               val jwtProperties: JwtProperties,
+                               val jwtTokenizer: JwtTokenizer) : OAuth2Service {
 
     override fun token(tokenRequest: TokenRequest): TokenResponse {
         when (tokenRequest.getGrantType()){

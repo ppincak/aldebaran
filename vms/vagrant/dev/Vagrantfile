@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.network "forwarded_port", guest: 3306, host: 3306
 	config.vm.network "forwarded_port", guest: 6379, host: 6379
 	config.vm.network "forwarded_port", guest: 8500, host: 8500
+	config.vm.network "forwarded_port", guest: 9090, host: 9090
 
 	config.vm.provider "virtualbox" do |vb|
 		vb.gui = false
@@ -39,5 +40,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         d.run "consul",
             args: "-p 8500:8500 " +
                   "--name consul-server"
+        d.run "prom/prometheus",
+            args: "-p 9090:9090 " +
+				  "-v /vagrant/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml " +	
+                  "--name prometheus-server"
     end
 end

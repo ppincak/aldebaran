@@ -2,7 +2,6 @@ package com.aldebaran.omanager.core.entities;
 
 import com.aldebaran.data.domain.Price;
 import com.aldebaran.data.domain.TrackableBaseDomain;
-import com.aldebaran.omanager.core.OrderStatus;
 
 import javax.persistence.*;
 import java.util.List;

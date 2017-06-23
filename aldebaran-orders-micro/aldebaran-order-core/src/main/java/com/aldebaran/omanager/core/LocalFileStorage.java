@@ -34,7 +34,7 @@ public class LocalFileStorage implements FileStorageFacade {
         }
     }
 
-    public String downloadLink() {
+    public String downloadLink(String filePath) {
         return null;
     }
 

@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 @Component
-@Conditional(ConsulEnabledCondition.class)
+@Conditional(ConsulCondition.ConsulEnabledCondition.class)
 public class LoadBalancingServiceDiscovery implements ServiceDiscovery {
 
     @Autowired
@@ -36,7 +36,7 @@ public class LoadBalancingServiceDiscovery implements ServiceDiscovery {
     }
 
     @PostConstruct
-    private void init() throws Exception {
+    private void init() {
         for(String serviceName: discoveryProperties.getDiscoveryServices()) {
             DynamicServerList serverList = new DynamicServerList();
 
@@ -65,7 +65,12 @@ public class LoadBalancingServiceDiscovery implements ServiceDiscovery {
                 DynamicLoadBalancer dynamicLoadBalancer  = loadBalancers.get(serviceName);
                 dynamicLoadBalancer.getDynamicServerList().setUpdatedServers(servers);
             });
-            serviceHealthCache.start();
+
+            try {
+                serviceHealthCache.start();
+            } catch (Exception e) {
+                throw new ConsulException("Failed to start consul service search");
+            }
         }
     }
 

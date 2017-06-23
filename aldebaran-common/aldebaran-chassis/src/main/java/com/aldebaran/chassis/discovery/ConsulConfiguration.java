@@ -19,8 +19,8 @@ import java.util.UUID;
 
 
 @Configuration
-@Conditional(ConsulEnabledCondition.class)
-public class ConsulConfigurationConfiguration {
+@Conditional(ConsulCondition.ConsulEnabledCondition.class)
+public class ConsulConfiguration {
 
     @Autowired
     private DiscoveryProperties discoveryProperties;
@@ -62,7 +62,7 @@ public class ConsulConfigurationConfiguration {
                         .builder()
                         .id(UUID.randomUUID().toString())
                         .name(discoveryProperties.getServiceName())
-                        .address(url.toString())
+                        .address(url.getHost())
                         .port(discoveryProperties.getServicePort())
                         .addChecks(httpCheck)
                         .build();

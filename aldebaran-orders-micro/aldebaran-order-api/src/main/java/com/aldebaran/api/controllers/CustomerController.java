@@ -50,7 +50,7 @@ public class CustomerController {
     @GET
     @Path("/{customerId}")
     @ApiOperation(value = "Find customer by id",
-            response = CustomerResponse.class)
+                  response = CustomerResponse.class)
     public Response getCustomer(@PathParam("customerId") Long customerId) {
         return Response
                 .ok(customerService.getCustomerById(customerId))
