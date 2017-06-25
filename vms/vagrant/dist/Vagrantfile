@@ -13,12 +13,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder ".", "/vagrant", disabled: false
 
 	config.vm.network "private_network", ip: LOCAL_IP
-	
+
+	config.vm.network "forwarded_port", guest: 80, host: 8080
+	config.vm.network "forwarded_port", guest: 3000, host: 3000
 	config.vm.network "forwarded_port", guest: 3306, host: 3306
 	config.vm.network "forwarded_port", guest: 8500, host: 8500
-	config.vm.network "forwarded_port", guest: 8080, host: 8080
 	config.vm.network "forwarded_port", guest: 8078, host: 8078	
 	config.vm.network "forwarded_port", guest: 8079, host: 8079
+	config.vm.network "forwarded_port", guest: 9090, host: 9090
 
 	config.vm.provider "virtualbox" do |vb|
 		vb.gui = false

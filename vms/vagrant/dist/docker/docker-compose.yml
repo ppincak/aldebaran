@@ -9,13 +9,29 @@ services:
     image: redis
     ports:
      - "6379:6379"
+  prometheus:
+    image: prom/prometheus
+    ports:
+     - "9090:9090"
+    links:
+     - "consul"
+    volumes:
+     - /vagrant/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana
+    ports:
+     - "3000:3000"
+    links:
+     - "prometheus"
+    environment:
+     - GF_SECURITY_ADMIN_PASSWORD=admin
   mysql:
     image: mysql
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
     ports:
      - "3306:3306"
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
     volumes: 
      - /var/mysql/data:/var/lib/mysql
      - /vagrant/docker/mysql/:/docker-entrypoint-initdb.d
@@ -61,8 +77,17 @@ services:
       - "consul"
     links:
      - "consul"
+  order-load-balancer:
+    image: shufo/nginx-consul-template
     ports:
-     - "8080:8080"
+     - "80:80"
+    environment:
+     - CONSUL_KV_PREFIX=nginx
+     - CONSUL_PORT_8500_TCP_ADDR=consul
+    volumes:
+     - /vagrant/docker/aldebaran-order/nginx.conf.ctmpl:/etc/nginx/nginx.conf.ctmpl
+    links:
+     - "consul"
 networks:
   aldebaran:
     driver: bridge

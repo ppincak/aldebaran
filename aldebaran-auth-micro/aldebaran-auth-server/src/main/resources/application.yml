@@ -1,4 +1,5 @@
 server:
+  apiKey: superKey
   port: ${SERVICE_PORT}
 
 discovery:

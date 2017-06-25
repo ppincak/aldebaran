@@ -4,6 +4,7 @@ import com.aldebaran.utils.FormattingUtils;
 import com.google.common.net.HostAndPort;
 import com.orbitz.consul.AgentClient;
 import com.orbitz.consul.Consul;
+import com.orbitz.consul.KeyValueClient;
 import com.orbitz.consul.model.agent.ImmutableRegistration;
 import com.orbitz.consul.model.agent.Registration;
 import org.springframework.beans.factory.annotation.Autowired;

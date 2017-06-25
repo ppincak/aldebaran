@@ -12,6 +12,8 @@ import java.io.IOException;
 @Provider
 public class RequestInterceptor implements ContainerRequestFilter {
 
+    private String[] apiKeys;
+    
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String lang = requestContext.getHeaderString(DeviceConstants.LANG_HEADER);

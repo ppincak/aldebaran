@@ -33,8 +33,6 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
-        logger.info("AUTH REQUEST" + request.getMethod() + request.getRequestURI());
-
         int statusCode = Response.Status.UNAUTHORIZED.getStatusCode();
 
         ErrorResponse errorResponse =
