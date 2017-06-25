@@ -24,14 +24,14 @@ services:
     links:
      - "prometheus"
     environment:
-     - GF_SECURITY_ADMIN_PASSWORD=admin
+     - GF_SECURITY_ADMIN_PASSWORD=694aAdiy#a
   mysql:
     image: mysql
     restart: always
     ports:
      - "3306:3306"
     environment:
-     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_ROOT_PASSWORD=1sd@4415fd
     volumes:
      - /var/mysql/data:/var/lib/mysql
      - /opt/aldebaran/mysql/:/docker-entrypoint-initdb.d
