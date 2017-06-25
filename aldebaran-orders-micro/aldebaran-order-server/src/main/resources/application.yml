@@ -1,5 +1,6 @@
 server:
   port: ${SERVICE_PORT}
+  apiKey: aldebaran-2fa93c87d445e3cabc5
 
 discovery:
   service:

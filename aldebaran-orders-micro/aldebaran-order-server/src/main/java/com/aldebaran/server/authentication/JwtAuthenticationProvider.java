@@ -4,6 +4,8 @@ import com.aldebaran.chassis.discovery.ServiceDescription;
 import com.aldebaran.chassis.discovery.ServiceDiscovery;
 import com.aldebaran.chassis.hystrix.RestCall;
 import com.aldebaran.chassis.hystrix.RestCallCommand;
+import com.aldebaran.rest.device.DeviceConstants;
+import com.aldebaran.rest.device.DeviceContext;
 import com.aldebaran.security.authentication.JwtAuthenticatedUser;
 import com.aldebaran.security.authentication.JwtAuthentication;
 import com.aldebaran.security.authentication.UnauthorizedException;
@@ -32,8 +34,12 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         final JwtAuthentication jwtAuthentication = (JwtAuthentication) authentication;
 
+        DeviceContext deviceContext = DeviceContext.getContext();
+
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", jwtAuthentication.getJwt());
+        httpHeaders.add(DeviceConstants.API_KEY_HEADER, deviceContext.getApiKey());
+        httpHeaders.add(DeviceConstants.API_LANG_HEADER, deviceContext.getLang());
         HttpEntity<Object> httpEntity = new HttpEntity<>(httpHeaders);
 
         ServiceDescription serviceDescription =

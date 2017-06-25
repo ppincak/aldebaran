@@ -4,6 +4,7 @@ import com.aldebaran.api.services.FileService;
 import com.aldebaran.chassis.monitoring.Count;
 import com.aldebaran.omanager.core.model.FileLinkResponse;
 import com.aldebaran.rest.files.DownloadableFile;
+import com.aldebaran.rest.interceptors.ApplyDeviceContext;
 import io.swagger.annotations.ApiOperation;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Component
 @Path("/files")
+@ApplyDeviceContext
 @Produces({MediaType.APPLICATION_JSON})
 public class FileController {
 

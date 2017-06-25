@@ -10,6 +10,7 @@ import java.io.IOException;
 
 
 @Provider
+@ApplyDeviceContext
 public class ResponseInterceptor implements ContainerResponseFilter {
 
     @Override

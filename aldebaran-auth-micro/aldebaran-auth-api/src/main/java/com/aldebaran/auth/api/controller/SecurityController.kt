@@ -2,6 +2,7 @@ package com.aldebaran.auth.api.controller
 
 import com.aldebaran.auth.api.service.SecurityService
 import com.aldebaran.auth.core.model.TokenRevokeRequest
+import com.aldebaran.rest.interceptors.ApplyDeviceContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import javax.validation.Valid
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response
 
 @Component
 @Path("/security")
+@ApplyDeviceContext
 open class SecurityController
         @Autowired constructor(val securityService: SecurityService) {
 

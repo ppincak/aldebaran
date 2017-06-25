@@ -4,6 +4,7 @@ import com.aldebaran.api.services.ProductService;
 import com.aldebaran.omanager.core.model.ProductRequest;
 import com.aldebaran.omanager.core.model.ProductResponse;
 import com.aldebaran.omanager.core.model.update.ProductUpdateRequest;
+import com.aldebaran.rest.interceptors.ApplyDeviceContext;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.SearchRequest;
 import io.swagger.annotations.Api;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.Response;
 
 @Component
 @Path("/products")
+@ApplyDeviceContext
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
 @Api(value = "/products",

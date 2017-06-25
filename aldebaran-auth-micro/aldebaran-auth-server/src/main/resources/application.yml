@@ -1,5 +1,5 @@
 server:
-  apiKey: superKey
+  apiKey: aldebaran-2fa93c87d445e3cabc5
   port: ${SERVICE_PORT}
 
 discovery:

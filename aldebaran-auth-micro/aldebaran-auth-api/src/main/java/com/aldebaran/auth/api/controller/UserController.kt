@@ -2,6 +2,7 @@ package com.aldebaran.auth.api.controller
 
 import com.aldebaran.auth.api.service.UserService
 import com.aldebaran.auth.core.model.UserRegistrationRequest
+import com.aldebaran.rest.interceptors.ApplyDeviceContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import javax.validation.Valid
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response
 
 @Component
 @Path("/users")
+@ApplyDeviceContext
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 open class UserController

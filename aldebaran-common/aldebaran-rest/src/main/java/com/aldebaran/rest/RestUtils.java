@@ -9,6 +9,15 @@ import java.util.Map;
 
 public class RestUtils {
 
+    public static boolean hasApiKey(String[] apiKeys, String apiKey) {
+        for(String key: apiKeys) {
+            if(key.equals(apiKey)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String[] orderBy(String[] orderByProperties, Map<String, OrderDescriptor> orderDescriptors) {
         List<String> validProperties = new ArrayList<>();
         for(String orderByProperty: orderByProperties) {

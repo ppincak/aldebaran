@@ -5,6 +5,7 @@ import com.aldebaran.rest.error.event.ApplicationException;
 import com.aldebaran.rest.error.event.ErrorBuilder;
 import com.aldebaran.rest.error.event.ErrorDetailBuilder;
 import com.aldebaran.rest.error.event.ErrorResponse;
+import com.aldebaran.rest.interceptors.ApiKeyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class GeneralExceptionHandler implements ExceptionMapper<Exception> {
     public Response toResponse(Exception exception) {
         if(exception instanceof ApplicationException) {
             return handleApplicationException((ApplicationException) exception);
+        }
+        if(exception instanceof ApiKeyException) {
+            return handleApplicationException
+                    (new ApplicationException(GeneralErrorEvents.INVALID_API_KEY)
+                            .status(Response.Status.BAD_REQUEST.getStatusCode()));
         }
         if(exception instanceof NotFoundException) {
             return handleApplicationException(
