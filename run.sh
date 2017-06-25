@@ -18,7 +18,7 @@ echo "Moved aldebaran-auth Dockerfile"
 (cd ./aldebaran-orders-micro/; ./gradlew bootRepackage)
 
 echo "Created aldebaran-order directory"
-mkdir -p ./vms/vagrant/docker/aldebaran-order
+mkdir -p ./vms/vagrant/dist/docker/aldebaran-order
 cp ./aldebaran-orders-micro/aldebaran-order-server/build/libs/aldebaran-order-server-1.0-SNAPSHOT.jar ./vms/vagrant/dist/docker/aldebaran-order
 echo "Moved aldebaran-order-server-1.0-SNAPSHOT.jar"
 cp ./aldebaran-orders-micro/Dockerfile ./vms/vagrant/dist/docker/aldebaran-order
