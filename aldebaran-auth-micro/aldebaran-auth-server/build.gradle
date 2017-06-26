@@ -17,6 +17,7 @@ dependencies {
     compile libraries.hikari
     compile libraries.logback.core
     compile libraries.mysqlDriver
+    compile libraries.prometheus.hotspot
     compile libraries.redis.jedis
     compile (libraries.spring.boot.jersey) {
         exclude group: 'ch.qos.logback', module: 'logback-core'
