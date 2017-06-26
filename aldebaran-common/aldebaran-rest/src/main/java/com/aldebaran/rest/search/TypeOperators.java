@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class TypeOperators {
+public final class TypeOperators {
 
     private static final Map<Class<? extends Comparable<?>>, EnumSet<SearchOperator>> typeOperators = new HashMap<>();
 

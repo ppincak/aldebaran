@@ -27,8 +27,14 @@ public abstract class AbstractSearchDescriptors {
                              new OrderDescriptor(propertyName, propertyName));
     }
 
+    protected void addOrderDescriptors(String... propertyNames) {
+        for(String propertyName: propertyNames) {
+            addOrderDescriptor(propertyName);
+        }
+    }
+
     protected void addOrderDescriptor(String propertyName,
-                                           String resultProperty) {
+                                      String resultProperty) {
         orderDescriptors.put(propertyName,
                              new OrderDescriptor(propertyName, resultProperty));
     }

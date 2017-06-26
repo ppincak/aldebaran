@@ -12,15 +12,14 @@ public final class CustomerSearchDescriptors extends AbstractSearchDescriptors {
         addDescriptor("firstName", String.class);
         addDescriptor("lastName", String.class);
         addDescriptor("email", String.class);
+        addDescriptor("phone", String.class);
 
         addOrderDescriptor("id");
         addOrderDescriptor("firstName");
         addOrderDescriptor("lastName");
         addOrderDescriptor("email");
         addOrderDescriptor("phone");
-        addOrderDescriptor("createdAt",
-                           "timestamps.createdAt");
-        addOrderDescriptor("updatedAt",
-                           "timestamps.updatedAt");
+        addOrderDescriptor("createdAt","timestamps.createdAt");
+        addOrderDescriptor("updatedAt","timestamps.updatedAt");
     }
 }

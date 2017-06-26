@@ -49,3 +49,7 @@ Requires several environment variables for configuration:
 
 The easiest way to run the project is through vagrant
 
+# Endpoint list
+
+*  /monitor/health
+*  /monitor/metrics

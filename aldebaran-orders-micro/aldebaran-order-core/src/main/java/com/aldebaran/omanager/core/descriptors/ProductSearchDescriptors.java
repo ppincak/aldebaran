@@ -15,5 +15,9 @@ public final class ProductSearchDescriptors extends AbstractSearchDescriptors {
         addDescriptor("code", String.class);
         addDescriptor("preTaxPrice", BigDecimal.class, "price.preTax");
         addDescriptor("afterTaxPrice", BigDecimal.class, "price.afterTax");
+
+        addOrderDescriptors("id", "name", "code");
+        addOrderDescriptor("preTaxPrice","price.preTax");
+        addOrderDescriptor("afterTaxPrice","price.afterTax");
     }
 }

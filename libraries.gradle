@@ -30,6 +30,7 @@ ext {
     springVersion = '4.3.6.RELEASE'
     swaggerVersion = '1.5.12'
     tomcatEmbedCoreVersion = '8.5.11'
+    typetoolsVersion= '0.5.0'
 
     def libs = [
         aspectj: [
@@ -127,7 +128,8 @@ ext {
         ],
         tomcat: [
             embedCore: "org.apache.tomcat.embed:tomcat-embed-core:${tomcatEmbedCoreVersion}"
-        ]
+        ],
+        typetools: "net.jodah:typetools:${typetoolsVersion}"
     ]
     libraries = libs
 }
