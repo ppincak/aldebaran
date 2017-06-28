@@ -1,3 +1,5 @@
+hystrix.stream.dashboard.intervalInMilliseconds: 10000
+
 server:
   port: ${SERVICE_PORT}
   apiKey: aldebaran-2fa93c87d445e3cabc5

@@ -11,6 +11,7 @@ dependencies {
     compile libraries.netflix.ribbon.loadBalancer
     compile libraries.prometheus.client
     compile libraries.prometheus.common
+    compile libraries.prometheus.pushGateway
     compile libraries.spring.beans
     compile libraries.spring.context
     compile libraries.spring.core

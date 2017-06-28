@@ -99,7 +99,8 @@ ext {
         prometheus: [
             client: "io.prometheus:simpleclient:${prometheusVersion}",
             common: "io.prometheus:simpleclient_common:${prometheusVersion}",
-            hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
+            hotspot: "io.prometheus:simpleclient_hotspot:${prometheusVersion}",
+            pushGateway: "io.prometheus:simpleclient_pushgateway:${prometheusVersion}"
         ],
         redis: [
             jedis: "redis.clients:jedis:${jedisVersion}"
