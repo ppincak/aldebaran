@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 @Component
-@Conditional(ConsulCondition.ConsulEnabledCondition.class)
+@Conditional(ConsulCondition.Enabled.class)
 public class LoadBalancingServiceDiscovery implements ServiceDiscovery {
 
     @Autowired

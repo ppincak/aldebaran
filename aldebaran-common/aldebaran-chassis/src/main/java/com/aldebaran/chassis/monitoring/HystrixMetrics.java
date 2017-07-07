@@ -1,5 +1,7 @@
 package com.aldebaran.chassis.monitoring;
 
+import com.netflix.hystrix.HystrixCommandMetrics;
+import com.netflix.hystrix.HystrixEventType;
 import com.netflix.hystrix.metric.consumer.HystrixDashboardStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,14 +17,16 @@ public class HystrixMetrics {
 
     @Bean
     public TrTest testing() {
-        //PushGateway pushGateway = new PushGateway("");
-
         HystrixDashboardStream
-                .getInstance()
-                .observe()
-                .subscribe((val) -> {
-                    System.out.println("data emitted");
-                });
+            .getInstance()
+            .observe()
+            .subscribe((val) -> {
+                for(HystrixCommandMetrics metrics: val.getCommandMetrics()) {
+                    System.out.println(metrics.getTotalTimeMean());
+                    System.out.println(metrics.getExecutionTimeMean());
+                    System.out.println(metrics.getCumulativeCount(HystrixEventType.SUCCESS));
+                }
+            });
         return null;
     }
 

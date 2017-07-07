@@ -38,7 +38,7 @@ public class SpringConfiguration {
     }
 
     @Bean
-    @Conditional(ConsulCondition.ConsulDisabledCondition.class)
+    @Conditional(ConsulCondition.Disabled.class)
     public ServiceDiscovery serviceDiscovery(Environment env) {
         String authHost = env.getProperty("discovery.aldebaran-auth.host");
         Integer authPort = env.getProperty("discovery.aldebaran-auth.port", Integer.class);

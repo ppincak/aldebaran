@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@Conditional(ConsulCondition.ConsulEnabledCondition.class)
+@Conditional(ConsulCondition.Enabled.class)
 public class ConsulDeregistrationBean implements DisposableBean {
 
     @Autowired

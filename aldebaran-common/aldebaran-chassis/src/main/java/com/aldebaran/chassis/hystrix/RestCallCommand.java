@@ -23,7 +23,7 @@ public class RestCallCommand<T> extends HystrixObservableCommand<T> {
     public RestCallCommand(RestCall<T> restCall, int timeout, String group) {
         super(Setter
                 .withGroupKey(HystrixCommandGroupKey.Factory.asKey(group))
-                .andCommandKey(HystrixCommandKey.Factory.asKey(""))
+                .andCommandKey(HystrixCommandKey.Factory.asKey("RestCall"))
                 .andCommandPropertiesDefaults(
                         HystrixCommandProperties.Setter()
                             .withExecutionTimeoutInMilliseconds(timeout)));
@@ -41,10 +41,10 @@ public class RestCallCommand<T> extends HystrixObservableCommand<T> {
 
                 ResponseEntity<T> responseEntity =
                         restTemplate.exchange(restCall.getUrl(),
-                                      restCall.getMethod(),
-                                      restCall.getRequestEntity(),
-                                      restCall.getResponseType(),
-                                      restCall.getUriVariables());
+                                              restCall.getMethod(),
+                                              restCall.getRequestEntity(),
+                                              restCall.getResponseType(),
+                                              restCall.getUriVariables());
 
                 observer.onNext(responseEntity.getBody());
                 observer.onCompleted();

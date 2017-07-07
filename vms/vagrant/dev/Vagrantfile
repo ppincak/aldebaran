@@ -16,11 +16,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.network "forwarded_port", guest: 6379, host: 6379
 	config.vm.network "forwarded_port", guest: 8500, host: 8500
 	config.vm.network "forwarded_port", guest: 9090, host: 9090
+	config.vm.network "forwarded_port", guest: 9091, host: 9091
 
 	config.vm.provider "virtualbox" do |vb|
 		vb.gui = false
 		vb.name = "aldebaran-vm"
-		vb.memory = "2048"
+		vb.memory = "3072"
 		vb.cpus = 2
 	end
 
@@ -45,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             args: "-p 9090:9090 " +
 				  "-v /vagrant/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml " +
 				  "--link consul-server:consul " +
-                  "--name prometheus-server"
+                  "--name prometheus-server"        d
         d.run "grafana/grafana",
             args: "-p 3000:3000 " +
                   "-e GF_SECURITY_ADMIN_PASSWORD=#{GRAFANA_ADMIN_PASSWORD} " +
