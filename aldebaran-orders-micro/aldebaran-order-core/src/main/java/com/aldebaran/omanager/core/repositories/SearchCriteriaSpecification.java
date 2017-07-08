@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -42,7 +43,9 @@ public class SearchCriteriaSpecification<T, Y extends Comparable<Y>> implements 
                 return builder.greaterThanOrEqualTo(root.get(criterion.getPropertyName()),
                                                     criterion.getValue());
             case IN:
-                return root.get(criterion.getPropertyName()).in(criterion.getValue());
+                return root
+                        .get(criterion.getPropertyName())
+                        .in((Collection<?>) criterion.getValue());
             case LIKE:
                 return builder.like(root.get(criterion.getPropertyName()),
                                    "%" + criterion.getValue().toString() + "%");
@@ -54,10 +57,11 @@ public class SearchCriteriaSpecification<T, Y extends Comparable<Y>> implements 
         }
     }
 
-    public static <T, Y extends Comparable<Y>>Specification<T> build(SearchCriterion<Y> criterion) {
-        return new SearchCriteriaSpecification<T, Y>(criterion);
+    private static <T, Y extends Comparable<Y>>Specification<T> build(SearchCriterion<Y> criterion) {
+        return new SearchCriteriaSpecification<>(criterion);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T, Y extends Comparable<Y>>Specification<T> buildWithAnd(Set<SearchCriterion> criteria) {
         if(criteria.isEmpty()) {
             throw new RuntimeException();

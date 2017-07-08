@@ -10,9 +10,10 @@ public final class TypeConverters {
 
     static {
         typeConverters.put(Long.class, new ListTypeConverter.LongListTypeConverter());
+        typeConverters.put(String.class, new ListTypeConverter.StringListTypeConverter());
     }
 
-    public static <TSource, TTarget> TypeConverter<TSource, TTarget> get(Class<TTarget> converter) {
-        return null;
+    public static TypeConverter get(Class<?> converter) {
+        return typeConverters.get(converter);
     }
 }

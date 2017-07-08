@@ -6,24 +6,40 @@ import java.util.List;
 
 public abstract class ListTypeConverter<T> implements TypeConverter<String, List<T>> {
 
+    protected List<T> convert(String s, StringConverter<T> converter) {
+        List<T> resultList = new ArrayList<>();
+        if(s == null || s.isEmpty()) {
+            return resultList;
+        }
+
+        String[] elements =
+                s.split(SearchRequest.LIST_SPLIT_CHAR);
+
+        for(String element: elements) {
+            try {
+                resultList.add(converter.convert(element));
+            } catch (Exception ignored) {}
+        }
+        return resultList;
+    }
+
+    public interface StringConverter<TTarget> {
+        TTarget convert(String source);
+    }
+
     public static class LongListTypeConverter extends ListTypeConverter<Long> {
 
         @Override
         public List<Long> convert(String s) {
-            List<Long> resultList = new ArrayList<>();
-            if(s == null || s.isEmpty()) {
-                return resultList;
-            }
+            return this.convert(s, Long::valueOf);
+        }
+    }
 
-            String[] elements =
-                    s.split(SearchRequest.LIST_SPLIT_CHAR);
+    public static class StringListTypeConverter extends ListTypeConverter<String> {
 
-            for(String element: elements) {
-                try {
-                    resultList.add(Long.valueOf(element));
-                } catch (NumberFormatException ignored) {}
-            }
-            return resultList;
+        @Override
+        public List<String> convert(String s) {
+            return this.convert(s, source -> source);
         }
     }
 }

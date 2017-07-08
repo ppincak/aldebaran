@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Component
 public final class ProductSearchDescriptors extends AbstractSearchDescriptors {
 
-    public void init() {
+    protected void init() {
         addDescriptor("id", Long.class);
         addDescriptor("name", String.class);
         addDescriptor("code", String.class);
@@ -19,5 +19,7 @@ public final class ProductSearchDescriptors extends AbstractSearchDescriptors {
         addOrderDescriptors("id", "name", "code");
         addOrderDescriptor("preTaxPrice","price.preTax");
         addOrderDescriptor("afterTaxPrice","price.afterTax");
+        addOrderDescriptor("createdAt","timestamps.createdAt");
+        addOrderDescriptor("updatedAt","timestamps.updatedAt");
     }
 }

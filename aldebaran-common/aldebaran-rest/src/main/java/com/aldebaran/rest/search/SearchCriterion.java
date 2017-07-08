@@ -1,7 +1,7 @@
 package com.aldebaran.rest.search;
 
 
-public class SearchCriterion<T extends Comparable<T>> {
+public class SearchCriterion<T> {
 
     private final SearchOperator operator;
     private final String propertyName;

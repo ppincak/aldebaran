@@ -16,14 +16,14 @@ public class RestCallCommand<T> extends HystrixObservableCommand<T> {
 
     private final RestCall<T> restCall;
 
-    public RestCallCommand(RestCall<T> restCall) {
-        this(restCall, 2000,"RestCallGroup" );
+    public RestCallCommand(RestCall<T> restCall, String commandKey) {
+        this(restCall, 2000, "RestCallGroup", commandKey);
     }
 
-    public RestCallCommand(RestCall<T> restCall, int timeout, String group) {
+    public RestCallCommand(RestCall<T> restCall, int timeout, String groupKey, String commandKey) {
         super(Setter
-                .withGroupKey(HystrixCommandGroupKey.Factory.asKey(group))
-                .andCommandKey(HystrixCommandKey.Factory.asKey("RestCall"))
+                .withGroupKey(HystrixCommandGroupKey.Factory.asKey(groupKey))
+                .andCommandKey(HystrixCommandKey.Factory.asKey(commandKey))
                 .andCommandPropertiesDefaults(
                         HystrixCommandProperties.Setter()
                             .withExecutionTimeoutInMilliseconds(timeout)));

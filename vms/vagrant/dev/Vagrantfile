@@ -46,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             args: "-p 9090:9090 " +
 				  "-v /vagrant/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml " +
 				  "--link consul-server:consul " +
-                  "--name prometheus-server"        d
+                  "--name prometheus-server"
         d.run "grafana/grafana",
             args: "-p 3000:3000 " +
                   "-e GF_SECURITY_ADMIN_PASSWORD=#{GRAFANA_ADMIN_PASSWORD} " +

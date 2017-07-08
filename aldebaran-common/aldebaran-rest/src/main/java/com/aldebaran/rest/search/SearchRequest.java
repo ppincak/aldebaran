@@ -29,6 +29,7 @@ public class SearchRequest {
         this.search = search;
     }
 
+    @SuppressWarnings("unchecked")
     public Set<SearchCriterion> toSearchCriteria(Map<String, SearchDescriptor> descriptorsMap) {
         Set<SearchCriterion> criteria = new HashSet<>();
         if(search == null || search.isEmpty()) {
@@ -54,11 +55,25 @@ public class SearchRequest {
                 throw new ApplicationException(GeneralErrorEvents.UNSUPPORTED_SEARCH_OPERATOR);
             }
             String value = matcher.group(3);
+            Object transformedValue = null;
+
+            if(searchOperator.equals(SearchOperator.IN)) {
+                TypeConverter typeConverter =
+                        TypeConverters.get(searchDescriptor.getResultType());
+
+                if(typeConverter == null) {
+                    continue;
+                }
+
+                transformedValue = typeConverter.convert(value);
+            } else {
+                transformedValue = value;
+            }
 
             SearchCriterion searchCriterion =
                     new SearchCriterion<>(searchOperator,
                                           searchDescriptor.getPropertyName(),
-                                          value);
+                                          transformedValue);
             criteria.add(searchCriterion);
         }
         return criteria;
