@@ -1,0 +1,49 @@
+group 'com.aldebaran'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.1.3'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://repo.spring.io/milestone"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.4.RELEASE")
+    }
+}
+
+apply from: '../libraries.gradle'
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+
+allprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compile libraries.kotlin.sdk
+    compile libraries.jackson.databind
+    compile libraries.jackson.kotlin
+    testCompile libraries.restAssured.core
+    testCompile libraries.restAssured.jsonPath
+    testCompile libraries.testng
+    testCompile libraries.typesafeConfig
+}
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '1.8'
+        vcs = 'Git'
+    }
+}
