@@ -1,6 +1,6 @@
 package com.aldebaran.integration.test.auth
 
-import com.aldebaran.integration.ErrorResponse
+import com.aldebaran.integration.model.ErrorResponse
 import com.aldebaran.integration.model.LoginRequest
 import com.aldebaran.integration.model.LoginResponse
 import com.aldebaran.integration.test.AbstractAuthServiceRoot

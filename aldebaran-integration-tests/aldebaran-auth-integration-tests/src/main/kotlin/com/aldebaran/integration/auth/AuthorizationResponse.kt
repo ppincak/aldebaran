@@ -1,4 +1,4 @@
-package com.aldebaran.integration.model
+package com.aldebaran.integration.auth
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

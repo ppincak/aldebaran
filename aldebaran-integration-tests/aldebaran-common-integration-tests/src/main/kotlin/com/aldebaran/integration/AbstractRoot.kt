@@ -19,12 +19,12 @@ abstract class AbstractRoot {
 
     init {
         loadProperties()
-        loadCredentials()
+        configureObjectMapper()
         configureRestAssured()
     }
 
+    protected lateinit var objectMapper: ObjectMapper;
     protected lateinit var config: Config;
-    protected lateinit var credentials: Credentials;
 
     protected abstract fun baseUrl() : String
     protected abstract fun requestSpecification() : RequestSpecification;
@@ -32,12 +32,6 @@ abstract class AbstractRoot {
 
     protected fun loadProperties() : Unit {
         config = ConfigFactory.load();
-    }
-
-    protected fun loadCredentials() : Unit {
-        credentials = Credentials(config.getString("service.credentials.username"),
-                config.getString("service.credentials.password"))
-
     }
 
     private fun configureRestAssured() : Unit {
@@ -52,14 +46,16 @@ abstract class AbstractRoot {
                         .objectMapperConfig(objectMapperConfig())
     }
 
+    private fun configureObjectMapper() {
+        objectMapper =
+                ObjectMapper()
+                        .registerModule(KotlinModule())
+                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+    }
+
     private fun objectMapperConfig() : ObjectMapperConfig {
         val objectMapperFactory = Jackson2ObjectMapperFactory { cls, charset ->
-            val objectMapper =
-                    ObjectMapper()
-                            .registerModule(KotlinModule())
-                            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                            .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-
             objectMapper
         }
 

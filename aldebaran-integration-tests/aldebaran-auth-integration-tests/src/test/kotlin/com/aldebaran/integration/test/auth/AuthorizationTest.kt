@@ -1,8 +1,8 @@
 package com.aldebaran.integration.test.auth
 
 import com.aldebaran.integration.Credentials
-import com.aldebaran.integration.model.AuthorizationResponse
-import com.aldebaran.integration.ErrorResponse
+import com.aldebaran.integration.auth.AuthorizationResponse
+import com.aldebaran.integration.model.ErrorResponse
 import com.aldebaran.integration.auth.TokenRevokeRequest
 import com.aldebaran.integration.model.LoginRequest
 import com.aldebaran.integration.model.LoginResponse
