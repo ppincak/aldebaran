@@ -8,5 +8,4 @@ dependencies {
     compile libraries.hibernate.validator
     compile libraries.spring.context
     compile libraries.spring.dataCommons
-    compile libraries.typetools
 }
