@@ -6,7 +6,12 @@ include 'aldebaran-data'
 include 'aldebaran-rest'
 include 'aldebaran-utils'
 include 'aldebaran-security'
+include 'aldebaran-aql'
+include 'aldebaran-aql-jpa'
 include 'aldebaran-chassis'
+
+project(':aldebaran-aql').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-aql')
+project(':aldebaran-aql-jpa').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-aql-jpa')
 project(':aldebaran-chassis').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-chassis')
 project(':aldebaran-data').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-data')
 project(':aldebaran-rest').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-rest')

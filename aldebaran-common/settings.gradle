@@ -5,4 +5,7 @@ include 'aldebaran-chassis'
 include 'aldebaran-utils'
 include 'aldebaran-security'
 include 'aldebaran-redis'
+include 'aldebaran-aql'
+include 'aldebaran-aql-jpa'
+include 'aldebaran-data-spring'
 

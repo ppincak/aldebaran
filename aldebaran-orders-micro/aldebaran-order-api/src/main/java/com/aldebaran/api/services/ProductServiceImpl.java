@@ -116,6 +116,14 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
     }
 
     @Override
+    public PaginationResponse<ProductResponse> searchProducts(String aql) {
+
+        //AqlNode node = AqlParser.parse(aql);
+        //repository.findAll(TreeSpecification.build(node), new PageRequest(0, 10));
+        return null;
+    }
+
+    @Override
     public void addImage(Long productId, Long imageId) {
         ProductFileLink productFileLink =
                 productFileLinkRepository.getByProductAndFileLink(productId, imageId);

@@ -1,0 +1,8 @@
+dependencies {
+    compile (project(':aldebaran-aql'))
+    compile (project(':aldebaran-data'))
+
+    compile libraries.hibernate.jpa
+    compile libraries.spring.dataJpa
+    compile libraries.spring.orm
+}

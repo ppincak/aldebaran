@@ -26,32 +26,32 @@ public class SearchCriteriaSpecification<T, Y extends Comparable<Y>> implements 
         switch (criterion.getOperator()) {
             case EQUALS:
                 return builder.equal(root.get(criterion.getPropertyName()),
-                                     criterion.getValue());
+                                              criterion.getValue());
             case NOT_EQUALS:
                 return builder.notEqual(root.get(criterion.getPropertyName()),
-                                criterion.getValue());
+                                                 criterion.getValue());
             case LESS_THAN:
                 return builder.lessThan(root.get(criterion.getPropertyName()),
-                                criterion.getValue());
+                                                 criterion.getValue());
             case GREATER_THAN:
                 return builder.greaterThan(root.get(criterion.getPropertyName()),
-                                           criterion.getValue());
+                                                    criterion.getValue());
             case LESS_THAN_EQUALS:
                 return builder.lessThanOrEqualTo(root.get(criterion.getPropertyName()),
-                                                 criterion.getValue());
+                                                          criterion.getValue());
             case GREATER_THAN_EQUALS:
                 return builder.greaterThanOrEqualTo(root.get(criterion.getPropertyName()),
-                                                    criterion.getValue());
+                                                             criterion.getValue());
             case IN:
                 return root
                         .get(criterion.getPropertyName())
                         .in((Collection<?>) criterion.getValue());
             case LIKE:
                 return builder.like(root.get(criterion.getPropertyName()),
-                                   "%" + criterion.getValue().toString() + "%");
+                                            "%" + criterion.getValue().toString() + "%");
             case ILIKE:
                 return builder.like(root.get(criterion.getPropertyName()),
-                                   "%" + criterion.getValue().toString().toLowerCase() + "%");
+                                            "%" + criterion.getValue().toString().toLowerCase() + "%");
             default:
                 return null;
         }

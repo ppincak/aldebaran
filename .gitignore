@@ -7,4 +7,5 @@ build
 /vms/packer/build
 classes
 .vagrant
-/aldebaran-auth-micros/out
+/aldebaran-auth-micro/out
+out

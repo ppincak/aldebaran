@@ -41,6 +41,17 @@ public class ProductController {
     }
 
     @POST
+    @Path("/search")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    @ApiOperation(value = "Find product using AQL",
+                  response = ProductResponse.class)
+    public Response searchProducts(@FormParam("aql") String aql) {
+        return Response
+                .ok(productService.searchProducts(aql))
+                .build();
+    }
+
+    @POST
     @ApiOperation(value = "Create product",
                   response = ProductResponse.class)
     public Response createProduct(@Valid ProductRequest productRequest) {
@@ -95,8 +106,7 @@ public class ProductController {
 
     @DELETE
     @Path("/{productId}/images/{imageId}")
-    @ApiOperation(value = "Delete product image by id",
-                  response = Void.class)
+    @ApiOperation(value = "Delete product image by id")
     public Response removeImage(@PathParam("productId") Long productId,
                                 @PathParam("imageId") Long imageId) {
         productService.removeImage(productId, imageId);
