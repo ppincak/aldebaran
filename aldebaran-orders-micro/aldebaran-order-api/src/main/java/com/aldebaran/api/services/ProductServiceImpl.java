@@ -1,5 +1,8 @@
 package com.aldebaran.api.services;
 
+import com.aldebaran.aql.AqlParser;
+import com.aldebaran.aql.ParsedAqlWrapper;
+import com.aldebaran.aql.jpa.TreeSpecification;
 import com.aldebaran.omanager.core.CustomerOrderErrorEvents;
 import com.aldebaran.omanager.core.assemblers.ProductAssembler;
 import com.aldebaran.omanager.core.descriptors.ProductSearchDescriptors;
@@ -117,9 +120,10 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
 
     @Override
     public PaginationResponse<ProductResponse> searchProducts(String aql) {
+        ParsedAqlWrapper wrapper =
+                new AqlParser().toParsedAqlWrapper(aql);
 
-        //AqlNode node = AqlParser.parse(aql);
-        //repository.findAll(TreeSpecification.build(node), new PageRequest(0, 10));
+        repository.findAll(TreeSpecification.build(wrapper.getRootNode()), new PageRequest(0, 10));
         return null;
     }
 

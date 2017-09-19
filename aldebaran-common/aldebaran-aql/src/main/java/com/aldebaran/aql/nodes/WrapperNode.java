@@ -1,6 +1,6 @@
 package com.aldebaran.aql.nodes;
 
-import com.aldebaran.aql.operators.BooleanOperator;
+import com.aldebaran.utils.operators.BooleanOperator;
 
 
 public class WrapperNode implements AqlNode {

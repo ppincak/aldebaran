@@ -3,13 +3,13 @@ package com.aldebaran.aql.operators;
 import com.aldebaran.utils.descriptor.MatchingEnum;
 
 
-public enum BooleanOperator implements MatchingEnum<BooleanOperator >{
-    AND("and", "AND"),
-    OR("or", "OR");
+public enum OrderDirection implements MatchingEnum<OrderDirection> {
+    ASC("asc", "ASC"),
+    DESC("desc", "DESC");
 
-    private String[] representations;
+    private final String[] representations;
 
-    BooleanOperator(String... representations) {
+    OrderDirection(String... representations) {
         this.representations = representations;
     }
 

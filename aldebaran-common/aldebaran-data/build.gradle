@@ -1,4 +1,6 @@
 dependencies {
+    compile (project(':aldebaran-utils'))
+
     compile libraries.hibernate.jpa
     compile libraries.jackson.annotations
     compile libraries.jackson.databind

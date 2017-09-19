@@ -1,14 +1,7 @@
-group 'com.aldebaran'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile (project(':aldebaran-data'))
+
+    compile libraries.hibernate.jpa
+    compile libraries.spring.dataJpa
+    compile libraries.spring.orm
 }

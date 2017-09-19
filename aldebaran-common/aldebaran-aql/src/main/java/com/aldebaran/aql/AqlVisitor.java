@@ -5,16 +5,53 @@ import com.aldebaran.aql.antlr.QueryParser;
 import com.aldebaran.aql.nodes.ExpressionNode;
 import com.aldebaran.aql.nodes.AqlNode;
 import com.aldebaran.aql.nodes.WrapperNode;
-import com.aldebaran.aql.operators.BooleanOperator;
-import com.aldebaran.aql.operators.ComparisonOperator;
+import com.aldebaran.utils.operators.BooleanOperator;
+import com.aldebaran.utils.operators.ComparisonOperator;
+import com.aldebaran.aql.operators.OrderDirection;
 import com.aldebaran.utils.EnumUtils;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
-public final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
+final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
 
     @Override
     public AqlNode visitSearch(QueryParser.SearchContext ctx) {
-        return traverse(ctx.expression().get(0));
+        return traverse(ctx.expression());
+    }
+
+    OrderByClause getOrderByClause(QueryParser.SearchContext ctx) {
+        if(ctx.orderByExpression() == null) {
+            return new OrderByClause(new String[0], null);
+        }
+        Set<String> orderByProperties = new HashSet<>();
+
+        QueryParser.OrderByExpressionContext dbCtx = ctx.orderByExpression();
+        for(TerminalNode terminalNode: dbCtx.SearchProperty()) {
+            orderByProperties.add(terminalNode.getText());
+        }
+
+        return new OrderByClause(
+                orderByProperties.toArray(new String[orderByProperties.size()]),
+                EnumUtils.getByRepresentation(OrderDirection.class, dbCtx.OrderByDirection().getText())
+        );
+    }
+
+    AqlNode getTree(QueryParser.SearchContext ctx) {
+        return traverse(ctx.expression());
+    }
+
+    Collection<AqlNode> getExpressions(QueryParser.SearchContext ctx) {
+        Set<AqlNode> nodes = new HashSet<>();
+        traverseExpressions(ctx.expression(), nodes);
+        return nodes;
+    }
+
+    ParsedAqlWrapper getParsedAqlWrapper(QueryParser.SearchContext ctx) {
+        return new ParsedAqlWrapper(getTree(ctx), getExpressions(ctx), getOrderByClause(ctx));
     }
 
     private AqlNode traverse(QueryParser.ExpressionContext ctx) {
@@ -32,17 +69,34 @@ public final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
         }
 
         if(ctx.SearchProperty() != null) {
-            // TODO refactor handling
-            String searchValue = ctx.SearchValue().getText();
-            if(searchValue.charAt(0) == '"') {
-                searchValue = searchValue.substring(1, searchValue.length() -1);
-            }
-
-            return new ExpressionNode<>(ctx.SearchProperty().getText(),
-                                        searchValue,
-                                        EnumUtils.getByRepresentation(ComparisonOperator.class,
-                                                                      ctx.ComparisonOperator().getText()));
+            return toExpressionNode(ctx);
         }
         return null;
+    }
+
+    private ExpressionNode toExpressionNode(QueryParser.ExpressionContext ctx) {
+        // NOTE (peter.pincak) figure out a better way to handle this
+        String searchValue = ctx.SearchValue().getText();
+        if(searchValue.charAt(0) == '"') {
+            searchValue = searchValue.substring(1, searchValue.length() -1);
+        }
+
+        return new ExpressionNode<>(ctx.SearchProperty().getText(),
+                searchValue,
+                EnumUtils.getByRepresentation(ComparisonOperator.class,
+                        ctx.ComparisonOperator().getText()));
+    }
+
+    private void traverseExpressions(QueryParser.ExpressionContext ctx, Set<AqlNode> nodes) {
+        if(ctx.LPAREN() != null) {
+            traverseExpressions(ctx.expression(0), nodes);
+            return;
+        }
+        if(ctx.BooleanOperator() != null) {
+            traverseExpressions(ctx.expression(0), nodes);
+            traverseExpressions(ctx.expression(1), nodes);
+            return;
+        }
+        nodes.add(toExpressionNode(ctx));
     }
 }

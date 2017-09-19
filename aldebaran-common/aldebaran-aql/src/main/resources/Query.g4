@@ -4,7 +4,7 @@ grammar Query;
     package com.aldebaran.aql.antlr;
 }
 
-search  : expression + EOF ;
+search  : expression WS? orderByExpression? EOF ;
 
 expression
     : expression BooleanOperator expression
@@ -12,6 +12,27 @@ expression
     | SearchProperty ComparisonOperator SearchValue
     | LPAREN expression RPAREN
     ;
+
+orderByExpression
+    : ORDERBY WS? (SearchProperty ','?)+ OrderByDirection
+    ;
+
+/**
+ * Order statement tokens
+ */
+
+ORDERBY
+    : 'order by'
+    | 'ORDER BY'
+    ;
+
+OrderByDirection
+    : ASC
+    | DESC
+    ;
+
+ASC:    'asc' | 'ASC';
+DESC:   'desc' | 'DESC';
 
 /*
  * Boolean operator tokens
@@ -116,7 +137,7 @@ PropertyCharacters
 
 fragment
 PropertyCharacter
-    : ~[ '"\\?!=()]
+    : ~[ '"\\?!=(),]
     ;
 
 LPAREN          : '(';

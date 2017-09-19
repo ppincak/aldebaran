@@ -6,6 +6,8 @@ import com.aldebaran.aql.nodes.AqlNode;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.util.Collection;
+
 
 public class AqlParser implements Parser {
 
@@ -15,11 +17,29 @@ public class AqlParser implements Parser {
         this.visitor = new AqlVisitor();
     }
 
-    public AqlNode parse(String aql) {
+    @Override
+    public AqlNode toTree(String aql) {
+        return visitor.getTree(createParser(aql).search());
+    }
+
+    @Override
+    public Collection<AqlNode> toNodeCollection(String aql) {
+        return visitor.getExpressions(createParser(aql).search());
+    }
+
+    @Override
+    public ParsedAqlWrapper toParsedAqlWrapper(String aql) {
+        return visitor.getParsedAqlWrapper(createParser(aql).search());
+    }
+
+    private QueryParser createParser(String aql) {
         QueryLexer lexer = new QueryLexer(CharStreams.fromString(aql));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-        QueryParser queryParser = new QueryParser(tokenStream);
+        return new QueryParser(tokenStream);
+    }
 
-        return visitor.visitSearch(queryParser.search());
+    @Override
+    public AqlVisitor getVisitor() {
+        return visitor;
     }
 }

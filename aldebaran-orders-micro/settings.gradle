@@ -3,6 +3,7 @@ include 'aldebaran-order-api'
 include 'aldebaran-order-server'
 include 'aldebaran-order-core'
 include 'aldebaran-data'
+include 'aldebaran-data-spring'
 include 'aldebaran-rest'
 include 'aldebaran-utils'
 include 'aldebaran-security'
@@ -14,6 +15,7 @@ project(':aldebaran-aql').projectDir = new File(settingsDir, '../aldebaran-commo
 project(':aldebaran-aql-jpa').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-aql-jpa')
 project(':aldebaran-chassis').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-chassis')
 project(':aldebaran-data').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-data')
+project(':aldebaran-data-spring').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-data-spring')
 project(':aldebaran-rest').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-rest')
 project(':aldebaran-utils').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-utils')
 project(':aldebaran-security').projectDir = new File(settingsDir, '../aldebaran-common/aldebaran-security')
