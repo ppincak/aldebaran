@@ -5,7 +5,7 @@ import com.aldebaran.aql.nodes.AqlNode;
 import java.util.Collection;
 
 
-public class ParsedAqlWrapper {
+public final class ParsedAqlWrapper {
 
     private final AqlNode rootNode;
     private final Collection<AqlNode> nodes;
@@ -21,6 +21,10 @@ public class ParsedAqlWrapper {
 
     public AqlNode getRootNode() {
         return rootNode;
+    }
+
+    public Collection<AqlNode> getNodes() {
+        return nodes;
     }
 
     public OrderByClause getOrderByClause() {

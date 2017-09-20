@@ -2,6 +2,7 @@ package com.aldebaran.rest.search;
 
 import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.event.ApplicationException;
+import com.aldebaran.utils.EnumUtils;
 
 import javax.ws.rs.QueryParam;
 import java.util.HashSet;
@@ -47,7 +48,10 @@ public class SearchRequest {
             if(searchDescriptor == null) {
                 continue;
             }
-            SearchOperator searchOperator = SearchOperator.getByLabel(matcher.group(2));
+
+            SearchOperator searchOperator =
+                    EnumUtils.getByLabel(SearchOperator.class, matcher.group(2));
+
             if(searchOperator == null) {
                 continue;
             }

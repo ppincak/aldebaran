@@ -3,7 +3,7 @@ package com.aldebaran.aql;
 import com.aldebaran.aql.operators.OrderDirection;
 
 
-public class OrderByClause {
+public final class OrderByClause {
 
     private final String[] properties;
     private final OrderDirection orderDirection;
