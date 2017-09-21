@@ -123,6 +123,8 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
         ParsedAqlWrapper wrapper =
                 new AqlParser().toParsedAqlWrapper(aql);
 
+
+
         repository.findAll(TreeSpecification.build(wrapper.getRootNode()), new PageRequest(0, 10));
         return null;
     }

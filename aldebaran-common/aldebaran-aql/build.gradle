@@ -18,6 +18,9 @@ dependencies {
     compile group: 'org.antlr', name: 'antlr4-runtime', version: '4.7'
 
     compile (project(':aldebaran-utils'))
+
+
+    compile libraries.junit
 }
 
 

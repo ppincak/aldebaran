@@ -60,6 +60,7 @@ ComparisonOperator
     | GT
     | GTEQ
     | LIKE
+    | ILIKE
     ;
 
 EQ      : '=' ;
@@ -69,18 +70,31 @@ LTEQ    : '<=';
 GT      : '>';
 GTEQ    : '>=';
 IN      : ('in' | 'IN');
-LIKE    : ('like' | 'LIKE') ;
+LIKE    : ('like' | 'LIKE');
+ILIKE   : ('ilike' | 'ILIKE');
 
 SearchValue
     : NullLiteral
     | BooleanLiteral
     | IntegerLiteral
     | FloatLiteral
-    | StringLiteral;
+    | StringLiteral
+    | ArrayLiteral;
 
 fragment
 Sign
     :   [+-]
+    ;
+
+ArrayLiteral
+    : '[' (ArrayItem ','?)+ ']'
+    ;
+
+ArrayItem
+    : BooleanLiteral
+    | IntegerLiteral
+    | FloatLiteral
+    | StringLiteral
     ;
 
 StringLiteral
