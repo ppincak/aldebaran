@@ -4,9 +4,12 @@ import com.aldebaran.aql.antlr.QueryLexer;
 import com.aldebaran.aql.antlr.QueryParser;
 import com.aldebaran.aql.errors.FailFastErrorStrategy;
 import com.aldebaran.aql.nodes.AqlNode;
+import com.aldebaran.aql.processors.DefaultProcessors;
+import com.aldebaran.aql.processors.ValueProcessor;
 import org.antlr.v4.runtime.*;
 
 import java.util.Collection;
+import java.util.List;
 
 
 public class AqlParser implements Parser {
@@ -15,7 +18,11 @@ public class AqlParser implements Parser {
     private final ANTLRErrorStrategy errorStrategy;
 
     public AqlParser() {
-        this.visitor = new AqlVisitor();
+        this(DefaultProcessors.get());
+    }
+
+    public AqlParser(List<ValueProcessor> valueProcessors) {
+        this.visitor = new AqlVisitor(valueProcessors);
         this.errorStrategy = new FailFastErrorStrategy();
     }
 

@@ -2,9 +2,11 @@ package com.aldebaran.aql;
 
 import com.aldebaran.aql.antlr.QueryBaseVisitor;
 import com.aldebaran.aql.antlr.QueryParser;
+import com.aldebaran.aql.errors.ProcessingException;
 import com.aldebaran.aql.nodes.ExpressionNode;
 import com.aldebaran.aql.nodes.AqlNode;
 import com.aldebaran.aql.nodes.WrapperNode;
+import com.aldebaran.aql.processors.ValueProcessor;
 import com.aldebaran.utils.operators.BooleanOperator;
 import com.aldebaran.utils.operators.ComparisonOperator;
 import com.aldebaran.aql.operators.OrderDirection;
@@ -13,10 +15,17 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
+
+    private final List<ValueProcessor> processors;
+
+    public AqlVisitor(List<ValueProcessor> processors) {
+        this.processors = processors;
+    }
 
     @Override
     public AqlNode visitSearch(QueryParser.SearchContext ctx) {
@@ -75,16 +84,28 @@ final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
     }
 
     private ExpressionNode toExpressionNode(QueryParser.ExpressionContext ctx) {
-        // NOTE (peter.pincak) figure out a better way to handle this
-        String searchValue = ctx.SearchValue().getText();
-        if(searchValue.charAt(0) == '"') {
-            searchValue = searchValue.substring(1, searchValue.length() -1);
+        String unprocessedValue = ctx.SearchValue().getText();
+        Object searchValue = null;
+
+        for(ValueProcessor processor: processors) {
+            if(processor.shouldProcess(unprocessedValue)) {
+                try {
+                    searchValue = processor.process(unprocessedValue);
+                } catch(Exception e) {
+                    throw new ProcessingException(processor.getClass(), unprocessedValue, e);
+                }
+                break;
+            }
+        }
+
+        if(searchValue == null) {
+            searchValue = unprocessedValue;
         }
 
         return new ExpressionNode<>(ctx.SearchProperty().getText(),
-                searchValue,
-                EnumUtils.getByRepresentation(ComparisonOperator.class,
-                        ctx.ComparisonOperator().getText()));
+                                    searchValue,
+                                    EnumUtils.getByRepresentation(ComparisonOperator.class,
+                                            ctx.ComparisonOperator().getText()));
     }
 
     private void traverseExpressions(QueryParser.ExpressionContext ctx, Set<AqlNode> nodes) {
