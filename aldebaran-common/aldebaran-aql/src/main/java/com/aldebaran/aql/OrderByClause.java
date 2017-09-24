@@ -1,6 +1,6 @@
 package com.aldebaran.aql;
 
-import com.aldebaran.aql.operators.OrderDirection;
+import com.aldebaran.utils.enums.OrderDirection;
 
 
 public final class OrderByClause {

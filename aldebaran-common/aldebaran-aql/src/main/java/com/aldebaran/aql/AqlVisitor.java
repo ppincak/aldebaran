@@ -7,9 +7,9 @@ import com.aldebaran.aql.nodes.ExpressionNode;
 import com.aldebaran.aql.nodes.AqlNode;
 import com.aldebaran.aql.nodes.WrapperNode;
 import com.aldebaran.aql.processors.ValueProcessor;
-import com.aldebaran.utils.operators.BooleanOperator;
-import com.aldebaran.utils.operators.ComparisonOperator;
-import com.aldebaran.aql.operators.OrderDirection;
+import com.aldebaran.utils.enums.BooleanOperator;
+import com.aldebaran.utils.enums.ComparisonOperator;
+import com.aldebaran.utils.enums.OrderDirection;
 import com.aldebaran.utils.EnumUtils;
 import org.antlr.v4.runtime.tree.TerminalNode;
 

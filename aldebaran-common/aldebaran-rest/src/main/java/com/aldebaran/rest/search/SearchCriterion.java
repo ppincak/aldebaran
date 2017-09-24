@@ -1,7 +1,7 @@
 package com.aldebaran.rest.search;
 
 import com.aldebaran.utils.Searchable;
-import com.aldebaran.utils.operators.ComparisonOperator;
+import com.aldebaran.utils.enums.ComparisonOperator;
 
 
 public class SearchCriterion<T> implements Searchable<T> {

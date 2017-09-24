@@ -1,7 +1,7 @@
 package com.aldebaran.aql.nodes;
 
 import com.aldebaran.utils.Searchable;
-import com.aldebaran.utils.operators.ComparisonOperator;
+import com.aldebaran.utils.enums.ComparisonOperator;
 
 
 public class ExpressionNode<T> implements AqlNode, Searchable<T> {

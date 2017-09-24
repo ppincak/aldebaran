@@ -3,7 +3,7 @@ package com.aldebaran.aql;
 import com.aldebaran.aql.errors.InvalidQuerySyntaxException;
 import com.aldebaran.aql.nodes.AqlNode;
 import com.aldebaran.aql.nodes.ExpressionNode;
-import com.aldebaran.utils.operators.ComparisonOperator;
+import com.aldebaran.utils.enums.ComparisonOperator;
 import org.junit.Assert;
 import org.junit.Test;
 

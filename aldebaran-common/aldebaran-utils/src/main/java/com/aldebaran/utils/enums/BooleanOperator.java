@@ -1,4 +1,4 @@
-package com.aldebaran.utils.operators;
+package com.aldebaran.utils.enums;
 
 import com.aldebaran.utils.descriptor.MatchingEnum;
 

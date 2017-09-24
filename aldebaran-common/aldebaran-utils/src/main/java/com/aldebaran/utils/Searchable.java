@@ -1,9 +1,9 @@
 package com.aldebaran.utils;
 
-import com.aldebaran.utils.operators.ComparisonOperator;
+import com.aldebaran.utils.enums.ComparisonOperator;
 
 
-// TODO figure out a better name
+// NOTE(peter.pincak) figure out a better name
 public interface Searchable<T> {
 
     String getSearchProperty();
