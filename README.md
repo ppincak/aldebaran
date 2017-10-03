@@ -10,6 +10,12 @@ Project is split into four top level modules:
 
 Normally, I would have split each of the top level modules into a separate repository, so instead of including the common project as a gradle project, it would be included as normal dependency.
 
+### Architecture
+
+![architecture diagram](./docs/imgs/architecture_diagram.svg)
+
+Each microservice uses Consul for service discovery and Ribbon for client side load balancing.  
+
 ### aldebaran-auth-micro
 Requires several environment variables for configuration:
 * __Database variables__:
@@ -51,6 +57,13 @@ Requires several environment variables for configuration:
 The easiest way to run the project is through vagrant
 
 # Endpoint list
+
+List of some essential endpoints
+
+#### Swagger endpoints
+* /api-docs/swagger.json
+
+#### Monitoring endpoints
 
 *  /monitor/health
 *  /monitor/metrics
