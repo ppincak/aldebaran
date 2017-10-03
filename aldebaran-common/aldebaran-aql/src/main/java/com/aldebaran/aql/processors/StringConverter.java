@@ -2,15 +2,15 @@ package com.aldebaran.aql.processors;
 
 
 
-public class StringProcessor implements ValueProcessor<String> {
+public class StringConverter implements ValueConverter<String> {
 
     @Override
-    public boolean shouldProcess(String value) {
+    public boolean shouldConvert(String value) {
         return value.charAt(0) == '"';
     }
 
     @Override
-    public String process(String value) {
+    public String convert(String value) {
         return value.substring(1, value.length() -1);
     }
 }

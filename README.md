@@ -1,9 +1,10 @@
 # Dev comments
 Name of the project "Aldebaran" wasn't my own Idea as I used some "online name generator"( I don't remember which one).
 
-Project is split into three top level modules:
+Project is split into four top level modules:
 
 * __aldebaran-common__ : provides common functionality for the other two modules.
+* __aldebaran_integration_tests__ : as the name suggest it contains integration tests of few rest services
 * __aldebaran-auth-micro__ : microservice resposible for authentication and user management
 * __aldebaran-order-micro__ :  microservice responsible for order management
 

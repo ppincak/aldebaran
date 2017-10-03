@@ -1,22 +1,23 @@
 package com.aldebaran.aql.errors;
 
-import com.aldebaran.aql.processors.ValueProcessor;
+import com.aldebaran.aql.processors.ValueConverter;
 
-public class ProcessingException extends RuntimeException {
 
-    private final Class<? extends ValueProcessor> processorClazz;
+public class ConversionException extends RuntimeException {
+
+    private final Class<? extends ValueConverter> processorClazz;
     private final String processingValue;
 
-    public ProcessingException(Class<? extends ValueProcessor> processorClazz,
+    public ConversionException(Class<? extends ValueConverter> processorClazz,
                                String processingValue,
                                Throwable cause) {
-        super("Failed to process value: \"" +processingValue + "\"", cause);
+        super("Failed to convert value: \"" +processingValue + "\"", cause);
 
         this.processorClazz = processorClazz;
         this.processingValue = processingValue;
     }
 
-    public Class<? extends ValueProcessor> getProcessorClazz() {
+    public Class<? extends ValueConverter> getProcessorClazz() {
         return processorClazz;
     }
 

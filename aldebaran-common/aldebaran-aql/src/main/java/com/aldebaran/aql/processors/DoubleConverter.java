@@ -1,14 +1,14 @@
 package com.aldebaran.aql.processors;
 
-public class DoubleProcessor implements ValueProcessor<Double> {
+public class DoubleConverter implements ValueConverter<Double> {
 
     @Override
-    public boolean shouldProcess(String value) {
+    public boolean shouldConvert(String value) {
         return value.contains(".");
     }
     
     @Override
-    public Double process(String value) {
+    public Double convert(String value) {
         return Double.parseDouble(value);
     }
 }

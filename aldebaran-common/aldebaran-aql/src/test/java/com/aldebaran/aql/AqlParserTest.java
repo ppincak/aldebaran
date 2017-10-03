@@ -39,6 +39,30 @@ public class AqlParserTest {
         Assert.assertEquals("test",expressionNode.getSearchValue());
     }
 
+    @Test
+    public void testArrayExpressionQuery() {
+        ParsedAqlWrapper parsedAqlWrapper =
+                aqlParser.toParsedAqlWrapper("name LIKE [1,15,\"peter\"]");
+
+        Assert.assertEquals(1, parsedAqlWrapper.getNodes().size());
+
+        AqlNode aqlNode = parsedAqlWrapper
+                .getNodes()
+                .iterator()
+                .next();
+
+        Assert.assertEquals("Invalid type of root node",
+                ExpressionNode.class,
+                aqlNode.getClass());
+
+        ExpressionNode<Object[]> expressionNode = (ExpressionNode<Object[]>) aqlNode;
+
+        Assert.assertEquals(ComparisonOperator.LIKE, expressionNode.getOperator());
+        Assert.assertEquals("name",expressionNode.getSearchProperty());
+        Assert.assertEquals(3, expressionNode.getSearchValue().length);
+
+    }
+
     @Test(expected = InvalidQuerySyntaxException.class)
     public void testRandomString() {
         aqlParser.toTree("name=\"test\" AND");

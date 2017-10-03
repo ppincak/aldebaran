@@ -2,11 +2,11 @@ package com.aldebaran.aql;
 
 import com.aldebaran.aql.antlr.QueryBaseVisitor;
 import com.aldebaran.aql.antlr.QueryParser;
-import com.aldebaran.aql.errors.ProcessingException;
+import com.aldebaran.aql.errors.ConversionException;
 import com.aldebaran.aql.nodes.ExpressionNode;
 import com.aldebaran.aql.nodes.AqlNode;
 import com.aldebaran.aql.nodes.WrapperNode;
-import com.aldebaran.aql.processors.ValueProcessor;
+import com.aldebaran.aql.processors.ValueConverter;
 import com.aldebaran.utils.enums.BooleanOperator;
 import com.aldebaran.utils.enums.ComparisonOperator;
 import com.aldebaran.utils.enums.OrderDirection;
@@ -21,9 +21,9 @@ import java.util.Set;
 
 final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
 
-    private final List<ValueProcessor> processors;
+    private final List<ValueConverter> processors;
 
-    public AqlVisitor(List<ValueProcessor> processors) {
+    public AqlVisitor(List<ValueConverter> processors) {
         this.processors = processors;
     }
 
@@ -87,12 +87,12 @@ final class AqlVisitor extends QueryBaseVisitor<AqlNode> {
         String unprocessedValue = ctx.SearchValue().getText();
         Object searchValue = null;
 
-        for(ValueProcessor processor: processors) {
-            if(processor.shouldProcess(unprocessedValue)) {
+        for(ValueConverter processor: processors) {
+            if(processor.shouldConvert(unprocessedValue)) {
                 try {
-                    searchValue = processor.process(unprocessedValue);
+                    searchValue = processor.convert(unprocessedValue);
                 } catch(Exception e) {
-                    throw new ProcessingException(processor.getClass(), unprocessedValue, e);
+                    throw new ConversionException(processor.getClass(), unprocessedValue, e);
                 }
                 break;
             }
