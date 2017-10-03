@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Authentication microservice test suite" verbose="1" thread-count="2" preserve-order="true">
+    <test name="Auth tests" >
+        <classes>
+            <class name="com.aldebaran.integration.test.auth.LoginTest"/>
+            <class name="com.aldebaran.integration.test.auth.AuthorizationTest"/>
+        </classes>
+    </test>
+</suite>

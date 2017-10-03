@@ -4,8 +4,7 @@ import com.aldebaran.rest.search.OrderDescriptor;
 import com.aldebaran.rest.search.SearchDescriptor;
 import com.aldebaran.rest.search.TypeOperators;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public abstract class AbstractSearchDescriptors {
@@ -27,10 +26,29 @@ public abstract class AbstractSearchDescriptors {
                              new OrderDescriptor(propertyName, propertyName));
     }
 
+    protected void addOrderDescriptors(String... propertyNames) {
+        for(String propertyName: propertyNames) {
+            addOrderDescriptor(propertyName);
+        }
+    }
+
     protected void addOrderDescriptor(String propertyName,
-                                           String resultProperty) {
+                                      String resultProperty) {
         orderDescriptors.put(propertyName,
                              new OrderDescriptor(propertyName, resultProperty));
+    }
+
+    protected void addDescriptor(String propertyName,
+                                 Class<? extends Comparable<?>> resultType,
+                                 SearchOperator... additionalSearchOperators) {
+        EnumSet<SearchOperator> searchOperators = TypeOperators.getOperators(resultType);
+        searchOperators.addAll(Arrays.asList(additionalSearchOperators));
+        searchDescriptors
+                .put(propertyName,
+                        new SearchDescriptor(propertyName,
+                                             resultType,
+                                             propertyName,
+                                             searchOperators));
     }
 
     protected void addDescriptor(String propertyName,

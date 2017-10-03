@@ -1,0 +1,75 @@
+version: '2'
+services:
+  consul:
+    image: consul
+    ports:
+     - "8500:8500"
+     - "8600:8600/udp"
+  redis:
+    image: redis
+    ports:
+     - "6379:6379"  
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+     - "3306:3306"
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
+    volumes: 
+     - /var/mysql/data:/var/lib/mysql
+     - /vagrant/docker/mysql/:/docker-entrypoint-initdb.d
+  auth:
+     build: ./aldebaran-auth
+     environment:
+       - SERVICE_PORT=8080
+       - DATABASE_HOST=mysql
+       - DATABASE_PORT=3306
+       - REDIS_ENABLED=true
+       - REDIS_HOST=redis
+       - REDIS_PORT=6379
+       - CONSUL_ENABLED=true
+       - CONSUL_HOST=consul
+       - CONSUL_PORT=8500
+       - DISCOVERY_HEALTH_CHECK_INTERVAL=10s
+       - DISCOVERY_SERVICE_NAME=aldebaran-auth
+       - DISCOVERY_SERVICE_PORT=8080
+     depends_on:
+      - "redis"
+      - "mysql"
+      - "consul"
+     links:
+      - "redis"
+      - "consul"
+  order:
+    build: ./aldebaran-order
+    environment:
+      - SERVICE_PORT=8080
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306      
+      - CONSUL_ENABLED=true
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+      - DISCOVERY_HEALTH_CHECK_INTERVAL=10s
+      - DISCOVERY_SERVICE_NAME=aldebaran-order
+      - DISCOVERY_SERVICE_HOST=order
+      - DISCOVERY_SERVICE_PORT=8080
+      - ALDEBARAN_AUTH_HOST=10.5.0.2
+      - ALDEBARAN_AUTH_PORT=8078
+    depends_on:
+      - "mysql"
+      - "consul"
+    links:
+     - "consul"
+  nginx-load-balancer:
+    image: shufo/nginx-consul-template
+    ports:
+     - "80:80"
+    environment:
+     - CONSUL_KV_PREFIX=nginx
+     - CONSUL_PORT_8500_TCP_ADDR=consul
+    volumes:
+     - /vagrant/docker/nginx/nginx.conf.ctmpl:/etc/nginx/nginx.conf.ctmpl
+     - /vagrant/docker/nginx/html:/usr/share/nginx/html
+    links:
+     - "consul"

@@ -8,7 +8,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 
 @Configuration
-@Conditional(RedisEnabledCondition.class)
+@Conditional(RedisCondition.Enabled.class)
 public class RedisConfiguration {
 
     @Bean

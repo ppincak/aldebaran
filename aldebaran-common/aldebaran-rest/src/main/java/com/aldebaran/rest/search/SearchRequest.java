@@ -2,6 +2,7 @@ package com.aldebaran.rest.search;
 
 import com.aldebaran.rest.error.GeneralErrorEvents;
 import com.aldebaran.rest.error.event.ApplicationException;
+import com.aldebaran.utils.EnumUtils;
 
 import javax.ws.rs.QueryParam;
 import java.util.HashSet;
@@ -13,8 +14,9 @@ import java.util.regex.Pattern;
 
 public class SearchRequest {
 
-    private static final String SPLIT_CHAR = ";";
-    private static final Pattern SEARCH_PATTERN =
+    public static final String LIST_SPLIT_CHAR = ",";
+    public static final String SPLIT_CHAR = ";";
+    public static final Pattern SEARCH_PATTERN =
             Pattern.compile("([a-zA-Z]+)(:eq:|:neq:|:it:|:gt:|:lte:|:gte:|:in:|:li:|:ili:)([a-zA-Z0-9]+)");
 
     @QueryParam("search")
@@ -28,6 +30,7 @@ public class SearchRequest {
         this.search = search;
     }
 
+    @SuppressWarnings("unchecked")
     public Set<SearchCriterion> toSearchCriteria(Map<String, SearchDescriptor> descriptorsMap) {
         Set<SearchCriterion> criteria = new HashSet<>();
         if(search == null || search.isEmpty()) {
@@ -45,7 +48,10 @@ public class SearchRequest {
             if(searchDescriptor == null) {
                 continue;
             }
-            SearchOperator searchOperator = SearchOperator.getByLabel(matcher.group(2));
+
+            SearchOperator searchOperator =
+                    EnumUtils.getByLabel(SearchOperator.class, matcher.group(2));
+
             if(searchOperator == null) {
                 continue;
             }
@@ -53,11 +59,25 @@ public class SearchRequest {
                 throw new ApplicationException(GeneralErrorEvents.UNSUPPORTED_SEARCH_OPERATOR);
             }
             String value = matcher.group(3);
+            Object transformedValue = null;
+
+            if(searchOperator.equals(SearchOperator.IN)) {
+                TypeConverter typeConverter =
+                        TypeConverters.get(searchDescriptor.getResultType());
+
+                if(typeConverter == null) {
+                    continue;
+                }
+
+                transformedValue = typeConverter.convert(value);
+            } else {
+                transformedValue = value;
+            }
 
             SearchCriterion searchCriterion =
                     new SearchCriterion<>(searchOperator,
                                           searchDescriptor.getPropertyName(),
-                                          value);
+                                          transformedValue);
             criteria.add(searchCriterion);
         }
         return criteria;

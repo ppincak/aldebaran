@@ -2,6 +2,8 @@ dependencies {
     compile (project(':aldebaran-chassis'))
     compile (project(':aldebaran-rest'))
     compile (project(':aldebaran-order-core'))
+    compile (project(':aldebaran-aql'))
+    compile (project(':aldebaran-aql-jpa'))
 
     compile libraries.javax.rs
     compile libraries.jackson.databind

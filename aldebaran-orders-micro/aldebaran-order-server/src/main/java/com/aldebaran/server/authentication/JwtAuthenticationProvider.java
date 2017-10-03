@@ -58,7 +58,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
                     .setResponseType(TokenInfo.class)
                     .setRequestEntity(httpEntity);
 
-        new RestCallCommand<>(restCall)
+        new RestCallCommand<>(restCall, "jwtAuthentication")
                 .toObservable()
                 .toBlocking()
                 .subscribe(

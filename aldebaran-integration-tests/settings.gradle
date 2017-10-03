@@ -1,0 +1,5 @@
+rootProject.name = 'aldebaran-integration-tests'
+include 'aldebaran-auth-integration-tests'
+include 'aldebaran-order-integration-tests'
+include 'aldebaran-common-integration-tests'
+

@@ -1,7 +1,6 @@
 package com.aldebaran.auth.core.storage
 
-import com.aldebaran.redis.RedisDisabledCondition
-import com.aldebaran.redis.RedisEnabledCondition
+import com.aldebaran.redis.RedisCondition
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Conditional
 import org.springframework.context.annotation.Configuration
@@ -14,14 +13,14 @@ open class SecurityStorageConfiguration {
 
     @Bean
     @Primary
-    @Conditional(RedisDisabledCondition::class)
+    @Conditional(RedisCondition.Disabled::class)
     open fun localSecurityStorage() : SecurityStorage {
         return LocalSecurityStorage()
     }
 
     @Bean
     @Primary
-    @Conditional(RedisEnabledCondition::class)
+    @Conditional(RedisCondition.Enabled::class)
     open fun redisSecurityStorage(jedisPool: JedisPool) : SecurityStorage {
         return RedisSecurityStorage(jedisPool)
     }

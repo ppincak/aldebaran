@@ -20,14 +20,14 @@ public class ConsulCondition implements Condition {
         return null != env && value.equals(env.getProperty("discovery.consul.enabled"));
     }
 
-    public static class ConsulEnabledCondition extends ConsulCondition {
-        public ConsulEnabledCondition() {
+    public static class Enabled extends ConsulCondition {
+        public Enabled() {
             super("true");
         }
     }
 
-    public static class ConsulDisabledCondition extends ConsulCondition {
-        public ConsulDisabledCondition() {
+    public static class Disabled extends ConsulCondition {
+        public Disabled() {
             super("false");
         }
     }

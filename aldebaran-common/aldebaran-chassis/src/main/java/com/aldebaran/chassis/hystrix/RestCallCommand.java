@@ -1,6 +1,7 @@
 package com.aldebaran.chassis.hystrix;
 
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.HystrixCommandProperties;
 import com.netflix.hystrix.HystrixObservableCommand;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,14 @@ public class RestCallCommand<T> extends HystrixObservableCommand<T> {
 
     private final RestCall<T> restCall;
 
-    public RestCallCommand(RestCall<T> restCall) {
-        this(restCall, 2000,"RestCallGroup" );
+    public RestCallCommand(RestCall<T> restCall, String commandKey) {
+        this(restCall, 2000, "RestCallGroup", commandKey);
     }
 
-    public RestCallCommand(RestCall<T> restCall, int timeout, String group) {
+    public RestCallCommand(RestCall<T> restCall, int timeout, String groupKey, String commandKey) {
         super(Setter
-                .withGroupKey(HystrixCommandGroupKey.Factory.asKey(group))
+                .withGroupKey(HystrixCommandGroupKey.Factory.asKey(groupKey))
+                .andCommandKey(HystrixCommandKey.Factory.asKey(commandKey))
                 .andCommandPropertiesDefaults(
                         HystrixCommandProperties.Setter()
                             .withExecutionTimeoutInMilliseconds(timeout)));
@@ -39,10 +41,10 @@ public class RestCallCommand<T> extends HystrixObservableCommand<T> {
 
                 ResponseEntity<T> responseEntity =
                         restTemplate.exchange(restCall.getUrl(),
-                                      restCall.getMethod(),
-                                      restCall.getRequestEntity(),
-                                      restCall.getResponseType(),
-                                      restCall.getUriVariables());
+                                              restCall.getMethod(),
+                                              restCall.getRequestEntity(),
+                                              restCall.getResponseType(),
+                                              restCall.getUriVariables());
 
                 observer.onNext(responseEntity.getBody());
                 observer.onCompleted();

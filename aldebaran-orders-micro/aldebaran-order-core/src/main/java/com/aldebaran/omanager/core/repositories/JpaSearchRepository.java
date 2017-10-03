@@ -12,6 +12,5 @@ import java.io.Serializable;
 @NoRepositoryBean
 public interface JpaSearchRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
 
-
     Page<T> findAll(Specification<T> specification, Pageable pageable);
 }

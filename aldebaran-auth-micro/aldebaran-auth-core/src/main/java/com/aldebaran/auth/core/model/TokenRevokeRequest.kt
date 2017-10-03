@@ -8,4 +8,5 @@ data class TokenRevokeRequest(
 
     @NotNull
     @JsonProperty
-    val jtis: List<String>)
+    val jtis: List<String>
+)

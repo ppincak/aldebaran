@@ -1,11 +1,7 @@
 dependencies {
+    compile (project(':aldebaran-utils'))
+
     compile libraries.hibernate.jpa
     compile libraries.jackson.annotations
     compile libraries.jackson.databind
-    compile libraries.hikari
-    compile libraries.spring.beans
-    compile libraries.spring.core
-    compile libraries.spring.orm
-    compile libraries.spring.tx
-    compile libraries.spring.context
 }

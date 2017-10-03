@@ -95,8 +95,7 @@ public class ProductController {
 
     @DELETE
     @Path("/{productId}/images/{imageId}")
-    @ApiOperation(value = "Delete product image by id",
-                  response = Void.class)
+    @ApiOperation(value = "Delete product image by id")
     public Response removeImage(@PathParam("productId") Long productId,
                                 @PathParam("imageId") Long imageId) {
         productService.removeImage(productId, imageId);

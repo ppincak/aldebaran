@@ -1,27 +1,39 @@
 package com.aldebaran.rest.search;
 
+import com.aldebaran.utils.Searchable;
+import com.aldebaran.utils.enums.ComparisonOperator;
 
-public class SearchCriterion<T extends Comparable<T>> {
 
-    private final SearchOperator operator;
-    private final String propertyName;
-    private final T value;
+public class SearchCriterion<T> implements Searchable<T> {
 
-    public SearchCriterion(SearchOperator operator, String propertyName, T value) {
-        this.operator = operator;
-        this.propertyName = propertyName;
-        this.value = value;
+    private final SearchOperator searchOperator;
+    private final String searchProperty;
+    private final T searchValue;
+
+    public SearchCriterion(SearchOperator searchOperator,
+                           String searchProperty,
+                           T searchValue) {
+        this.searchOperator = searchOperator;
+        this.searchProperty = searchProperty;
+        this.searchValue = searchValue;
     }
 
-    public SearchOperator getOperator() {
-        return operator;
+    public SearchOperator getSearchOperator() {
+        return searchOperator;
     }
 
-    public String getPropertyName() {
-        return propertyName;
+    @Override
+    public String getSearchProperty() {
+        return searchProperty;
     }
 
-    public T getValue() {
-        return value;
+    @Override
+    public ComparisonOperator getOperator() {
+        return ComparisonOperator.valueOf(searchOperator.toString());
+    }
+
+    @Override
+    public T getSearchValue() {
+        return searchValue;
     }
 }

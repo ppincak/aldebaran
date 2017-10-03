@@ -1,0 +1,32 @@
+apply plugin: 'antlr'
+
+configurations {
+    runtime.exclude group: 'org.antlr', module: 'antlr-runtime';
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated-src/antlr/main"
+            project.tasks.compileJava.dependsOn project.tasks.generateGrammarSource
+        }
+    }
+}
+
+dependencies {
+    antlr libraries.antlr.core
+    compile libraries.antlr.runtime
+    compile libraries.logback.core
+
+    compile (project(':aldebaran-utils'))
+
+    testCompile libraries.junit
+}
+
+
+generateGrammarSource {
+    arguments += ["-visitor", "-long-messages"]
+    source = ['src/main/resources']
+    // NOTE (peter.pincak) figre out a better way to do this
+    outputDirectory = ["${buildDir}/generated-src/antlr/main/com/aldebaran/aql/antlr"]
+}
