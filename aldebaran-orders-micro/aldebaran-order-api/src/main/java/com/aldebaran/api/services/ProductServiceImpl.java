@@ -1,8 +1,5 @@
 package com.aldebaran.api.services;
 
-import com.aldebaran.aql.AqlParser;
-import com.aldebaran.aql.ParsedAqlWrapper;
-import com.aldebaran.aql.jpa.TreeSpecification;
 import com.aldebaran.omanager.core.CustomerOrderErrorEvents;
 import com.aldebaran.omanager.core.assemblers.ProductAssembler;
 import com.aldebaran.omanager.core.descriptors.ProductSearchDescriptors;

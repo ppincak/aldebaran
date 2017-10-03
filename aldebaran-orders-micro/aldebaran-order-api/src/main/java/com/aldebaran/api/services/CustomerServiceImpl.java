@@ -2,7 +2,6 @@ package com.aldebaran.api.services;
 
 import com.aldebaran.data.domain.Price;
 import com.aldebaran.omanager.core.CustomerOrderErrorEvents;
-import com.aldebaran.omanager.core.entities.OrderStatus;
 import com.aldebaran.omanager.core.assemblers.CustomerAssembler;
 import com.aldebaran.omanager.core.descriptors.CustomerSearchDescriptors;
 import com.aldebaran.omanager.core.entities.*;

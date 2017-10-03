@@ -1,6 +1,5 @@
 package com.aldebaran.api.services;
 
-import com.aldebaran.aql.OrderByClause;
 import com.aldebaran.omanager.core.ApiProperties;
 import com.aldebaran.rest.RestUtils;
 import com.aldebaran.rest.error.GeneralErrorEvents;

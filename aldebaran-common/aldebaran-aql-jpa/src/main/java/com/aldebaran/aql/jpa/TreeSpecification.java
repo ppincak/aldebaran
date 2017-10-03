@@ -1,7 +1,7 @@
 package com.aldebaran.aql.jpa;
 
-import com.aldebaran.aql.nodes.ExpressionNode;
 import com.aldebaran.aql.nodes.AqlNode;
+import com.aldebaran.aql.nodes.ExpressionNode;
 import com.aldebaran.aql.nodes.WrapperNode;
 import com.aldebaran.data.spring.AbstractSearchableSpecification;
 import org.springframework.data.jpa.domain.Specification;
