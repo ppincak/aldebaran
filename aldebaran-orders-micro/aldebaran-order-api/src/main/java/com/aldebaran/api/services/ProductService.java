@@ -27,8 +27,6 @@ public interface ProductService {
     PaginationResponse<ProductResponse> getProducts(SearchRequest searchRequest,
                                                     PaginationRequest paginationRequest);
 
-    PaginationResponse<ProductResponse> searchProducts(String aql);
-
     void addImage(Long productId, Long imageId);
 
     void removeImage(Long productId, Long imageId);

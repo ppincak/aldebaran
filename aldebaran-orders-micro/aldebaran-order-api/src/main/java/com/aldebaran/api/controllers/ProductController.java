@@ -40,18 +40,6 @@ public class ProductController {
                 .build();
     }
 
-
-    @POST
-    @Path("/search")
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-    @ApiOperation(value = "Find product using AQL",
-                  response = ProductResponse.class)
-    public Response searchProducts(@FormParam("aql") String aql) {
-        return Response
-                .ok(productService.searchProducts(aql))
-                .build();
-    }
-
     @POST
     @ApiOperation(value = "Create product",
                   response = ProductResponse.class)
