@@ -12,9 +12,9 @@ Normally, I would have split each of the top level modules into a separate repos
 
 ### Architecture
 
-![architecture diagram](./docs/imgs/architecture_diagram.svg)
+Each microservice uses Consul for service discovery and Ribbon for client side load balancing.
 
-Each microservice uses Consul for service discovery and Ribbon for client side load balancing.  
+![architecture diagram](./docs/imgs/architecture_diagram.svg)
 
 ### aldebaran-auth-micro
 Requires several environment variables for configuration:
