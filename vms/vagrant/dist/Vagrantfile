@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		vb.name = "aldebaran-vm-dist"
 		vb.memory = "3072"
 		vb.cpus = 1
+		vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
 	end
 
 	config.vm.provision "shell", run: "once" do |s|

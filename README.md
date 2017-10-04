@@ -8,13 +8,13 @@ Project is split into four top level modules:
 * __aldebaran-auth-micro__ : microservice resposible for authentication and user management
 * __aldebaran-order-micro__ :  microservice responsible for order management
 
-Normally, I would have split each of the top level modules into a separate repository, so instead of including the common project as a gradle project, it would be included as normal dependency.
+Normally, I would have split each of the top level modules into a separate repositories, so instead of including the common project as a gradle project, it would be included as normal dependency.
 
 ### Architecture
 
 Each microservice uses Consul for service discovery and Ribbon for client side load balancing.
 
-![architecture diagram](./docs/imgs/architecture_diagram.svg)
+![architecture diagram](docs/imgs/architecture_diagram.svg)
 
 ### aldebaran-auth-micro
 Requires several environment variables for configuration:
@@ -54,13 +54,31 @@ Requires several environment variables for configuration:
     
 # Installation instructions
 
-The easiest way to run the project is through vagrant
+The easiest way to run the project is through [vagrant](https://www.vagrantup.com/) and packer [packer](https://www.packer.io/).
+
+#### Installation with vagrant
+
+Run the following commands (*assuming we are in a root directory of the project*):
+
+```bash
+cd vms/packer
+packer build ubuntu.json
+cd ../prod
+chmod +x run.sh  
+./run.sh
+vagrant up
+```
+
+#### Import to intellij
+
+Each top level module, should be imported as a separate project.
 
 # Endpoint list
 
-List of some essential endpoints
+List of base endpoints common to all microservices.
 
 #### Swagger endpoints
+
 * /api-docs/swagger.json
 
 #### Monitoring endpoints
