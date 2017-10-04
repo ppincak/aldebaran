@@ -41,7 +41,7 @@ dependencies {
 }
 
 bootRepackage {
-    mainClass = 'com.aldebaran.server.Startup'
+    mainClass = 'com.aldebaran.order.server.Startup'
 }
 
 springBoot  {
