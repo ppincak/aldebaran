@@ -54,8 +54,10 @@ open class WebSecurityConfiguration() : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(web: WebSecurity) {
-        web.ignoring().antMatchers("/oauth2/**",
-                                   "/users/register",
-                                   "/monitor/**")
+        web.ignoring()
+                .antMatchers("/oauth2/**",
+                             "/users/register",
+                             "/monitor/**",
+                             "/api-docs/**")
     }
 }

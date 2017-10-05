@@ -50,6 +50,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/monitor/**");
+        web.ignoring()
+                .antMatchers("/monitor/**",
+                             "/api-docs/**");
     }
 }
