@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.NotAllowedException;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -96,6 +97,7 @@ public class GeneralExceptionHandler implements ExceptionMapper<Exception> {
 
         return Response
                 .status(status)
+                .header("Content-Type", MediaType.APPLICATION_JSON)
                 .entity(errorResponse)
                 .build();
     }
