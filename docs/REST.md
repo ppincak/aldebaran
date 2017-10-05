@@ -111,6 +111,23 @@ curl \
 -X POST http://localhost:8080/aldebaran-order/customer
 ```
 
+__Response__:
+
+```json
+{
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "phone": null,
+    "email": "firstName.lastName@sample.com",
+    "id": "1",
+    "imageUrl": null,
+    "timestamps": {
+        "createdAt": "2017-10-05T18:36:52.057",
+        "updatedAt": "2017-10-05T18:36:52.057"
+    }
+}
+```
+
 #### Read customer 
 
 ```bash
@@ -119,6 +136,10 @@ curl \
 -H "X-API-KEY: aldebaran-2fa93c87d445e3cabc5" \
 -X GET http://localhost:8080/aldebaran-order/customer/:customerId
 ```
+
+__Response__:
+
+sames as [Create customer](#create-customer)
 
 #### Update customer
 
@@ -135,6 +156,10 @@ curl \
 }" \
 -X PUT http://localhost:8080/aldebaran-order/customer/:customerId
 ```
+
+__Response__:
+
+sames as [Create customer](#create-customer)
 
 #### Delete customer
 
