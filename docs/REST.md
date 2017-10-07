@@ -431,3 +431,50 @@ curl \
 -H "X-API-KEY: aldebaran-2fa93c87d445e3cabc5" \
 -X DELETE http://localhost:8080/aldebaran-order/customers/:customerId/orders/:orderId
 ```
+
+#### Upload file
+
+```bash
+curl \
+-H "Authorization: Bearer :jwt" \
+-H "X-API-KEY: aldebaran-2fa93c87d445e3cabc5" \
+-F "file=:pathToFile" \
+-X POST http://localhost:8080/aldebaran-order/files/:fileName
+```
+
+__Response__:
+
+```json
+[
+    {
+        "id": 6,
+        "filename": "fileName",
+        "url": "/files/1",
+        "fileLength": "1019143",
+        "fileType": "IMAGE",
+        "mediaType": "image/jpeg",
+        "timestamps": {
+            "createdAt": "2017-10-07T08:33:49.254",
+            "updatedAt": "2017-10-07T08:33:49.254"
+        }
+    }
+]
+```
+
+#### Download file
+
+```bash
+curl \
+-H "Authorization: Bearer :jwt" \
+-H "X-API-KEY: aldebaran-2fa93c87d445e3cabc5" \
+-X GET http://localhost:8080/aldebaran-order/files/:fileId
+```
+
+#### Delete file
+
+```bash
+curl \
+-H "Authorization: Bearer :jwt" \
+-H "X-API-KEY: aldebaran-2fa93c87d445e3cabc5" \
+-X DELETE http://localhost:8080/aldebaran-order/files/:fileId
+```

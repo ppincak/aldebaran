@@ -98,3 +98,5 @@ List of base endpoints common to both microservices:
 
     *  /monitor/health
     *  /monitor/metrics
+
+Rest of the endpoints is documented in [REST Documentation](./docs/REST.md)
