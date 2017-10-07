@@ -12,7 +12,9 @@ import java.util.Set;
 @Repository
 public interface ProductRepository extends JpaSearchRepository<Product, Long> {
 
-    Product getByName(String name);
+    Long countByName(String name);
+
+    Long countByCode(String code);
 
     @Query("SELECT p FROM Product p " +
            "WHERE p.id IN(:productIds)")

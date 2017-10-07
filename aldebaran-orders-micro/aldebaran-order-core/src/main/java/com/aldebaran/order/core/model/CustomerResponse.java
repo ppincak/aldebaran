@@ -2,8 +2,10 @@ package com.aldebaran.order.core.model;
 
 import com.aldebaran.data.model.Response;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+@JsonPropertyOrder({ "id", "firstName", "lastName", "email", "phone" })
 public class CustomerResponse extends CustomerModel implements Response {
 
     @JsonProperty

@@ -9,6 +9,9 @@ import java.util.List;
 public class TokenInfo {
 
     @JsonProperty
+    private String jti;
+
+    @JsonProperty
     private Long userId;
 
     @JsonProperty
@@ -36,6 +39,14 @@ public class TokenInfo {
         clientId = authenticatedUser.getClientId();
         expiresAt = authenticatedUser.getExpiresAt();
         roles = TokenUtils.extractRoles(authenticatedUser.getAuthorities());
+    }
+
+    public String getJti() {
+        return jti;
+    }
+
+    public void setJti(String jti) {
+        this.jti = jti;
     }
 
     public Long getUserId() {

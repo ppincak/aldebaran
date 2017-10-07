@@ -50,7 +50,9 @@ open class OAuth2ServiceImpl
             if(storageProxy.isRevoked(authenticatedUser.jti)) {
                 throw ApplicationException(GeneralErrorEvents.UNAUTHORIZED)
             }
-            return TokenInfo(authenticatedUser)
+            val tokenInfo = TokenInfo(authenticatedUser)
+            tokenInfo.jti = authenticatedUser.jti
+            return tokenInfo
         } catch(e: JwtVerificationException) {
             throw ApplicationException(GeneralErrorEvents.UNAUTHORIZED)
         }
@@ -99,7 +101,8 @@ open class OAuth2ServiceImpl
                              authenticatedUser.expiresAt)
     }
 
-    private fun generateAccessToken(userDetails: DbAuthenticatedUser, clientId: String): JwtAuthenticatedUser {
+    private fun generateAccessToken(userDetails: DbAuthenticatedUser, clientId: String)
+            : JwtAuthenticatedUser {
         val authenticatedUser = getJwtAuthenticatedUser(userDetails, clientId)
         val jti = TokenUtils.generateJti(authenticatedUser);
         val jwt = jwtTokenizer
@@ -110,7 +113,8 @@ open class OAuth2ServiceImpl
         return authenticatedUser
     }
 
-    private fun getJwtAuthenticatedUser(userDetails: DbAuthenticatedUser, clientId: String): JwtAuthenticatedUser {
+    private fun getJwtAuthenticatedUser(userDetails: DbAuthenticatedUser, clientId: String)
+            : JwtAuthenticatedUser {
         val user = userDetails.getUserEntity()
 
         val authenticatedUser = JwtAuthenticatedUser()

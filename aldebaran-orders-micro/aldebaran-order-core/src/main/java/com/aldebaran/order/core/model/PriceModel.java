@@ -17,9 +17,6 @@ public class PriceModel {
     @JsonSerialize(using = MoneySerializer.class)
     private BigDecimal afterTax;
 
-    @JsonProperty
-    private String currency;
-
     public PriceModel() {
     }
 

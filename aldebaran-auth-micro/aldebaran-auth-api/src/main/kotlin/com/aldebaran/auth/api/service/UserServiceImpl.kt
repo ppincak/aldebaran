@@ -3,6 +3,7 @@ package com.aldebaran.auth.api.service
 import com.aldebaran.auth.api.AuthErrorEvents
 import com.aldebaran.auth.core.entity.User
 import com.aldebaran.auth.core.model.UserRegistrationRequest
+import com.aldebaran.auth.core.model.UserRegistrationResponse
 import com.aldebaran.auth.core.repository.UserRepository
 import com.aldebaran.rest.error.event.ApplicationException
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +16,7 @@ open class UserServiceImpl
         @Autowired constructor(val userRepository: UserRepository,
                                val passwordEncoder: PasswordEncoder): UserService {
 
-    override fun register(request: UserRegistrationRequest) {
+    override fun register(request: UserRegistrationRequest): UserRegistrationResponse {
         if(request.password!!.toLowerCase().equals(request.repeatPassword!!.toLowerCase()) == false) {
             throw ApplicationException(AuthErrorEvents.PASSWORDS_DO_NOT_MATCH)
         }
@@ -36,5 +37,7 @@ open class UserServiceImpl
         user.expired = false
 
         userRepository.save(user)
+
+        return UserRegistrationResponse(user.id, user.username, user.email)
     }
 }

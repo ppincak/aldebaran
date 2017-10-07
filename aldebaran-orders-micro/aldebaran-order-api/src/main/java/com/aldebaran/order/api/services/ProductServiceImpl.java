@@ -58,7 +58,9 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
 
     @Override
     public ProductResponse createProduct(ProductRequest productRequest) {
-        checkProductName(productRequest.getName());
+        checkName(productRequest.getName());
+        checkCode(productRequest.getCode());
+
         Product product = productAssembler.toEntity(productRequest);
         repository.save(product);
         return productAssembler.toResponse(product);
@@ -121,7 +123,7 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
                 productFileLinkRepository.getByProductAndFileLink(productId, imageId);
 
         if(productFileLink != null) {
-            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_FILE_LINK_EXISTS);
+            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_IMAGE_LINK_EXISTS);
         }
         Product product = repository.findOne(productId);
         if(product == null) {
@@ -148,10 +150,15 @@ public class ProductServiceImpl extends AbstractApiService<ProductRepository, Pr
         productFileLinkRepository.delete(productFileLink);
     }
 
-    private void checkProductName(String name) {
-        Product product = repository.getByName(name);
-        if(product != null) {
-            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_NAME_TOKEN);
+    private void checkName(String name) {
+        if(repository.countByName(name) > 0) {
+            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_NAME_TAKEN);
+        }
+    }
+
+    private void checkCode(String code) {
+        if(repository.countByCode(code) > 0) {
+            throw new ApplicationException(CustomerOrderErrorEvents.PRODUCT_CODE_TAKEN);
         }
     }
 }

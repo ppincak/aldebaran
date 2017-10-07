@@ -82,9 +82,9 @@ public class CustomerController {
     }
 
     @POST
-    @Path("/{customerId}/photo/{photoId}")
+    @Path("/{customerId}/photos/{photoId}")
     @ApiOperation(value = "Assign photo to customer",
-                  response = Void.class)
+                  response = CustomerResponse.class)
     public Response addCustomerPhoto(@PathParam("customerId") Long customerId,
                                      @PathParam("photoId") Long photoId) {
         return Response

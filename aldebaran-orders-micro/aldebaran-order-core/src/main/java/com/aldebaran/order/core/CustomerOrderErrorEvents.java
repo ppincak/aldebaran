@@ -6,10 +6,11 @@ import com.aldebaran.rest.error.event.ErrorEvent;
 public enum CustomerOrderErrorEvents implements ErrorEvent {
 
     CUSTOMER_EMAIL_TAKEN(1, "customer.email.taken"),
-    EMPTY_CUSTOMER_ORDER(2, "empty.customer.order"),
-    PRODUCT_NAME_TOKEN(3, "product.mail.taken"),
-    CUSTOMER_HAS_ORDERS(4, "customer.has.orders"),
-    PRODUCT_FILE_LINK_EXISTS(5, "product.file.link.exists");
+    CUSTOMER_HAS_ORDERS(2, "customer.has.orders"),
+    EMPTY_CUSTOMER_ORDER(3, "empty.customer.order"),
+    PRODUCT_NAME_TAKEN(4, "product.name.taken"),
+    PRODUCT_CODE_TAKEN(5, "product.code.taken"),
+    PRODUCT_IMAGE_LINK_EXISTS(6, "product.image.link.exists");
 
     private final static int SUB_CODE = 4;
 

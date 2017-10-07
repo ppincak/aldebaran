@@ -1,10 +1,13 @@
 package com.aldebaran.order.core.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
+@JsonPropertyOrder({"id", "name", "description", "price"})
 public class ProductResponse extends ProductModel {
 
     @JsonProperty
@@ -14,7 +17,7 @@ public class ProductResponse extends ProductModel {
     private TimestampsModel timestamps;
 
     @JsonProperty
-    private List<ImageModel> images;
+    private List<ImageModel> images = new ArrayList<>();
 
     public Long getId() {
         return id;

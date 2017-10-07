@@ -6,12 +6,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class OrderProduct {
 
-    @JsonProperty
     @NotEmpty
+    @JsonProperty
     private Long productId;
 
-    @JsonProperty
     @NotEmpty
+    @JsonProperty
     private Integer quantity;
 
     public Long getProductId() {

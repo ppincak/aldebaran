@@ -153,11 +153,7 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
                                                       CustomerOrder customerOrder,
                                                       CustomerOrderRequest customerOrderRequest) {
 
-        Map<Long, Integer> productQuantities  = new HashMap<>();
-        for(OrderProduct orderProduct: customerOrderRequest.getProducts()) {
-            productQuantities.put(orderProduct.getProductId(),
-                                  orderProduct.getQuantity());
-        }
+        Map<Long, Integer> productQuantities  = getQuantities(customerOrderRequest);
 
         List<Product> products =
                 productService.getProducts(productQuantities.keySet());
@@ -223,14 +219,25 @@ public class CustomerServiceImpl extends AbstractApiService<CustomerRepository, 
         return null;
     }
 
+    private  Map<Long, Integer> getQuantities(CustomerOrderRequest orderRequest) {
+        Map<Long, Integer> productQuantities  = new HashMap<>();
+        for(OrderProduct orderProduct: orderRequest.getProducts()) {
+            Integer quantity = productQuantities.get(orderProduct.getProductId());
+            if(quantity == null) {
+                quantity = orderProduct.getQuantity();
+            } else {
+                quantity+= orderProduct.getQuantity();
+            }
+            productQuantities.put(orderProduct.getProductId(),
+                                  quantity);
+        }
+        return productQuantities;
+    }
+
     private CustomerOrderResponse appendCustomerOrder(CustomerOrder customerOrder,
                                                       CustomerOrderUpdateRequest customerOrderRequest) {
 
-        Map<Long, Integer> productQuantities  = new HashMap<>();
-        for(OrderProduct orderProduct: customerOrderRequest.getProducts()) {
-            productQuantities.put(orderProduct.getProductId(),
-                                  orderProduct.getQuantity());
-        }
+        Map<Long, Integer> productQuantities  = getQuantities(customerOrderRequest);
 
         List<Product> products =
                 productService.getProducts(productQuantities.keySet());
