@@ -185,12 +185,17 @@ public class CustomerOrderServiceImpl
     }
 
     private Map<Long, List<CustomerOrderProductsMap>> getOrderToProducts(Collection<CustomerOrder> customerOrders) {
+        if(customerOrders.isEmpty()) {
+            return new HashMap<>();
+        }
+
         Set<Long> orderIds = customerOrders
                                 .stream()
                                 .map(CustomerOrder::getId)
                                 .collect((Collectors.toCollection(HashSet::new)));
 
-        List<Map<String, Object>> orderProducts = repository.getByCustomerOrderIds(orderIds);
+        List<Map<String, Object>> orderProducts =
+                repository.getByCustomerOrderIds(orderIds);
 
         Map<Long, List<CustomerOrderProductsMap>> orderToProductsMap = new HashMap<>();
         for(Map<String, Object> orderProduct: orderProducts) {

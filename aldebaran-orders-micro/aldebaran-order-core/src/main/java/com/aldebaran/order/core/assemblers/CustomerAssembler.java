@@ -44,30 +44,6 @@ public class CustomerAssembler extends AbstractOrikaAssembler {
         return mapperFacade.mapAsList(customers, CustomerResponse.class);
     }
 
-    public CustomerOrderResponse toCustomerOrderResponse(CustomerOrder customerOrder,
-                                                         List<CustomerOrderProductsMap> customerOrderProductsMaps) {
-        CustomerOrderResponse response = new CustomerOrderResponse();
-        response.setOrderId(customerOrder.getId());
-        response.setTimestamps(
-                mapperFacade.map(customerOrder.getTimestamps(), TimestampsModel.class));
-        response.setPriceModel(
-                mapperFacade.map(customerOrder.getPriceSum(), PriceModel.class));
-        response.setProducts(
-                mapperFacade.mapAsList(customerOrderProductsMaps,
-                                       CustomerOrderProductModel.class));
-        return response;
-    }
-
-    public List<CustomerOrderResponse> toCustomerOrderResponse(List<CustomerOrder> customerOrders,
-                                                               Map<Long, List<CustomerOrderProductsMap>> customerOrderMap) {
-        List<CustomerOrderResponse> response = new ArrayList<>();
-        for(CustomerOrder customerOrder: customerOrders) {
-            response.add(toCustomerOrderResponse(customerOrder,
-                                                 customerOrderMap.get(customerOrder.getId())));
-        }
-        return response;
-    }
-
     @Override
     public void register(MapperFactory factory) {
         factory

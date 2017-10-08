@@ -368,14 +368,16 @@ curl \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer :jwt" \
 -H "X-API-KEY: aldebaran-2fa93c87d445e3cabc5" \
--X GET http://localhost:8080/aldebaran-order/customers/:customerId/orders
+-X GET http://localhost:8080/aldebaran-order/customers/:customerId/orders?search=preTaxSum:lt:90;afterTaxSum:lt:90
 ```
 
 __Response__:
 
 ```json
 {
-    "orders": [
+    "totalPages": 1,
+    "totalElements": 1,
+    "data": [
         {
             "orderId": 1,
             "products": [
@@ -397,7 +399,7 @@ __Response__:
                 "preTax": "35.75",
                 "afterTax": "94.25"
             }
-        }       
+        }
     ]
 }
 ```

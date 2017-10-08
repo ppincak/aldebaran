@@ -98,8 +98,7 @@ public class CustomerController {
 
     @GET
     @Path("/{customerId}/orders")
-    @ApiOperation(value = "Get customer orders",
-                  response = CustomerOrdersResponse.class)
+    @ApiOperation(value = "Get customer orders by complex search criteria")
     public Response getCustomerOrders(@PathParam("customerId") Long customerId,
                                       @BeanParam SearchRequest searchRequest,
                                       @BeanParam PaginationRequest paginationRequest) {
