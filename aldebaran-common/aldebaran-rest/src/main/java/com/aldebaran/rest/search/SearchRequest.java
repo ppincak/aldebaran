@@ -17,7 +17,7 @@ public class SearchRequest {
     public static final String LIST_SPLIT_CHAR = ",";
     public static final String SPLIT_CHAR = ";";
     public static final Pattern SEARCH_PATTERN =
-            Pattern.compile("([a-zA-Z]+)(:eq:|:neq:|:it:|:gt:|:lte:|:gte:|:in:|:li:|:ili:)([a-zA-Z0-9]+)");
+            Pattern.compile("([a-zA-Z]+)(:eq:|:neq:|:lt:|:gt:|:lte:|:gte:|:in:|:li:|:ili:)([a-zA-Z0-9]+)");
 
     @QueryParam("search")
     private String search;
@@ -76,7 +76,7 @@ public class SearchRequest {
 
             SearchCriterion searchCriterion =
                     new SearchCriterion<>(searchOperator,
-                                          searchDescriptor.getPropertyName(),
+                                          searchDescriptor.getResultProperty(),
                                           transformedValue);
             criteria.add(searchCriterion);
         }

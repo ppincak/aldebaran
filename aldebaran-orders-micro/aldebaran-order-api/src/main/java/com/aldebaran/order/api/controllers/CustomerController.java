@@ -1,5 +1,6 @@
 package com.aldebaran.order.api.controllers;
 
+import com.aldebaran.order.api.services.CustomerOrderService;
 import com.aldebaran.order.api.services.CustomerService;
 import com.aldebaran.order.core.model.*;
 import com.aldebaran.order.core.model.update.CustomerOrderUpdateRequest;
@@ -29,6 +30,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private CustomerOrderService customerOrderService;
 
     @GET
     @ApiOperation(value = "Get customers by complex search criteria")
@@ -96,9 +100,11 @@ public class CustomerController {
     @Path("/{customerId}/orders")
     @ApiOperation(value = "Get customer orders",
                   response = CustomerOrdersResponse.class)
-    public Response getCustomerOrders(@PathParam("customerId") Long customerId) {
+    public Response getCustomerOrders(@PathParam("customerId") Long customerId,
+                                      @BeanParam SearchRequest searchRequest,
+                                      @BeanParam PaginationRequest paginationRequest) {
         return Response
-                .ok(customerService.getCustomerOrders(customerId))
+                .ok(customerOrderService.getCustomerOrders(customerId, searchRequest, paginationRequest))
                 .build();
     }
 
@@ -110,7 +116,7 @@ public class CustomerController {
                                         @Valid CustomerOrderRequest customerOrderRequest) {
         return Response
                 .status(Response.Status.CREATED)
-                .entity(customerService.createCustomerOrder(customerId, customerOrderRequest))
+                .entity(customerOrderService.createCustomerOrder(customerId, customerOrderRequest))
                 .build();
     }
 
@@ -122,7 +128,7 @@ public class CustomerController {
                                         @Valid CustomerOrderUpdateRequest customerOrderRequest) {
         return Response
                 .status(Response.Status.CREATED)
-                .entity(customerService.updateCustomerOrder(customerOrderId, customerOrderRequest))
+                .entity(customerOrderService.updateCustomerOrder(customerOrderId, customerOrderRequest))
                 .build();
     }
 
@@ -131,7 +137,7 @@ public class CustomerController {
     @ApiOperation(value = "Delete customer order by customer and order id",
                   response = Void.class)
     public Response deleteOrder(@PathParam("orderId") Long customerOrderId) {
-        customerService.deleteCustomerOder(customerOrderId);
+        customerOrderService.deleteCustomerOder(customerOrderId);
         return Response
                 .noContent()
                 .build();

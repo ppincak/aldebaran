@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public final class CustomerSearchDescriptors extends AbstractSearchDescriptors {
 
+    @Override
     protected void init() {
         addDescriptor("id", Long.class, SearchOperator.IN);
         addDescriptor("firstName", String.class, SearchOperator.IN);

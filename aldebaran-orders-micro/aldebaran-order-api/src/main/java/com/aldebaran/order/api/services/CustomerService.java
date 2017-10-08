@@ -1,7 +1,7 @@
 package com.aldebaran.order.api.services;
 
-import com.aldebaran.order.core.model.*;
-import com.aldebaran.order.core.model.update.CustomerOrderUpdateRequest;
+import com.aldebaran.order.core.model.CustomerRequest;
+import com.aldebaran.order.core.model.CustomerResponse;
 import com.aldebaran.order.core.model.update.CustomerUpdateRequest;
 import com.aldebaran.rest.search.PaginationRequest;
 import com.aldebaran.rest.search.PaginationResponse;
@@ -23,13 +23,4 @@ public interface CustomerService {
 
     CustomerResponse addCustomerPhoto(Long customerId, Long photoId);
 
-    CustomerOrdersResponse getCustomerOrders(Long customerId);
-
-    CustomerOrderResponse createCustomerOrder(Long customerId,
-                                              CustomerOrderRequest customerOrderRequest);
-
-    CustomerOrderResponse updateCustomerOrder(Long customerOrderId,
-                                              CustomerOrderUpdateRequest customerOrderRequest);
-
-    void deleteCustomerOder(Long customerOrderId);
 }

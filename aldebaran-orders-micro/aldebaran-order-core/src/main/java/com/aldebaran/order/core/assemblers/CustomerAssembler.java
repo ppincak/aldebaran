@@ -2,7 +2,6 @@ package com.aldebaran.order.core.assemblers;
 
 import com.aldebaran.order.core.entities.Customer;
 import com.aldebaran.order.core.entities.CustomerOrder;
-import com.aldebaran.order.core.entities.CustomerOrderProduct;
 import com.aldebaran.order.core.model.*;
 import com.aldebaran.order.core.model.update.CustomerUpdateRequest;
 import ma.glasnost.orika.CustomMapper;
@@ -12,7 +11,9 @@ import ma.glasnost.orika.metadata.ClassMapBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Component
@@ -43,7 +44,8 @@ public class CustomerAssembler extends AbstractOrikaAssembler {
         return mapperFacade.mapAsList(customers, CustomerResponse.class);
     }
 
-    public CustomerOrderResponse toCustomerOrderResponse(CustomerOrder customerOrder) {
+    public CustomerOrderResponse toCustomerOrderResponse(CustomerOrder customerOrder,
+                                                         List<CustomerOrderProductsMap> customerOrderProductsMaps) {
         CustomerOrderResponse response = new CustomerOrderResponse();
         response.setOrderId(customerOrder.getId());
         response.setTimestamps(
@@ -51,15 +53,17 @@ public class CustomerAssembler extends AbstractOrikaAssembler {
         response.setPriceModel(
                 mapperFacade.map(customerOrder.getPriceSum(), PriceModel.class));
         response.setProducts(
-                mapperFacade.mapAsList(customerOrder.getOrderProducts(),
+                mapperFacade.mapAsList(customerOrderProductsMaps,
                                        CustomerOrderProductModel.class));
         return response;
     }
 
-    public CustomerOrdersResponse toCustomerOrderResponse(List<CustomerOrder> customerOrders) {
-        CustomerOrdersResponse response = new CustomerOrdersResponse();
+    public List<CustomerOrderResponse> toCustomerOrderResponse(List<CustomerOrder> customerOrders,
+                                                               Map<Long, List<CustomerOrderProductsMap>> customerOrderMap) {
+        List<CustomerOrderResponse> response = new ArrayList<>();
         for(CustomerOrder customerOrder: customerOrders) {
-            response.addOrder(toCustomerOrderResponse(customerOrder));
+            response.add(toCustomerOrderResponse(customerOrder,
+                                                 customerOrderMap.get(customerOrder.getId())));
         }
         return response;
     }
@@ -97,13 +101,6 @@ public class CustomerAssembler extends AbstractOrikaAssembler {
 
         registerMap(factory.classMap(CustomerRequest.class, CustomerUpdateRequest.class))
             .mapNulls(false)
-            .register();
-
-        factory
-            .classMap(CustomerOrderProduct.class, CustomerOrderProductModel.class)
-            .field("product.id", "productId")
-            .field("product.name", "name")
-            .byDefault()
             .register();
     }
 

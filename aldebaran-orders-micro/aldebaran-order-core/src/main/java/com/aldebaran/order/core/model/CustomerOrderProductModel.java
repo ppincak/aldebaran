@@ -17,9 +17,6 @@ public class CustomerOrderProductModel {
     @JsonProperty
     private Integer quantity;
 
-    @JsonProperty
-    private String url;
-
     public Long getProductId() {
         return productId;
     }
@@ -50,13 +47,5 @@ public class CustomerOrderProductModel {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

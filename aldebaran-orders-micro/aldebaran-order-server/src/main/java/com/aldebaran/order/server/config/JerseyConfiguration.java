@@ -1,6 +1,5 @@
 package com.aldebaran.order.server.config;
 
-import com.aldebaran.chassis.discovery.DiscoveryProperties;
 import com.aldebaran.chassis.monitoring.controller.MonitoringController;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
@@ -8,7 +7,6 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.model.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.ws.rs.ApplicationPath;
@@ -18,18 +16,17 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationPath("/")
 public class JerseyConfiguration extends ResourceConfig {
 
-    @Autowired
-    public JerseyConfiguration(DiscoveryProperties discoveryProperties) {
+    public JerseyConfiguration() {
         register(MultiPartFeature.class);
         register(MonitoringController.class);
         packages("com.aldebaran.order.api",
                  "com.aldebaran.chassis",
                  "com.aldebaran.rest");
 
-        initializeSwagger(discoveryProperties);
+        initializeSwagger();
     }
 
-    private void initializeSwagger(DiscoveryProperties discoveryProperties) {
+    private void initializeSwagger() {
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("1.0.2");
         beanConfig.setSchemes(new String[]{"http"});

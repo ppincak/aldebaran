@@ -1,9 +1,5 @@
 package com.aldebaran.rest.search;
 
-import com.aldebaran.rest.search.OrderDescriptor;
-import com.aldebaran.rest.search.SearchDescriptor;
-import com.aldebaran.rest.search.TypeOperators;
-
 import java.util.*;
 
 

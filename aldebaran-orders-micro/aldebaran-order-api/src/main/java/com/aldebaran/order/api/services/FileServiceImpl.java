@@ -50,6 +50,7 @@ public class FileServiceImpl implements FileService {
         return fileLink;
     }
 
+    // TODO refactor
     @Override
     public List<FileLinkResponse> uploadFile(String fileName, List<FormDataBodyPart> formDataBodyParts) {
         List<FileLink> fileLinks = new ArrayList<>();
@@ -87,7 +88,13 @@ public class FileServiceImpl implements FileService {
         }
 
         if(fileLinks.isEmpty() == false) {
-            fileLinkRepository.save(fileLinks);
+            try {
+                fileLinkRepository.save(fileLinks);
+            } catch (Exception e) {
+                for(FileLink fileLink: fileLinks) {
+                    fileStorageFacade.delete(fileLink.getUrl());
+                }
+            }
         }
 
         return fileLinkAssembler.toResponse(fileLinks);
@@ -111,5 +118,6 @@ public class FileServiceImpl implements FileService {
     public void deleteFile(Long fileId) {
         FileLink fileLink = getFileLink(fileId);
         fileStorageFacade.delete(fileLink.getUrl());
+        fileLinkRepository.delete(fileLink);
     }
 }

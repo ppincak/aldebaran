@@ -29,6 +29,10 @@ public class CustomerOrder extends TrackableBaseDomain {
                fetch = FetchType.LAZY)
     private List<CustomerOrderProduct> orderProducts;
 
+    public CustomerOrder() {
+        this.priceSum = new Price();
+    }
+
     public Customer getCustomer() {
         return customer;
     }

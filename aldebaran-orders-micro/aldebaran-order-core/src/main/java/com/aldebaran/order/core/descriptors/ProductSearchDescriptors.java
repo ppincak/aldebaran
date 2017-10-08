@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Component
 public final class ProductSearchDescriptors extends AbstractSearchDescriptors {
 
+    @Override
     protected void init() {
         addDescriptor("id", Long.class);
         addDescriptor("name", String.class);
