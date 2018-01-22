@@ -1,0 +1,68 @@
+version: '2'
+services:
+  consul:
+    image: consul
+    ports:
+     - "8500:8500"
+     - "8600:8600/udp"
+  redis:
+    image: redis
+    ports:
+     - "6379:6379"
+  prometheus:
+    image: prom/prometheus
+    ports:
+     - "9090:9090"
+    links:
+     - "consul"
+    volumes:
+     - /vagrant/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana
+    ports:
+     - "3000:3000"
+    links:
+     - "prometheus"
+    environment:
+     - GF_SECURITY_ADMIN_PASSWORD=admin
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+     - "3306:3306"
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
+    volumes: 
+     - /var/mysql/data:/var/lib/mysql
+     - /vagrant/docker/mysql/:/docker-entrypoint-initdb.d  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    ports: 
+     - "9200:9200"
+     - "9300:9300"   
+    ulimits:
+      nofile: 65536
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+     - esdata:/usr/share/elasticsearch/data
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:6.1.1
+    ports: 
+     - "4560:4560"
+    volumes: 
+     - /vagrant/docker/logstash/logstash-simple.conf:/usr/share/logstash/pipeline/logstash-simple.conf
+    depends_on:
+     - elasticsearch
+  kibana:
+    build: ./kibana
+    ports:
+     - "5601:5601"
+    volumes:
+     - /vagrant/docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+     - elasticsearch
+volumes:
+  esdata:
+    driver: local
