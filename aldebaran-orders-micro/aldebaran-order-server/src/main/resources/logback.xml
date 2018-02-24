@@ -2,6 +2,11 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:4560</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+
     <appender name="consul-appender" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="com.aldebaran.chassis.discovery.ConsulFilter">
         </filter>
@@ -11,11 +16,12 @@
     </appender>
 
     <logger name="com.aldebaran" level="ALL" additivity="false">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="logstash" />
     </logger>
 
     <logger name="com.orbitz.consul" level="ERROR" additivity="false">
-        <appender-ref ref="consul-appender"/>
+        <appender-ref ref="consul-appender" />
     </logger>
 </configuration>

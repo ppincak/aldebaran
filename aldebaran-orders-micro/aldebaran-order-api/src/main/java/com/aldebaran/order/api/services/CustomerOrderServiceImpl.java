@@ -87,6 +87,7 @@ public class CustomerOrderServiceImpl
                                                                      getOrderToProducts(page.getContent())))
                 .totalElements(page.getNumberOfElements())
                 .totalPages(page.getTotalPages())
+                .pagination(paginationRequest)
                 .build();
     }
 

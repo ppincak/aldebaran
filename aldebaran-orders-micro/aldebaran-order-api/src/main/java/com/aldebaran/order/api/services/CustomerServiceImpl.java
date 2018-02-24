@@ -1,5 +1,6 @@
 package com.aldebaran.order.api.services;
 
+import com.aldebaran.order.api.hal.CustomerHal;
 import com.aldebaran.order.core.CustomerOrderErrorEvents;
 import com.aldebaran.order.core.assemblers.CustomerAssembler;
 import com.aldebaran.order.core.descriptors.CustomerSearchDescriptors;
@@ -119,6 +120,7 @@ public class CustomerServiceImpl
                 .data(customerAssembler.toResponseList(page.getContent()))
                 .totalElements(page.getNumberOfElements())
                 .totalPages(page.getTotalPages())
+                .pagination(paginationRequest)
                 .build();
     }
 

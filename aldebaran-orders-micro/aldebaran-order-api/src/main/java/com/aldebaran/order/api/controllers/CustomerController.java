@@ -1,5 +1,6 @@
 package com.aldebaran.order.api.controllers;
 
+import com.aldebaran.order.api.hal.CustomerHal;
 import com.aldebaran.order.api.services.CustomerOrderService;
 import com.aldebaran.order.api.services.CustomerService;
 import com.aldebaran.order.core.model.*;
@@ -39,7 +40,7 @@ public class CustomerController {
     public Response getCustomers(@BeanParam SearchRequest searchRequest,
                                  @BeanParam PaginationRequest paginationRequest) {
         return Response
-                .ok(customerService.getCustomers(searchRequest, paginationRequest))
+                .ok(CustomerHal.addLinks(customerService.getCustomers(searchRequest, paginationRequest)))
                 .build();
     }
 
@@ -49,7 +50,7 @@ public class CustomerController {
     public Response createCustomer(@Valid CustomerRequest customerRequest) {
         return Response
                 .status(Response.Status.CREATED)
-                .entity(customerService.createCustomer(customerRequest))
+                .entity(CustomerHal.addLinks(customerService.createCustomer(customerRequest)))
                 .build();
     }
 
@@ -59,7 +60,7 @@ public class CustomerController {
                   response = CustomerResponse.class)
     public Response getCustomer(@PathParam("customerId") Long customerId) {
         return Response
-                .ok(customerService.getCustomerById(customerId))
+                .ok(CustomerHal.addLinks(customerService.getCustomerById(customerId)))
                 .build();
     }
 
@@ -70,7 +71,7 @@ public class CustomerController {
     public Response updateCustomer(@PathParam("customerId") Long customerId,
                                    CustomerUpdateRequest request) {
         return Response
-                .ok(customerService.updateCustomer(customerId, request))
+                .ok(CustomerHal.addLinks(customerService.updateCustomer(customerId, request)))
                 .build();
     }
 

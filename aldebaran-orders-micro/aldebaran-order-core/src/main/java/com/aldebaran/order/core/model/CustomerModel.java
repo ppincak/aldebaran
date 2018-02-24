@@ -3,9 +3,10 @@ package com.aldebaran.order.core.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.hateoas.ResourceSupport;
 
 
-public class CustomerModel {
+public class CustomerModel extends ResourceSupport {
 
     @NotEmpty
     @JsonProperty

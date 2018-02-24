@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class CustomerResponse extends CustomerModel implements Response {
 
     @JsonProperty
-    private String id;
+    private Long customerId;
 
     @JsonProperty
     private String imageUrl;
@@ -17,12 +17,12 @@ public class CustomerResponse extends CustomerModel implements Response {
     @JsonProperty
     private TimestampsModel timestamps;
 
-    public String getId() {
-        return id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public String getImageUrl() {

@@ -9,6 +9,7 @@ dependencies {
 
     compile libraries.jackson.annotations
     compile libraries.orika
-    compile libraries.spring.dataJpa
 
+    compile libraries.spring.dataJpa
+    compile libraries.spring.hateoas
 }

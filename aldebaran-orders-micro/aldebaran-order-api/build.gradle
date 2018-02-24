@@ -11,5 +11,6 @@ dependencies {
     compile libraries.jersey.media
     compile libraries.spring.beans
     compile libraries.spring.context
+    compile libraries.spring.hateoas
     compile libraries.swagger.annotations
 }

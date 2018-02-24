@@ -65,6 +65,7 @@ public class CustomerAssembler extends AbstractOrikaAssembler {
                                     CustomerResponse customerResponse,
                                     MappingContext context) {
 
+                    customerResponse.setCustomerId(customer.getId());
                     customerResponse.setImageUrl(
                             fileLinkAssembler.assembleImageUrl(customer.getFileLink()));
                 }

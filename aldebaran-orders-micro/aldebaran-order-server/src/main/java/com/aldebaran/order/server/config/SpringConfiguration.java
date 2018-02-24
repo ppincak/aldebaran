@@ -3,12 +3,15 @@ package com.aldebaran.order.server.config;
 import com.aldebaran.chassis.discovery.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.HashMap;
@@ -22,6 +25,7 @@ import java.util.Map;
 @EnableAutoConfiguration(exclude = {
     DataSourceAutoConfiguration.class
 })
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableJpaRepositories(value = SpringConfiguration.jpaRepositories)
 @ComponentScan(basePackages =  SpringConfiguration.componentScan)
 public class SpringConfiguration {

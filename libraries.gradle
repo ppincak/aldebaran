@@ -21,6 +21,7 @@ ext {
     kotlinVersion = '1.1.1'
     log4jVersion = '2.7'
     logbackVersion = '1.2.3'
+    logstashEncoderVersion = '4.11'
     mysqlDriverVersion = '6.0.5'
     orikaVersion = '1.5.1'
 	prometheusVersion = '0.0.21'
@@ -30,6 +31,8 @@ ext {
     springBootVersion = '1.5.1.RELEASE'
     springDataJpaVersion = '1.11.0.RELEASE'
     springDataCommons = '1.13.0.RELEASE'
+    springHateoasVersion = '0.24.0.RELEASE'
+    springPluginCoreVersion = '1.2.0.RELEASE'
     springVersion = '4.3.6.RELEASE'
     swaggerVersion = '1.5.12'
     testngVersion = '6.11'
@@ -94,6 +97,7 @@ ext {
             classic: "ch.qos.logback:logback-classic:${logbackVersion}",
             core: "ch.qos.logback:logback-core:${logbackVersion}"
         ],
+        logstashEncoder : "net.logstash.logback:logstash-logback-encoder:${logstashEncoderVersion}",
         mysqlDriver: "mysql:mysql-connector-java:${mysqlDriverVersion}",
         netflix: [
             hystrix: [
@@ -130,6 +134,8 @@ ext {
             orm: "org.springframework:spring-orm:${springVersion}",
             dataJpa: "org.springframework.data:spring-data-jpa:${springDataJpaVersion}",
             dataCommons: "org.springframework.data:spring-data-commons:${springDataCommons}",
+            hateoas: "org.springframework.hateoas:spring-hateoas:${springHateoasVersion}",
+            pluginCore: "org.springframework.plugin:spring-plugin-core:${springPluginCoreVersion}",
             security: [
                 web: "org.springframework.security:spring-security-web:${springSecurityVersion}",
                 core: "org.springframework.security:spring-security-core:${springSecurityVersion}",
