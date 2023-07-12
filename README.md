@@ -1,3 +1,7 @@
+# Project Description
+
+This is an old coding assigment I received when I applied for a job at [Inloop](https://github.com/inloop)
+
 # Dev comments
 Name of the project "Aldebaran" wasn't my own Idea as I used some "online name generator" (atm. I have no idea which one).
 
